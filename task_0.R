@@ -20,3 +20,4 @@ inspect(en_US.document)
 getTransformations()
 en_US.document[[1]]
 stemDocument(en_US.document[[1]])
+install.packages('SnowballC')
