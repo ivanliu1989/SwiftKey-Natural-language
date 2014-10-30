@@ -1,7 +1,21 @@
 setwd('/Users/ivan/Work_directory/SwiftKey')
-require(data.table)
-en_US.blogs <- as.data.frame(fread('final/en_US/en_US.blogs.txt'))
-en_US.news <- as.data.frame(fread('final/en_US/en_US.news.txt'))
-en_US.twitter <- as.data.frame(fread('final/en_US/en_US.twitter.txt'))
+require(tm)
 
-en_US.blogs <- read.table('final/en_US/en_US.blogs.txt')
+en_US <- 'final/en_US'
+(en_US.document <- Corpus(DirSource(en_US),
+                          readerControl = list(reader = readPlain,
+                                               language = "en_US",
+                                               load = TRUE)))
+meta(en_US.document[[1]]) # To see all available metadata for a text document
+en_US.document[[1]]
+length(en_US.document) # Returns the number of text documents in the collection.
+c(en_US.document[1:3]) #Concatenates several text collections to a single one.
+
+# Data inspect
+show(en_US.document)
+summary(en_US.document)
+inspect(en_US.document)
+
+# transformation
+getTransformations()
+
