@@ -1,6 +1,6 @@
 setwd('/Users/ivan/Work_directory/SwiftKey')
 require(tm)
-
+require(Rstem)
 en_US <- 'final/en_US'
 (en_US.document <- Corpus(DirSource(en_US),
                           readerControl = list(reader = readPlain,
@@ -18,4 +18,5 @@ inspect(en_US.document)
 
 # transformation
 getTransformations()
-
+en_US.document[[1]]
+stemDocument(en_US.document[[1]])
