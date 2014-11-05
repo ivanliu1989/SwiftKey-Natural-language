@@ -1,0 +1,28 @@
+###########################
+### Tasks to accomplish ###
+###########################
+# 1. Tokenization - identifying appropriate tokens such as words, punctuation, and numbers. 
+# Writing a function that takes a file as input and returns a tokenized version of it.
+# 2. Profanity filtering - removing profanity and other words you do not want to predict.
+
+###############################
+### Tips, tricks, and hints ###
+###############################
+# 1. Loading the data in.
+# 2. Sampling. You can use the rbinom function to "flip a biased coin" to determine 
+# whether you sample a line of text or not.
+# 3. If you need a refresher on regular expressions, 
+# take a look at Jeff Leek's lectures from Getting and Cleaning Data: Part 1 Part 2
+
+##############
+### Script ###
+##############
+setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\SwiftKey')
+setwd('/Users/ivan/Work_directory/SwiftKey')
+require(tm); require(SnowballC)
+
+con <- file("en_US.twitter.txt", "r") 
+readLines(con, 1) ## Read the first line of text
+readLines(con, 1) ## Read the next line of text 
+readLines(con, 5) ## Read in the next 5 lines of text 
+close(con) ## It's important to close the connection when you are done
