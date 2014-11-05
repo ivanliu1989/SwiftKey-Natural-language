@@ -19,10 +19,12 @@
 ##############
 setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\SwiftKey')
 setwd('/Users/ivan/Work_directory/SwiftKey')
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 require(tm); require(SnowballC)
 
-con <- file("en_US.twitter.txt", "r") 
-readLines(con, 1) ## Read the first line of text
+en_US <- file.path('.','final','en_US')
+con <- file(paste(en_US,"/en_US.twitter.txt",sep = ""), "r")
+n <- length(readLines(con)) ## Read the first line of text
 readLines(con, 1) ## Read the next line of text 
 readLines(con, 5) ## Read in the next 5 lines of text 
 close(con) ## It's important to close the connection when you are done
