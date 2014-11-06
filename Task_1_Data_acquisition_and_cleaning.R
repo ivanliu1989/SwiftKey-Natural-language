@@ -24,7 +24,7 @@ require(tm); require(SnowballC)
 
 en_US <- file.path('.','final','en_US/')
 dir(en_US)
-con <- file(paste(en_US,dir(en_US)[1],sep = ""), "r")
+con <- file(paste(en_US,dir(en_US)[3],sep = ""), "r")
 
 length(readLines(con)) ## Read the first line of text
 text.Length <- nchar(readLines(con), type='chars')
