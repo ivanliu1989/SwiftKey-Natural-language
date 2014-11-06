@@ -37,3 +37,5 @@ inspect(en_US.document[1])
 
 # Preparing the Corpus
 getTransformations()
+
+# Simple transformations
