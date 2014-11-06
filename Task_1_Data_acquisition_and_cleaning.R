@@ -22,23 +22,18 @@ setwd('/Users/ivan/Work_directory/SwiftKey')
 rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 require(tm); require(SnowballC)
 
-en_US <- file.path('.','final','en_US/')
-dir(en_US)
-con <- file(paste(en_US,dir(en_US)[3],sep = ""), "r")
+getSources()
+getReaders()
+en_US <- file.path('.','final','en_US')
+length(dir(en_US))
+en_US.document <- Corpus(DirSource(en_US), 
+                         readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
+en_US.document
+class(en_US.document)
+class(en_US.document[[1]])
 
-length(readLines(con)) ## Read the first line of text
-text.Length <- nchar(readLines(con), type='chars')
-ltext.no <- which(text.Length == 40833)
-max(nchar(readLines(con), type='chars'))
-nchar(readLines(con, 1)) ## Read the next line of text 
+# exploring the Corpus
+inspect(en_US.document[1])
 
-love_length <- length(grep('love', readLines(con)))
-hate_length <- length(grep('hate', readLines(con)))
-lh_ratio <- love_length/hate_length
-
-biostats_num <- grep('biostats', readLines(con))
-biostats_text <- readLines(con)[biostats_num]
-
-length(grep('A computer once beat me at chess, but it was no match for me at kickboxing', readLines(con)))
-
-close(con) ## It's important to close the connection when you are done
+# Preparing the Corpus
+getTransformations()
