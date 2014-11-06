@@ -38,6 +38,12 @@ inspect(en_US.document[1])
 ### Tokenization ###
 ####################
 # Simple Transformation
+toSpace <- content_transformer(function(x, pattern) gsub(pattern, " ", x)) 
+docs <- tm_map(en_US.document[1], toSpace, "/")
+docs <- tm_map(en_US.document[1], toSpace, "@")
+docs <- tm_map(en_US.document[1], toSpace, "\\|")
+docs <- tm_map(en_US.document[1], toSpace, "/|@|\\|")
+inspect(en_US.document[1])
 
 # Lowercase
 # Remove Numbers
@@ -46,6 +52,7 @@ inspect(en_US.document[1])
 # Remove Own Stop Words
 # Strip Whitespace
 # Specific Transformations
+# Profanity filtering
 
 ################
 ### Stemming ###
