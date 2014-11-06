@@ -58,6 +58,9 @@ en_US.document[1] <- tm_map(en_US.document[1], removePunctuation)
 inspect(en_US.document[1])
 
 # Remove English Stop Words
+length(stopwords("english"))
+stopwords("english")
+en_US.document[1] <- tm_map(en_US.document[1], removeWords, stopwords("english"))
 inspect(en_US.document[1])
 
 # Remove Own Stop Words
