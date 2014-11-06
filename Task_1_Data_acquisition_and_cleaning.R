@@ -71,10 +71,11 @@ inspect(en_US.document[1])
 en_US.document[1] <- tm_map(en_US.document[1], stripWhitespace)
 inspect(en_US.document[1])
 
-# Specific Transformations
-inspect(en_US.document[1])
-
-# Profanity filtering
+# Specific Transformations/Profanity filtering
+toString <- content_transformer(function(x, from, to) gsub(from, to, x))
+en_US.document[1] <- tm_map(en_US.document[1], toString, "harbin institute technology", "HIT")
+en_US.document[1] <- tm_map(en_US.document[1], toString, "shenzhen institutes advanced technology", "SIAT")
+en_US.document[1] <- tm_map(en_US.document[1], toString, "chinese academy sciences", "CAS")
 inspect(en_US.document[1])
 
 ################
