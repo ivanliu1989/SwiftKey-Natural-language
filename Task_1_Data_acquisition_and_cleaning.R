@@ -22,8 +22,7 @@ setwd('/Users/ivan/Work_directory/SwiftKey')
 rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 require(tm); require(SnowballC)
 
-getSources()
-getReaders()
+# getSources();getReaders();getTransformations()
 en_US <- file.path('.','final','en_US')
 length(dir(en_US))
 en_US.document <- Corpus(DirSource(en_US), 
@@ -35,7 +34,19 @@ class(en_US.document[[1]])
 # exploring the Corpus
 inspect(en_US.document[1])
 
-# Preparing the Corpus
-getTransformations()
+####################
+### Tokenization ###
+####################
+# Simple Transformation
 
-# Simple transformations
+# Lowercase
+# Remove Numbers
+# Remove Punctuations
+# Remove English Stop Words
+# Remove Own Stop Words
+# Strip Whitespace
+# Specific Transformations
+
+################
+### Stemming ###
+################
