@@ -64,9 +64,11 @@ en_US.document[1] <- tm_map(en_US.document[1], removeWords, stopwords("english")
 inspect(en_US.document[1])
 
 # Remove Own Stop Words
+en_US.document[1] <- tm_map(en_US.document[1], removeWords, c("department", "email"))
 inspect(en_US.document[1])
 
 # Strip Whitespace
+en_US.document[1] <- tm_map(en_US.document[1], stripWhitespace)
 inspect(en_US.document[1])
 
 # Specific Transformations
