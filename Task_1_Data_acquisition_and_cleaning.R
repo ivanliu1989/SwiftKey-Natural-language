@@ -46,6 +46,9 @@ docs <- tm_map(en_US.document[1], toSpace, "/|@|\\|")
 inspect(en_US.document[1])
 
 # Lowercase
+en_US.document[1] <- tm_map(en_US.document[1], content_transformer(tolower))
+inspect(en_US.document[1])
+
 # Remove Numbers
 # Remove Punctuations
 # Remove English Stop Words
