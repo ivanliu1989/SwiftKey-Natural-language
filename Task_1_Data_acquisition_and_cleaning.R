@@ -32,4 +32,8 @@ ltext.no <- which(text.Length == 40833)
 max(nchar(readLines(con), type='chars'))
 nchar(readLines(con, 1)) ## Read the next line of text 
 
+love_length <- length(grep('love', readLines(con)))
+hate_length <- length(grep('hate', readLines(con)))
+lh_ratio <- love_length/hate_length
+
 close(con) ## It's important to close the connection when you are done
