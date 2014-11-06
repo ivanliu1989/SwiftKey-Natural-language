@@ -54,15 +54,21 @@ en_US.document[1] <- tm_map(en_US.document[1], removeNumbers)
 inspect(en_US.document[1])
 
 # Remove Punctuations
+en_US.document[1] <- tm_map(en_US.document[1], removePunctuation)
 inspect(en_US.document[1])
+
 # Remove English Stop Words
 inspect(en_US.document[1])
+
 # Remove Own Stop Words
 inspect(en_US.document[1])
+
 # Strip Whitespace
 inspect(en_US.document[1])
+
 # Specific Transformations
 inspect(en_US.document[1])
+
 # Profanity filtering
 inspect(en_US.document[1])
 
