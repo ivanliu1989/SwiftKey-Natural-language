@@ -39,8 +39,6 @@ lh_ratio <- love_length/hate_length
 biostats_num <- grep('biostats', readLines(con))
 biostats_text <- readLines(con)[biostats_num]
 
-# A computer once beat me at chess, but it was no match for me at kickboxing
-sum(grep('A computer once beat me at chess, but it was no match for me at kickboxing', readLines(con)))
+length(grep('A computer once beat me at chess, but it was no match for me at kickboxing', readLines(con)))
 
 close(con) ## It's important to close the connection when you are done
-?readLines
