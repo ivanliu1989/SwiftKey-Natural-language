@@ -4,7 +4,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     print(paste('Please wait for initializing and summrising the input files......'))
     require(tm); require(SnowballC)
     print(paste('There are', 'nchar(docs)', 'characters in input/unprocessed document!'))
-    summary(docs)
+    print(summary(docs))
     print(paste('Start tokenization processes...'))
     
     # Simple Transformation
@@ -43,7 +43,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     if(trans[5] == T){
         print(paste('Remove', stopWords, 'Stop Words:'))
         print(paste('Stop Words including:' ))
-        stopwords(stopWords)
+        print(stopwords(stopWords))
         print(paste(length(stopwords(stopWords)), 'words in total'))
         docs <- tm_map(docs, removeWords, stopwords(stopWords))
         print('Stop Words have been eliminated from raw document!')
@@ -54,7 +54,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     if(trans[6] == T){
         print(paste('Remove Own Stop Words:'))
         print(paste('Stop Words including:' ))
-        ownStopWords
+        print(ownStopWords)
         print(paste(length(ownStopWords), 'words in total'))
         docs <- tm_map(docs, removeWords, ownStopWords)
         print('Own Stop Words have been eliminated from raw document!')
@@ -80,5 +80,6 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     
     # Complete messages
     print('Document has been tokenized!')
-    summary(docs)
+    print(summary(docs))
+    return(docs)
 }

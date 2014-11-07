@@ -80,15 +80,16 @@ inspect(en_US.document[1])
 ### Tokenization Func ###
 #########################
 load('Task_1.5_Tokenization_func.R')
-docs <- en_US.document[1]
+docs <- en_US.document[2]
 trans <- c(T,T,T,T,T,T,T,T)
 ChartoSpace <- c('/','@','\\|')
 stopWords <- 'english'
 ownStopWords <- c('department', 'email')
 profanity <- data.frame(raw = c('harbin institute technology'), target = c('HIT'))
 
-tokenizied_docs <- tokenization(docs, trans, ChartoSpace,
+tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                           stopWords, ownStopWords, profanity)
+inspect(tokenized_docs)
 
 ################
 ### Stemming ###
