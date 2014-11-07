@@ -85,8 +85,8 @@ trans <- c(T,T,T,T,T,T,T,T)
 ChartoSpace <- c('/','@','\\|')
 stopWords <- 'english'
 ownStopWords <- c('department', 'email')
-profanity <- data.frame(raw = c('harbin institute technology','VitalityWorks'), target = c('HIT','VW'))
-
+profanity <- data.frame(raw = c('harbin institute technology','VitalityWorks'), 
+                        target = c('HIT','VW'))
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                           stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
@@ -95,7 +95,8 @@ inspect(tokenized_docs)
 ### Stemming ###
 ################
 wordStem('runs')
-stem_docs <- tm_map(tokenized_docs, stemDocument)
+getStemLanguages()
+stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 inspect(stem_docs)
 
 ############################
