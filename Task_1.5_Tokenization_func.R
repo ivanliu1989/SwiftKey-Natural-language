@@ -44,7 +44,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
         print(paste('Remove', stopWords, 'Stop Words:'))
         print(paste('Stop Words including:' ))
         stopwords(stopWords)
-        print(length(stopwords(stopWords)), 'words in total')
+        print(paste(length(stopwords(stopWords)), 'words in total'))
         docs <- tm_map(docs, removeWords, stopwords(stopWords))
         print('Stop Words have been eliminated from raw document!')
     }
@@ -55,7 +55,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
         print(paste('Remove Own Stop Words:'))
         print(paste('Stop Words including:' ))
         ownStopWords
-        print(length(ownStopWords), 'words in total')
+        print(paste(length(ownStopWords), 'words in total'))
         docs <- tm_map(docs, removeWords, ownStopWords)
         print('Own Stop Words have been eliminated from raw document!')
     }
