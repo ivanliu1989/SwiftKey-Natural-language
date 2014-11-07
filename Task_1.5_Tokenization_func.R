@@ -3,7 +3,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     
     cat(paste('\n\nPlease wait for initializing and summrising the input files......'))
     require(tm); require(SnowballC)
-    cat(paste('\n\nThere are', 'nchar(docs)', 'characters in input/unprocessed document!\n'))
+    cat(paste('\n\nThere are', 'nchar(docs)', 'characters in input/unprocessed document!'))
     print(summary(docs))
     cat(paste('\n\nStart tokenization processes...'))
     

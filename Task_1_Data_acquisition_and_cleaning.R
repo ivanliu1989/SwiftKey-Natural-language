@@ -80,7 +80,7 @@ inspect(en_US.document[1])
 ### Tokenization Func ###
 #########################
 load('Task_1.5_Tokenization_func.R')
-docs <- en_US.document[3]
+docs <- en_US.document[1]
 trans <- c(T,T,T,T,T,T,T,T)
 ChartoSpace <- c('/','@','\\|')
 stopWords <- 'english'
@@ -94,3 +94,4 @@ inspect(tokenized_docs)
 ################
 ### Stemming ###
 ################
+
