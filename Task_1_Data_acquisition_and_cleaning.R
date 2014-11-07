@@ -102,3 +102,23 @@ inspect(stem_docs)
 ############################
 ### Document Term Matrix ###
 ############################
+dtm_docs <- DocumentTermMatrix(stem_docs) # tdm_docs <- TermDocumentMatrix(stem_docs)
+dtm_docs
+inspect(dtm_docs[1:5, 1000:1005])
+class(dtm_docs); dim(dtm_docs)
+    
+# Exploring the Document Term Matrix
+freq <- colSums(as.matrix(dtm_docs))
+length(freq)
+ord <- order(freq)
+freq[head(ord)] # Least frequent terms
+freq[tail(ord)] # Most frequent terms
+
+# Distribution of Term Frequencies
+head(table(freq), 15)
+tail(table(freq), 15)
+# Plot of Frequencies
+
+
+
+
