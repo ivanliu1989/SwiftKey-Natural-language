@@ -76,6 +76,20 @@ toString <- content_transformer(function(x, from, to) gsub(from, to, x))
 en_US.document[1] <- tm_map(en_US.document[1], toString, "harbin institute technology", "HIT")
 inspect(en_US.document[1])
 
+#########################
+### Tokenization Func ###
+#########################
+load('Task_1.5_Tokenization_func.R')
+docs <- en_US.document[1]
+trans <- c(T,T,T,T,T,T,T,T)
+ChartoSpace <- c('/','@','\\|')
+stopWords <- 'english'
+ownStopWords <- c('department', 'email')
+profanity <- data.frame(raw = c('harbin institute technology'), target = c('HIT'))
+
+tokenizied_docs <- tokenization(docs, trans, ChartoSpace,
+                          stopWords, ownStopWords, profanity)
+
 ################
 ### Stemming ###
 ################

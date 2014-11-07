@@ -1,9 +1,9 @@
-tokenization (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/','@','\\|'),
-              stopWords = 'english', ownStopWords = c(), profanity = matrix()) {
+tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/','@','\\|'),
+              stopWords = 'english', ownStopWords = c(), profanity = data.frame()) {
     
     print(paste('Please wait for initializing and summrising the input files......'))
     require(tm); require(SnowballC)
-    print(paste('There are', nchar(docs), 'characters in input/unprocessed document!'))
+    print(paste('There are', 'nchar(docs)', 'characters in input/unprocessed document!'))
     summary(docs)
     print(paste('Start tokenization processes...'))
     
@@ -71,8 +71,14 @@ tokenization (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/','@','\\|'),
     print(paste('Specific Transformations/Profanity filtering:', trans[8]))
     if(trans[8] == T){
         toString <- content_transformer(function(x, from, to) gsub(from, to, x))
-        docs <- tm_map(docs, toString, "harbin institute technology", "HIT")
+        for (i in nrow(profanity)){
+            print(paste('Transfer', profanity[i,1], 'to', profanity[i,2]))
+            docs <- tm_map(docs, toString, profanity[i,1], profanity[i,2])
+        }
         print('Specific Transformations/Profanity filtering have been done to raw document!')
     }
     
+    # Complete messages
+    print('Document has been tokenized!')
+    summary(docs)
 }
