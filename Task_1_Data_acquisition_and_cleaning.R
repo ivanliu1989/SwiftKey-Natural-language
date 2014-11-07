@@ -94,4 +94,10 @@ inspect(tokenized_docs)
 ################
 ### Stemming ###
 ################
+wordStem('runs')
+stem_docs <- tm_map(tokenized_docs, stemDocument)
+inspect(stem_docs)
 
+############################
+### Document Term Matrix ###
+############################
