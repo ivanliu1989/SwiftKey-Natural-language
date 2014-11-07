@@ -80,12 +80,12 @@ inspect(en_US.document[1])
 ### Tokenization Func ###
 #########################
 load('Task_1.5_Tokenization_func.R')
-docs <- en_US.document[2]
+docs <- en_US.document[3]
 trans <- c(T,T,T,T,T,T,T,T)
 ChartoSpace <- c('/','@','\\|')
 stopWords <- 'english'
 ownStopWords <- c('department', 'email')
-profanity <- data.frame(raw = c('harbin institute technology'), target = c('HIT'))
+profanity <- data.frame(raw = c('harbin institute technology','VitalityWorks'), target = c('HIT','VW'))
 
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                           stopWords, ownStopWords, profanity)
