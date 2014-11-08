@@ -75,13 +75,13 @@ inspect(en_US.document[1])
 # Specific Transformations/Profanity filtering
 toString <- content_transformer(function(x, from, to) gsub(from, to, x))
 en_US.document[1] <- tm_map(en_US.document[1], toString, "harbin institute technology", "HIT")
-inspect(en_US.document[1])
+inspect(en_US.document)
 
 #########################
 ### Tokenization Func ###
 #########################
 load('Task_1.5_Tokenization_func.R')
-docs <- en_US.document[1]
+docs <- en_US.document
 trans <- c(T,T,T,T,T,T,T,T)
 ChartoSpace <- c('/','@','\\|')
 stopWords <- 'english'
@@ -89,7 +89,7 @@ ownStopWords <- c('department', 'email')
 profanity <- data.frame(raw = c('harbin institute technology','VitalityWorks'), 
                         target = c('HIT','VW'))
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
-                          stopWords, ownStopWords, profanity)
+                                 stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
 
 ################
