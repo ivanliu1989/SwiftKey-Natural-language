@@ -17,6 +17,7 @@
 ##############
 ### Script ###
 ##############
+setwd('H:/Machine Learning/SwiftKey/')
 setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\SwiftKey')
 setwd('/Users/ivan/Work_directory/SwiftKey')
 rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
@@ -104,7 +105,7 @@ inspect(stem_docs)
 ############################
 dtm_docs <- DocumentTermMatrix(stem_docs) # tdm_docs <- TermDocumentMatrix(stem_docs)
 dtm_docs
-inspect(dtm_docs[1:5, 1000:1005])
+inspect(dtm_docs[1, 1])
 class(dtm_docs); dim(dtm_docs)
     
 # Exploring the Document Term Matrix
