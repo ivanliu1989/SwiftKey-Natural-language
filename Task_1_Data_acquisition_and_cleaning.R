@@ -26,7 +26,7 @@ require(tm); require(SnowballC)
 # getSources();getReaders();getTransformations()
 en_US <- file.path('.','final','en_US')
 length(dir(en_US))
-en_US.document <- Corpus(DirSource(en_US), 
+en_US.document <- Corpus(DirSource(en_US, encoding="UTF-8"), 
                          readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
 en_US.document
 class(en_US.document)
@@ -85,7 +85,7 @@ docs <- en_US.document
 trans <- c(T,T,T,T,T,T,T,T)
 ChartoSpace <- c('/','@','\\|')
 stopWords <- 'english'
-ownStopWords <- c('department', 'email')
+ownStopWords <- c()
 profanity <- data.frame(raw = c('harbin institute technology','VitalityWorks'), 
                         target = c('HIT','VW'))
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
