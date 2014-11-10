@@ -48,7 +48,7 @@ stopWords <- 'english'
 ownStopWords <- c()
 # George Carlin's seven dirty words.
 # tm_map(sdocs, removeWords, swears)
-swearwords <- read.csv('SwiftKey-Natural-language/Other/swearWords.csv')
+swearwords <- read.csv('SwiftKey-Natural-language/Other/swearWords.csv', header = F, sep=',')
 filter <- rep('***', length(swearwords))
 profanity <- data.frame(raw = swearwords, target = filter)
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
