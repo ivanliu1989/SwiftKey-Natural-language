@@ -82,7 +82,8 @@ inspect(en_US.document)
 #########################
 load('Task_1.5_Tokenization_func.R')
 docs <- en_US.document
-trans <- c(T,T,T,T,T,T,T,T)
+# simple, lowercase, numbers, punctuations, stopwords, whitespace, specific
+trans <- c(T,T,T,T,F,T,T,T)
 ChartoSpace <- c('/','@','\\|')
 stopWords <- 'english'
 ownStopWords <- c()
