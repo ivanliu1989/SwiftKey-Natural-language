@@ -35,63 +35,26 @@ class(en_US.document[[1]])
 # exploring the Corpus
 inspect(en_US.document[1])
 
-####################
-### Tokenization ###
-####################
-# Simple Transformation
-toSpace <- content_transformer(function(x, pattern) gsub(pattern, " ", x)) 
-docs <- tm_map(en_US.document[1], toSpace, "/")
-docs <- tm_map(en_US.document[1], toSpace, "@")
-docs <- tm_map(en_US.document[1], toSpace, "\\|")
-docs <- tm_map(en_US.document[1], toSpace, "/|@|\\|")
-inspect(en_US.document[1])
-
-# Lowercase
-en_US.document[1] <- tm_map(en_US.document[1], content_transformer(tolower))
-inspect(en_US.document[1])
-
-# Remove Numbers
-en_US.document[1] <- tm_map(en_US.document[1], removeNumbers)
-inspect(en_US.document[1])
-
-# Remove Punctuations
-en_US.document[1] <- tm_map(en_US.document[1], removePunctuation)
-inspect(en_US.document[1])
-
-# Remove English Stop Words
-length(stopwords("english"))
-stopwords("english")
-en_US.document[1] <- tm_map(en_US.document[1], removeWords, stopwords("english"))
-inspect(en_US.document[1])
-
-# Remove Own Stop Words
-en_US.document[1] <- tm_map(en_US.document[1], removeWords, c("department", "email"))
-inspect(en_US.document[1])
-
-# Strip Whitespace
-en_US.document[1] <- tm_map(en_US.document[1], stripWhitespace)
-inspect(en_US.document[1])
-
-# Specific Transformations/Profanity filtering
-toString <- content_transformer(function(x, from, to) gsub(from, to, x))
-en_US.document[1] <- tm_map(en_US.document[1], toString, "harbin institute technology", "HIT")
-inspect(en_US.document)
 
 #########################
 ### Tokenization Func ###
 #########################
 load('Task_1.5_Tokenization_func.R')
-docs <- en_US.document
-# simple, lowercase, numbers, punctuations, stopwords, whitespace, specific
-trans <- c(T,T,T,T,F,T,T,T)
-ChartoSpace <- c('/','@','\\|')
+docs <- en_US.document[1]
+# simple, lowercase, numbers, punctuations, stopwords, ownstop, whitespace, specific
+trans <- c(F,T,T,T,F,F,T,T)
+ChartoSpace <- c('/','\\|')
 stopWords <- 'english'
 ownStopWords <- c()
-profanity <- data.frame(raw = c('harbin institute technology','VitalityWorks'), 
-                        target = c('HIT','VW'))
+# George Carlin's seven dirty words.
+# tm_map(sdocs, removeWords, swears)
+swearwords <- read.csv('SwiftKey-Natural-language/Other/swearWords.csv')
+filter <- rep('***', length(swearwords))
+profanity <- data.frame(raw = swearwords, target = filter)
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                  stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
+
 
 ################
 ### Stemming ###
@@ -100,6 +63,7 @@ wordStem('runs')
 getStemLanguages()
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 inspect(stem_docs)
+
 
 ############################
 ### Document Term Matrix ###
