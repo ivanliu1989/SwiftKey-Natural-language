@@ -76,6 +76,7 @@ BigramTokenizer <- function(x)
 TrigramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
 
+
 ############################
 ### Document Term Matrix ###
 ############################
