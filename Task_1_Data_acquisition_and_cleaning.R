@@ -66,12 +66,23 @@ stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 inspect(stem_docs)
 
 
+###############
+### n grams ###
+###############
+library("RWeka")
+NGramTokenizer(stem_docs, Weka_control(min = 2, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
+BigramTokenizer <- function(x) 
+    NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = " \\r\\n\\t.,;:\"()?!"))
+TrigramTokenizer <- function(x) 
+    NGramTokenizer(x, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
+
 ############################
 ### Document Term Matrix ###
 ############################
-dtm_docs <- DocumentTermMatrix(stem_docs) # tdm_docs <- TermDocumentMatrix(stem_docs)
+dtm_docs <- DocumentTermMatrix(stem_docs, control = list(tokenize = BigramTokenizer))
+# tdm_docs <- TermDocumentMatrix(stem_docs)
 dtm_docs
-inspect(dtm_docs[1, 1])
+inspect(dtm_docs[340:345,1:10])
 class(dtm_docs); dim(dtm_docs)
 
 # Exploring the Document Term Matrix
@@ -86,3 +97,8 @@ head(table(freq), 15)
 tail(table(freq), 15)
 # Plot of Frequencies
 
+# Save as csv
+output <- as.matrix(dtm_docs)
+dim(output)
+write.csv(output, file='en_US_blogs.csv')
+save(output, 'en_US_blogs.RData')
