@@ -56,8 +56,8 @@ tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
 # save tokenized docs as text file and RData
-writeCorpus(tokenized_docs, file='en_US_blogs.txt')
-save(tokenized_docs, file='en_US_blogs.RData')
+writeCorpus(tokenized_docs, file='data/en_US_blogs_token.txt')
+save(tokenized_docs, file='data/en_US_blogs_token.RData')
 
 ################
 ### Stemming ###
@@ -66,6 +66,10 @@ wordStem('runs')
 getStemLanguages()
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 inspect(stem_docs)
+meta(stem_docs[[1]])$id
+# save stemming docs as text file and RData
+writeCorpus(stem_docs, file='data/en_US_blogs_stem.txt')
+save(stem_docs, file='data/en_US_blogs_stem.RData')
 
 
 ###############
