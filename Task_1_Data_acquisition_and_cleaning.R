@@ -55,7 +55,9 @@ profanity <- data.frame(raw = swearwords, target = filter)
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
-
+# save tokenized docs as text file and RData
+writeCorpus(tokenized_docs, file='en_US_blogs.txt')
+save(tokenized_docs, file='en_US_blogs.RData')
 
 ################
 ### Stemming ###
