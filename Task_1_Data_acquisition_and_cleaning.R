@@ -70,7 +70,7 @@ inspect(stem_docs)
 ### n grams ###
 ###############
 library("RWeka")
-NGramTokenizer(stem_docs, Weka_control(min = 2, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
+ngrams_test <- NGramTokenizer(stem_docs, Weka_control(min = 2, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
 BigramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = " \\r\\n\\t.,;:\"()?!"))
 TrigramTokenizer <- function(x) 
