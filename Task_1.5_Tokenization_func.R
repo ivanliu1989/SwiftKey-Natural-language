@@ -7,6 +7,10 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     print(summary(docs))
     cat(paste('\n\nStart tokenization processes...'))
     
+    # cat(paste('\n\nuse the utf8 encoding on the macintosh without the need to recompile...'))
+    # tm_map(docs, function(x) iconv(x, to='UTF-8-MAC', sub='byte'))
+    # tm_map(docs, function(x) iconv(enc2utf8(x), sub = "byte"))
+    
     # Simple Transformation
     cat(paste('\n\nSimple Transformation:', trans[1]))
     if(trans[1] == T){
