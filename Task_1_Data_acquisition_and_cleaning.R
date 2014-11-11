@@ -46,13 +46,14 @@ trans <- c(F,T,T,T,F,F,T,T)
 ChartoSpace <- c('/','\\|')
 stopWords <- 'english'
 ownStopWords <- c()
-# George Carlin's seven dirty words.
+# List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words
+# Mr. P.M. / '"‘ASC-II
 # tm_map(sdocs, removeWords, swears)
 swearwords <- read.csv('SwiftKey-Natural-language/Other/swearWords.csv', header = F, sep=',')
 filter <- rep('***', length(swearwords))
 profanity <- data.frame(raw = swearwords, target = filter)
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
-                                 stopWords, ownStopWords, profanity)
+                               stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
 
 
@@ -72,7 +73,7 @@ dtm_docs <- DocumentTermMatrix(stem_docs) # tdm_docs <- TermDocumentMatrix(stem_
 dtm_docs
 inspect(dtm_docs[1, 1])
 class(dtm_docs); dim(dtm_docs)
-    
+
 # Exploring the Document Term Matrix
 freq <- colSums(as.matrix(dtm_docs))
 length(freq)
