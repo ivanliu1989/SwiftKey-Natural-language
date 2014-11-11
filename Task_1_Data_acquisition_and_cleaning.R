@@ -21,7 +21,7 @@ setwd('H:/Machine Learning/SwiftKey/')
 setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\SwiftKey')
 setwd('/Users/ivan/Work_directory/SwiftKey')
 rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
-require(tm); require(SnowballC)
+require(tm); require(SnowballC); require(data.table)
 
 # getSources();getReaders();getTransformations()
 en_US <- file.path('.','final','en_US')
@@ -49,7 +49,7 @@ ownStopWords <- c()
 # List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words
 # Mr. P.M. / '"‘ASC-II
 # tm_map(sdocs, removeWords, swears)
-swearwords <- read.csv('SwiftKey-Natural-language/Other/swearWords.csv', header = F, sep=',')
+swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
 filter <- rep('***', length(swearwords))
 profanity <- data.frame(raw = swearwords, target = filter)
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
