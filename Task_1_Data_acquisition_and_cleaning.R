@@ -39,7 +39,7 @@ inspect(en_US.document[1])
 #########################
 ### Tokenization Func ###
 #########################
-load('Task_1.5_Tokenization_func.R')
+load('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 docs <- en_US.document[1]
 # simple, lowercase, numbers, punctuations, stopwords, ownstop, whitespace, specific
 trans <- c(F,T,T,T,F,F,T,T)
@@ -85,7 +85,6 @@ freq[tail(ord)] # Most frequent terms
 head(table(freq), 15)
 tail(table(freq), 15)
 # Plot of Frequencies
-
 
 
 
