@@ -35,7 +35,6 @@ class(en_US.document[[1]])
 # exploring the Corpus
 inspect(en_US.document[1])
 
-
 #########################
 ### Tokenization Func ###
 #########################
@@ -56,8 +55,8 @@ tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
 # save tokenized docs as text file and RData
-writeCorpus(tokenized_docs, file='data/en_US_blogs_token.txt')
-save(tokenized_docs, file='data/en_US_blogs_token.RData')
+writeCorpus(tokenized_docs, file=paste('data/',meta(stem_docs[[1]])$id,'_token.txt', sep=''))
+save(tokenized_docs, file=paste('data/',meta(stem_docs[[1]])$id,'_token.RData', sep=''))
 
 ################
 ### Stemming ###
@@ -68,9 +67,8 @@ stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 inspect(stem_docs)
 meta(stem_docs[[1]])$id
 # save stemming docs as text file and RData
-writeCorpus(stem_docs, file='data/en_US_blogs_stem.txt')
-save(stem_docs, file='data/en_US_blogs_stem.RData')
-
+writeCorpus(stem_docs, file=paste('data/',meta(stem_docs[[1]])$id,'_stem.txt', sep=''))
+save(stem_docs, file=paste('data/',meta(stem_docs[[1]])$id,'_stem.RData', sep=''))
 
 ###############
 ### n grams ###
@@ -81,7 +79,6 @@ BigramTokenizer <- function(x)
     NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = " \\r\\n\\t.,;:\"()?!"))
 TrigramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
-
 
 ############################
 ### Document Term Matrix ###
