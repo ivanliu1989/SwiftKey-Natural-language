@@ -86,5 +86,3 @@ head(table(freq), 15)
 tail(table(freq), 15)
 # Plot of Frequencies
 
-
-
