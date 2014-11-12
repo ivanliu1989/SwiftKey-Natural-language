@@ -85,16 +85,20 @@ sample.document <- Corpus(VectorSource(sample))
 save(sample.document, file=paste('data/','sample.RData', sep=''))
 
 library("RWeka")
-# ngrams_test <- NGramTokenizer(stem_docs, Weka_control(min = 2, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
+# ngrams_test <- NGramTokenizer(stem_docs, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
 BigramTokenizer <- function(x) 
-    NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = " \\r\\n\\t.,;:\"()?!"))
+    NGramTokenizer(x, Weka_control(min = 2, max = 2))
 TrigramTokenizer <- function(x) 
-    NGramTokenizer(x, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
+    NGramTokenizer(x, Weka_control(min = 3, max = 3))
 
 ############################
 ### Document Term Matrix ###
 ############################
 load('data/en_US.blogs.txt_stem.RData') # stem_docs
+con <- file('data/en_US.blogs.txt_stem.txt','r')
+stem_docs <- readLines(con)
+close(con)
+
 dtm_docs <- DocumentTermMatrix(sample.document, control = list(tokenize = TrigramTokenizer))
 # tdm_docs <- TermDocumentMatrix(stem_docs)
 dtm_docs
