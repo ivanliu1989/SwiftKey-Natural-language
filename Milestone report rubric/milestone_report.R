@@ -9,7 +9,7 @@ Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre7\\")
 rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 require(tm); require(SnowballC); require(data.table)
 require(ggplot2); require(RWeka); require(qdap);
-require(scales); require(gridExtra)
+require(scales); require(gridExtra); require(wordcloud)
 
 ## 1 ##
 stem_path <- file.path('.','final/en_US')
@@ -90,3 +90,7 @@ ggplot(word_counts,aes(x=names,y=word_counts)) +
     geom_text(aes(label=format(word_counts,big.mark=","),size=3),labels=comma,vjust=-0.2)+
     scale_y_continuous(limits=c(0,43000000),labels=comma)+theme(legend.position='none')+
     ggtitle('Total Word Count by Text Source')
+
+
+validCharWords<-words[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', words, perl=T )>0]
+sample_df <- data.frame(text=unlist(sapply(sample_corpus, '[',"content")),stringsAsFactors=F)

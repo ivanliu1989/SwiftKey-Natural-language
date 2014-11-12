@@ -1,0 +1,11 @@
+---
+title: "SwiftKey NLP Milestone Report"
+author: "Tianxiang(Ivan) Liu"
+date: "13 November 2014"
+output: html_document
+---
+
+
+```{r}
+
+```
