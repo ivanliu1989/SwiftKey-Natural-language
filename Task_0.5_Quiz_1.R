@@ -20,9 +20,16 @@ love_length <- length(grep('love', readLines(con)))
 hate_length <- length(grep('hate', readLines(con)))
 lh_ratio <- love_length/hate_length
 
-biostats_num <- grep('biostats', readLines(con))
+biostats_num <- grep('a case of', readLines(con))
 biostats_text <- readLines(con)[biostats_num]
 
 length(grep('A computer once beat me at chess, but it was no match for me at kickboxing', readLines(con)))
 
 close(con) ## It's important to close the connection when you are done
+
+Q1 <- c()
+for i in 1:length(biostats_num){
+    con <- file(paste(en_US,dir(en_US)[3],sep = ""), "r")
+    Q1 <- c(Q1, readLines(con, biostats_num[i]))
+    close(con)
+}
