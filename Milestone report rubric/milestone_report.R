@@ -40,6 +40,9 @@ ggplot(lengths,aes(x=names,y=lengths)) +
     ggtitle('Total Line Count by Text Source')
 
 ## 2 ##
+# Erasing characters that are not alphabetic, spaces or apostrophes
+# Replacing multiple spaces with a single space, and trimming leading and trailing spaces
+# Change all text to lowercase
 en_US_blogs <- gsub("[^[:alpha:][:space:]']", " ", en_US_blogs)
 en_US_blogs <- gsub("â ", "'", en_US_blogs)
 en_US_blogs <- gsub("ã", "'", en_US_blogs)
@@ -62,3 +65,28 @@ en_US_twitter <- Trim(clean(en_US_twitter))
 en_US_blogs <- tolower(en_US_blogs)
 en_US_news <- tolower(en_US_news)
 en_US_twitter <- tolower(en_US_twitter)
+
+## 3 ##
+# Blogs
+word_count_blogs <- lapply(en_US_blogs, function (z) length(unlist(strsplit(z," "))))
+word_count_blogs <- data.frame(do.call("rbind", word_count_blogs))
+names(word_count_blogs) <- "Word Count"
+# News
+word_count_news <- lapply(en_US_news, function (z) length(unlist(strsplit(z," "))))
+word_count_news <- data.frame(do.call("rbind", word_count_news))
+names(word_count_news) <- "Word Count"
+# Twitter
+word_count_twitter <- lapply(en_US_twitter, function (z) length(unlist(strsplit(z," "))))
+word_count_twitter <- data.frame(do.call("rbind", word_count_twitter))
+names(word_count_twitter) <- "Word Count"
+# Combine the three text sources together
+word_counts <- c(sum(word_count_blogs),sum(word_count_news),sum(word_count_twitter))
+word_counts <- data.frame(word_counts)
+word_counts$names <- c("blogs","news","twitter")
+# barplot of total word counts
+ggplot(word_counts,aes(x=names,y=word_counts)) + 
+    geom_bar(stat='identity',fill='cornsilk',color='grey60')+ 
+    xlab('Source')+ylab('Word Count') + coord_flip() + 
+    geom_text(aes(label=format(word_counts,big.mark=","),size=3),labels=comma,vjust=-0.2)+
+    scale_y_continuous(limits=c(0,43000000),labels=comma)+theme(legend.position='none')+
+    ggtitle('Total Word Count by Text Source')
