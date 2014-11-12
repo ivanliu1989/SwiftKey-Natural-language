@@ -5,13 +5,24 @@ date: "13 November 2014"
 output: html_document
 ---
 
-### Introduction
+### Overview
 Flowchart
-```{r}
 
-```
 
 ### Preprocess
+
+```{r echo=FALSE, message=FALSE}
+setwd('/Users/ivan/Work_directory/SwiftKey')
+require(tm); require(SnowballC); require(data.table)
+require(ggplot2); require(RWeka); require(qdap);
+require(scales); require(gridExtra); require(wordcloud)
+source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+```
+tokenization() is a function developped to handle all issues in preprocess stage of datasets
+
+
+
+
 Special notation
 tokenization
 filter
@@ -22,7 +33,7 @@ corpus - data.frame - ngrams
 Line num
 Word count
 ngram 1-4
-words DTM
+words DTM (keep)
 correlation diagram
 word cloud
 
