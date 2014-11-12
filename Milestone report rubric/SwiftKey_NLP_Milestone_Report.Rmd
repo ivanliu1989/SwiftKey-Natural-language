@@ -5,7 +5,30 @@ date: "13 November 2014"
 output: html_document
 ---
 
-
+### Introduction
+Flowchart
 ```{r}
 
 ```
+
+### Preprocess
+Special notation
+tokenization
+filter
+sample
+corpus - data.frame - ngrams
+
+### Preliminary Statistics/Visualization
+Line num
+Word count
+ngram 1-4
+words DTM
+correlation diagram
+word cloud
+
+
+### Prediction Algorithm
+sparsity
+
+
+### Application
