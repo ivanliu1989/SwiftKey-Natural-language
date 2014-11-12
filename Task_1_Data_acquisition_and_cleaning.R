@@ -73,8 +73,16 @@ save(stem_docs, file=paste('data/',meta(stem_docs[[1]])$id,'_stem.RData', sep=''
 ###############
 ### n grams ###
 ###############
+stem_path <- file.path('.','data/')
+dir(stem_path)
+con <- file(paste(stem_path, dir(stem_path)[2], sep=''),'r')
+sample_num <- length(readLines(con)) * 0.05
+close(con)
+con <- file(paste(stem_path, dir(stem_path)[2], sep=''),'r')
+sample <- readLines(con, sample_num)
+close(con)
 library("RWeka")
-ngrams_test <- NGramTokenizer(stem_docs, Weka_control(min = 2, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
+ngrams_test <- NGramTokenizer(sample, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
 BigramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = " \\r\\n\\t.,;:\"()?!"))
 TrigramTokenizer <- function(x) 
