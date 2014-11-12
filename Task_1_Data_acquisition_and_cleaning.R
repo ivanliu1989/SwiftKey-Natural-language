@@ -81,8 +81,11 @@ close(con)
 con <- file(paste(stem_path, dir(stem_path)[2], sep=''),'r')
 sample <- readLines(con, sample_num)
 close(con)
+sample.document <- Corpus(VectorSource(sample))
+save(sample.document, file=paste('data/','sample.RData', sep=''))
+
 library("RWeka")
-ngrams_test <- NGramTokenizer(sample, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
+# ngrams_test <- NGramTokenizer(stem_docs, Weka_control(min = 2, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
 BigramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = " \\r\\n\\t.,;:\"()?!"))
 TrigramTokenizer <- function(x) 
@@ -91,7 +94,8 @@ TrigramTokenizer <- function(x)
 ############################
 ### Document Term Matrix ###
 ############################
-dtm_docs <- DocumentTermMatrix(stem_docs, control = list(tokenize = BigramTokenizer))
+load('data/en_US.blogs.txt_stem.RData') # stem_docs
+dtm_docs <- DocumentTermMatrix(sample.document, control = list(tokenize = TrigramTokenizer))
 # tdm_docs <- TermDocumentMatrix(stem_docs)
 dtm_docs
 inspect(dtm_docs[340:345,1:10])
