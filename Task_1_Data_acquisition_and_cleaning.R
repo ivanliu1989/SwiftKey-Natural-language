@@ -40,7 +40,7 @@ inspect(en_US.document[1])
 #########################
 ### Tokenization Func ###
 #########################
-load('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 docs <- en_US.document[1]
 # simple, lowercase, numbers, punctuations, stopwords, ownstop, whitespace, specific
 trans <- c(F,T,T,T,F,F,T,T)
@@ -51,8 +51,10 @@ ownStopWords <- c()
 # Mr. P.M. / '"‘ASC-II
 # tm_map(sdocs, removeWords, swears)
 swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+names(swearwords)<-'swearwords'
 filter <- rep('***', length(swearwords))
-profanity <- data.frame(raw = swearwords, target = filter)
+profanity <- data.frame(swearwords, target = filter)
+rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
 tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 inspect(tokenized_docs)
