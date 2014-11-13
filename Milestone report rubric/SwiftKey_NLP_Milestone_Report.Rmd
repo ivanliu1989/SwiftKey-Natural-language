@@ -10,6 +10,7 @@ setwd('/Users/ivan/Work_directory/SwiftKey')
 require(tm); require(SnowballC); require(data.table)
 require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud);require(reshape2)
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
 
@@ -78,6 +79,15 @@ ggplot(melt_df,aes(x=names,y=value)) +
     xlab('Source')+ylab('Word Count/Lines') + theme(legend.position='none') + 
     ggtitle('Total Word Count / Lines by Text Source') + theme_bw() +
     geom_text(aes(label=format(value,big.mark=","),size=3),labels=comma,vjust=-0.2) 
+```
+
+Second, we convert our text corpus into Document Term Matrix based on different ngrams, so that we can easily figure out the frequency and correlation between different words. 
+
+```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
+setwd('/Users/ivan/Work_directory/SwiftKey')
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
+source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+load('./data/all_corpus.RData')
 ```
 
 sample

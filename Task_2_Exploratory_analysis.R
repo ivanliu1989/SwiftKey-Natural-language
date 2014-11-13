@@ -87,12 +87,29 @@ ggplot(melt_df,aes(x=names,y=value)) +
 #################################
 ### Transform into Data Frame ###
 #################################
+en_US <- file.path('.','final','en_US')
+en_US.document <- Corpus(DirSource(en_US, encoding="UTF-8"), 
+                         readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
+
+# simple, lowercase, numbers, punctuations, stopwords, ownstop, whitespace, specific
+docs <- en_US.document[1]
+trans <- c(F,T,T,T,F,F,T,T)
+ChartoSpace <- c('/','\\|')
+stopWords <- 'english'
+ownStopWords <- c()
+swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+names(swearwords)<-'swearwords'
+filter <- rep('***', length(swearwords))
+profanity <- data.frame(swearwords, target = filter)
+profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
+tokenized_docs <- tokenization(en_US.document, trans, ChartoSpace, stopWords, ownStopWords, profanity)
 
 # ngrams_test <- NGramTokenizer(stem_docs, Weka_control(min = 3, max = 3, delimiters = " \\r\\n\\t.,;:\"()?!"))
 BigramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 2, max = 2))
 TrigramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 3, max = 3))
+
 
 ############################
 ### Document Term Matrix ###
