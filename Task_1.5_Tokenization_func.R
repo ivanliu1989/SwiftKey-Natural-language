@@ -20,7 +20,18 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
             cat(paste('\n ->Character:', i, 'has been transformed into white space!'))
         }
     }
-    
+    # Specific Transformations/Profanity filtering
+    cat(paste('\n8.Specific Transformations/Profanity filtering:', trans[8]))
+    if(trans[8] == T){
+        cat(paste('\n', nrow(profanity), 'words will be filtered, following is a sample of the words:\n'))
+        print(head(profanity,5))
+        toString <- content_transformer(function(x, from, to) gsub(from, to, x))
+        for (i in 1:nrow(profanity)){
+            # cat(paste('\n ->Transfer', profanity[i,1], 'to', profanity[i,2]))
+            docs <- tm_map(docs, toString, profanity[i,1], profanity[i,2])
+        }
+        cat('\n ->Specific Transformations/Profanity filtering have been done to raw document!')
+    }
     # Lowercase
     cat(paste('\n2.Lowercase Transformation:', trans[2]))
     if(trans[2] == T){
@@ -71,18 +82,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
         cat('\n ->Whitespaces have been stripped from raw document!')
     }
     
-    # Specific Transformations/Profanity filtering
-    cat(paste('\n8.Specific Transformations/Profanity filtering:', trans[8]))
-    if(trans[8] == T){
-        cat(paste('\n', nrow(profanity), 'words will be filtered, following is a sample of the words:\n'))
-        print(head(profanity,5))
-        toString <- content_transformer(function(x, from, to) gsub(from, to, x))
-        for (i in 1:nrow(profanity)){
-            # cat(paste('\n ->Transfer', profanity[i,1], 'to', profanity[i,2]))
-            docs <- tm_map(docs, toString, profanity[i,1], profanity[i,2])
-        }
-        cat('\n ->Specific Transformations/Profanity filtering have been done to raw document!')
-    }
+   
     
     # Complete messages
     cat('\n\nDocument has been tokenized!')
