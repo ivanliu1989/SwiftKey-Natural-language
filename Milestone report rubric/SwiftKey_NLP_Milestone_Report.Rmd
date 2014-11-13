@@ -13,9 +13,17 @@ require(scales); require(gridExtra); require(wordcloud)
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
 
-### Overview
-In this project, the documents are consist of text data collected by HC Corpora (www.corpora.heliohost.org) from three source (blogs, news, twitter).
-Flowchart
+### Introduction
+This milestone report introduced a preliminary research about SwiftKey's NLP project.
+
+The SwiftKey's NLP project is mainly aimed to implement NLP(Natural language processing) techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. This predictive model will be built up for mobile keyboards, so a tradeoff between model capbility and efficiency will be considered during project.
+
+The word prediction project has been started and an initial assessment of the task completed. This report describes the goals of the overall project, the magnitude of the challenge, and gives some initial assessments of the results.
+
+In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
+
+Following flowchart gives us the main steps will be included of SwiftKey's NLP project. 
+
 
 
 ### Preprocess
