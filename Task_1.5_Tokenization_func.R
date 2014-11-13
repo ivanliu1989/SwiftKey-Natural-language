@@ -21,7 +21,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
         }
     }
     # Specific Transformations/Profanity filtering
-    cat(paste('\n8.Specific Transformations/Profanity filtering:', trans[8]))
+    cat(paste('\n2.Specific Transformations/Profanity filtering:', trans[8]))
     if(trans[8] == T){
         cat(paste('\n', nrow(profanity), 'words will be filtered, following is a sample of the words:\n'))
         print(head(profanity,5))
@@ -33,28 +33,28 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
         cat('\n ->Specific Transformations/Profanity filtering have been done to raw document!')
     }
     # Lowercase
-    cat(paste('\n2.Lowercase Transformation:', trans[2]))
+    cat(paste('\n3.Lowercase Transformation:', trans[2]))
     if(trans[2] == T){
         docs <- tm_map(docs, content_transformer(tolower))
         cat('\n ->All CAPITAL characters have been transformed to lower cases!')
     }
     
     # Remove Numbers
-    cat(paste('\n3.Remove Numbers:', trans[3]))
+    cat(paste('\n4.Remove Numbers:', trans[3]))
     if(trans[3] == T){
         docs <- tm_map(docs, removeNumbers)
         cat('\n ->All NUMBERs have been eliminated from raw document!')
     }
     
     # Remove Punctuations
-    cat(paste('\n4.Remove Punctuations:', trans[4]))
+    cat(paste('\n5.Remove Punctuations:', trans[4]))
     if(trans[4] == T){
         docs <- tm_map(docs, removePunctuation)
         cat('\n ->All Punctuations have been eliminated from raw document!')
     }
     
     # Remove English Stop Words
-    cat(paste('\n5.Remove Stop Words:', trans[5]))
+    cat(paste('\n6.Remove Stop Words:', trans[5]))
     if(trans[5] == T){
         cat(paste('\n->Remove', stopWords, 'Stop Words:'))
         cat(paste('\n->Stop Words including:\n' ))
@@ -65,7 +65,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     }
     
     # Remove Own Stop Words
-    cat(paste('\n6.Remove Own Stop Words:', trans[6]))
+    cat(paste('\n7.Remove Own Stop Words:', trans[6]))
     if(trans[6] == T){
         cat(paste('\n ->Remove Own Stop Words:'))
         cat(paste('\n ->Stop Words including:\n'))
@@ -76,13 +76,11 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     }
     
     # Strip Whitespace
-    cat(paste('\n7.Strip Whitespace:', trans[7]))
+    cat(paste('\n8.Strip Whitespace:', trans[7]))
     if(trans[7] == T){
         docs <- tm_map(docs, stripWhitespace)
         cat('\n ->Whitespaces have been stripped from raw document!')
     }
-    
-   
     
     # Complete messages
     cat('\n\nDocument has been tokenized!')
