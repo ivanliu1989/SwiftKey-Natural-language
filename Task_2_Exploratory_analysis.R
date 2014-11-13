@@ -74,13 +74,15 @@ word_counts$names <- c("blogs","news","twitter")
 basic_summary <- merge.data.frame(lengths, word_counts, by = 'names')
 melt_df <- melt(basic_summary)
 
+save(melt_df, file='./SwiftKey-Natural-language/Other/melt_df.RData')
+load('SwiftKey-Natural-language/Other/melt_df.RData')
 # barplot of total word counts
 ggplot(melt_df,aes(x=names,y=value)) + 
-    geom_bar(stat='identity',fill='cornsilk',color='grey60') + facet_wrap(~variable, scales = "free") + 
-    xlab('Source')+ylab('Word Count/Lines') + 
-    theme(legend.position='none')+
-    geom_text(aes(label=format(word_counts,big.mark=","),size=3),labels=comma,vjust=-0.2) +
-    ggtitle('Total Word Count by Text Source')
+    geom_bar(stat='identity',color='grey60',fill='cornsilk') + facet_wrap(~variable, scales = "free") + 
+    xlab('Source')+ylab('Word Count/Lines') + theme(legend.position='none') + 
+    ggtitle('Total Word Count / Lines by Text Source') + theme_bw() +
+    geom_text(aes(label=format(value,big.mark=","),size=3),labels=comma,vjust=-0.2) 
+    
 
 #################################
 ### Transform into Data Frame ###

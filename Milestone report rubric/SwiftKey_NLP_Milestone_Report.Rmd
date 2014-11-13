@@ -39,33 +39,46 @@ The preprocess for text mining mainly includes cleaning, tokenization and stemmi
 To overcome all issues above, function tokenization() has been constructed and following is an output of applying this function on our documents.
  
 ```{r echo=FALSE}
-# en_US <- read.table("/Users/ivan/Work_directory/SwiftKey/final/en_US_s/en_US_blogs_sample.txt")
-#     #file.path('/Users','ivan','Work_directory','SwiftKey','final','en_US_s/')
-# en_US.document <- Corpus(VectorSource(en_US))
-# docs <- en_US.document
-# trans <- c(F,T,T,T,F,F,T,T)
-# ChartoSpace <- c('/','\\|')
-# stopWords <- 'english'
-# ownStopWords <- c()
-# swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
-# names(swearwords)<-'swearwords'
-# filter <- rep('***', length(swearwords))
-# profanity <- data.frame(swearwords, target = filter)
-# profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
-# tokenized_docs <- tokenization(docs, trans, ChartoSpace, stopWords, ownStopWords, profanity)
+setwd('/Users/ivan/Work_directory/SwiftKey')
+en_US <- file.path('.','final','en_US_s')
+en_US.document <- Corpus(DirSource(en_US, encoding="UTF-8"), 
+                         readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
+docs <- en_US.document
+trans <- c(F,T,T,T,F,F,T,T)
+ChartoSpace <- c('/','\\|')
+stopWords <- 'english'
+ownStopWords <- c()
+swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+names(swearwords)<-'swearwords'
+filter <- rep('***', length(swearwords))
+profanity <- data.frame(swearwords, target = filter)
+profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
+tokenized_docs <- tokenization(docs, trans, ChartoSpace, stopWords, ownStopWords, profanity)
 ```
 
 After tokenizations, stemming is applied to documents to remove common words endings for English words, such as "es", "ed" and "s". 
 
 ```{r echo=FALSE}
-# stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
+stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 ```
 
 So far, we have done the basic cleaning/transformation steps for raw documents. Next we will do some preliminary statistics analysis and data visualisation to collected data.
 
 ### Preliminary Statistics/Visualization
-Line num
-Word count
+In this part, through doing some basic statistics analysis and data visualization on our data sets, we can get a brief understanding of our data. 
+First, we explore the total lines and number of words in each document.
+
+```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
+setwd('/Users/ivan/Work_directory/SwiftKey')
+load('./SwiftKey-Natural-language/Other/melt_df.RData')
+melt_df
+# barplot of total word counts
+ggplot(melt_df,aes(x=names,y=value)) + 
+    geom_bar(stat='identity',color='grey60',fill='cornsilk') + facet_wrap(~variable, scales = "free") + 
+    xlab('Source')+ylab('Word Count/Lines') + theme(legend.position='none') + 
+    ggtitle('Total Word Count / Lines by Text Source') + theme_bw() +
+    geom_text(aes(label=format(value,big.mark=","),size=3),labels=comma,vjust=-0.2) 
+```
 
 sample
 corpus - data.frame - ngram
