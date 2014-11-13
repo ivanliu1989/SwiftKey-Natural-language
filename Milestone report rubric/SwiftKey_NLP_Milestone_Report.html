@@ -59,18 +59,35 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 
 
-<div id="overview" class="section level3">
-<h3>Overview</h3>
-<p>Flowchart</p>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>This milestone report introduced a preliminary research about SwiftKey’s NLP project.</p>
+<p>The SwiftKey’s NLP project is mainly aimed to implement NLP(Natural language processing) techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. This predictive model will be built up for mobile keyboards, so a tradeoff between model capbility and efficiency will be considered during project.</p>
+<p>The word prediction project has been started and an initial assessment of the task completed. This report describes the goals of the overall project, the magnitude of the challenge, and gives some initial assessments of the results.</p>
+<p>In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.</p>
+<p>Following flowchart gives us the main steps will be included of SwiftKey’s NLP project.</p>
 </div>
 <div id="preprocess" class="section level3">
 <h3>Preprocess</h3>
-<p>tokenization() is a function developped to handle all issues in preprocess stage of datasets</p>
-<p>Special notation tokenization filter sample corpus - data.frame - ngrams</p>
+<p>The preprocess for text mining mainly includes cleaning, tokenization and stemming. The objectives of these processes are to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:</p>
+<ol style="list-style-type: decimal">
+<li>Capital/Lower case</li>
+<li>Numbers</li>
+<li>Punctuations</li>
+<li>Whitespace</li>
+<li>Profanity words</li>
+<li>Special notation/Noise like mistypes, UTF-16 encoded characters, foreign words, etc.</li>
+</ol>
+<p>To overcome all issues above, function tokenization() has been constructed and following is an output of applying this function on our documents.</p>
+<p>After tokenizations, stemming is applied to documents to remove common words endings for English words, such as “es”, “ed” and “s”.</p>
+<p>So far, we have done the basic cleaning/transformation steps for raw documents. Next we will do some preliminary statistics analysis and data visualisation to collected data.</p>
 </div>
 <div id="preliminary-statisticsvisualization" class="section level3">
 <h3>Preliminary Statistics/Visualization</h3>
-<p>Line num Word count ngram 1-4 words DTM (keep) correlation diagram word cloud</p>
+<p>Line num Word count</p>
+<p>sample corpus - data.frame - ngram</p>
+<p>ngram 1-4 words DTM (keep) correlation diagram word cloud</p>
+<p>df &lt;- data.frame(text=unlist(sapply(stem_docs, ‘[’,“content”)),stringsAsFactors=F) df&lt;-df[regexpr(pattern = ’^([a-zA-Z])(?!(\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?('(s)?)?$’, df, perl=T )&gt;0]</p>
 </div>
 <div id="prediction-algorithm" class="section level3">
 <h3>Prediction Algorithm</h3>

@@ -13,6 +13,7 @@ require(scales); require(gridExtra); require(wordcloud)
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
 
+
 ### Introduction
 This milestone report introduced a preliminary research about SwiftKey's NLP project.
 
@@ -23,7 +24,6 @@ The word prediction project has been started and an initial assessment of the ta
 In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
 
 Following flowchart gives us the main steps will be included of SwiftKey's NLP project. 
-
 
 
 ### Preprocess
@@ -39,43 +39,62 @@ The preprocess for text mining mainly includes cleaning, tokenization and stemmi
 To overcome all issues above, function tokenization() has been constructed and following is an output of applying this function on our documents.
  
 ```{r echo=FALSE}
-docs <- en_US.document[1]
-trans <- c(F,T,T,T,F,F,T,T)
-ChartoSpace <- c('/','\\|')
-stopWords <- 'english'
-ownStopWords <- c()
-swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
-names(swearwords)<-'swearwords'
-filter <- rep('***', length(swearwords))
-profanity <- data.frame(swearwords, target = filter)
-profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
-tokenized_docs <- tokenization(docs, trans, ChartoSpace,
-                               stopWords, ownStopWords, profanity)
+# en_US <- read.table("/Users/ivan/Work_directory/SwiftKey/final/en_US_s/en_US_blogs_sample.txt")
+#     #file.path('/Users','ivan','Work_directory','SwiftKey','final','en_US_s/')
+# en_US.document <- Corpus(VectorSource(en_US))
+# docs <- en_US.document
+# trans <- c(F,T,T,T,F,F,T,T)
+# ChartoSpace <- c('/','\\|')
+# stopWords <- 'english'
+# ownStopWords <- c()
+# swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+# names(swearwords)<-'swearwords'
+# filter <- rep('***', length(swearwords))
+# profanity <- data.frame(swearwords, target = filter)
+# profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
+# tokenized_docs <- tokenization(docs, trans, ChartoSpace, stopWords, ownStopWords, profanity)
 ```
 
 After tokenizations, stemming is applied to documents to remove common words endings for English words, such as "es", "ed" and "s". 
+
 ```{r echo=FALSE}
-tokenized_docs<-tokenized_docs[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', tokenized_docs, perl=T )>0]
-stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
-df <- data.frame(text=unlist(sapply(tokenized_docs, '[',"content")),stringsAsFactors=F)
+#stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 ```
 
 So far, we have done the basic cleaning/transformation steps for raw documents. Next we will do some preliminary statistics analysis and data visualisation to collected data.
 
-sample
-corpus - data.frame - ngrams
-
 ### Preliminary Statistics/Visualization
 Line num
 Word count
+
+sample
+corpus - data.frame - ngram
+
 ngram 1-4
 words DTM (keep)
 correlation diagram
 word cloud
 
+df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFactors=F)
+df<-df[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', df, perl=T )>0]
 
 ### Prediction Algorithm
 sparsity
 
-
 ### Application
+After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be settled on a Shiny server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement 1-4 grams algorithms for our online application.
+
+The main functionalities of this application should be:
+
+Detecting the nearest 1 to 4 words of the user input and transfer them as the inputs of our model. 
+Example: user input = “we had a”
+
+most frequent phrase beginning with user input = “we had a great”
+
+predicted word = “great”
+
+Other considerations:
+
+removing other common words and profanity
+
+using word “stems” to reduce size of the Document Term Matrix

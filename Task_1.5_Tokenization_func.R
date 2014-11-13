@@ -75,7 +75,7 @@ tokenization <- function (docs, trans = c(T,T,T,T,T,T,T,T), ChartoSpace = c('/',
     cat(paste('\n8.Specific Transformations/Profanity filtering:', trans[8]))
     if(trans[8] == T){
         cat(paste('\n', nrow(profanity), 'words will be filtered, following is a sample of the words:\n'))
-        cat(head(profanity,10))
+        print(head(profanity,5))
         toString <- content_transformer(function(x, from, to) gsub(from, to, x))
         for (i in 1:nrow(profanity)){
             # cat(paste('\n ->Transfer', profanity[i,1], 'to', profanity[i,2]))
