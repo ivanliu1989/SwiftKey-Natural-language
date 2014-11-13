@@ -84,17 +84,11 @@ sparsity
 ### Application
 After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be settled on a Shiny server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement 1-4 grams algorithms for our online application.
 
-The main functionalities of this application should be:
+The main functionalities should be included in Shiny app:
 
-Detecting the nearest 1 to 4 words of the user input and transfer them as the inputs of our model. 
-Example: user input = “we had a”
+1. Detecting the nearest 1 to 3 words of users' typing and taking them as the inputs of model. 
+2. Return the predictions of model to the user interface.
 
-most frequent phrase beginning with user input = “we had a great”
-
-predicted word = “great”
-
-Other considerations:
-
-removing other common words and profanity
-
-using word “stems” to reduce size of the Document Term Matrix
+Example: 
+user input = “allows you” 
+predicted word = “to”

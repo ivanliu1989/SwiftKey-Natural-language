@@ -95,6 +95,13 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 <div id="application" class="section level3">
 <h3>Application</h3>
+<p>After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be settled on a Shiny server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement 1-4 grams algorithms for our online application.</p>
+<p>The main functionalities should be included in Shiny app:</p>
+<ol style="list-style-type: decimal">
+<li>Detecting the nearest 1 to 3 words of users’ typing and taking them as the inputs of model.</li>
+<li>Return the predictions of model to the user interface.</li>
+</ol>
+<p>Example: user input = “allows you” predicted word = “to”</p>
 </div>
 
 
