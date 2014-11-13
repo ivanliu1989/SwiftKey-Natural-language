@@ -60,6 +60,8 @@ stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 df <- data.frame(text=unlist(sapply(tokenized_docs, '[',"content")),stringsAsFactors=F)
 ```
 
+So far, we have done the basic cleaning/transformation steps for raw documents. Next we will do some preliminary statistics analysis and data visualisation to collected data.
+
 sample
 corpus - data.frame - ngrams
 
