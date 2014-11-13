@@ -9,7 +9,7 @@ output: html_document
 setwd('/Users/ivan/Work_directory/SwiftKey')
 require(tm); require(SnowballC); require(data.table)
 require(ggplot2); require(RWeka); require(qdap);
-require(scales); require(gridExtra); require(wordcloud)
+require(scales); require(gridExtra); require(wordcloud);require(reshape2)
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
 
@@ -58,7 +58,7 @@ To overcome all issues above, function tokenization() has been constructed and f
 After tokenizations, stemming is applied to documents to remove common words endings for English words, such as "es", "ed" and "s". 
 
 ```{r echo=FALSE}
-#stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
+# stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 ```
 
 So far, we have done the basic cleaning/transformation steps for raw documents. Next we will do some preliminary statistics analysis and data visualisation to collected data.
@@ -92,3 +92,4 @@ The main functionalities should be included in Shiny app:
 Example: 
 user input = “allows you” 
 predicted word = “to”
+
