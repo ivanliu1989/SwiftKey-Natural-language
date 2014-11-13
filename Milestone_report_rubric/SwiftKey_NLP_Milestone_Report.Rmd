@@ -84,10 +84,10 @@ ggplot(melt_df,aes(x=names,y=value)) +
 Second, we convert our text corpus into Document Term Matrix based on different ngrams, so that we can easily figure out the frequency and correlation between different words. 
 
 ```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
-setwd('/Users/ivan/Work_directory/SwiftKey')
-rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
-source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
-load('./data/all_corpus.RData')
+# setwd('/Users/ivan/Work_directory/SwiftKey')
+# rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
+# source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+# load('./data/all_corpus.RData')
 ```
 
 sample
