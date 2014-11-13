@@ -11,6 +11,7 @@ en_US.document <- Corpus(DirSource(en_US, encoding="UTF-8"),
 
 
 # simple, lowercase, numbers, punctuations, stopwords, ownstop, whitespace, specific
+docs <- en_US.document[1]
 trans <- c(F,T,T,T,F,F,T,T)
 ChartoSpace <- c('/','\\|')
 stopWords <- 'english'
@@ -20,7 +21,7 @@ names(swearwords)<-'swearwords'
 filter <- rep('***', length(swearwords))
 profanity <- data.frame(swearwords, target = filter)
 profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
-tokenized_docs <- tokenization(en_US.document, trans, ChartoSpace,
+tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 
 

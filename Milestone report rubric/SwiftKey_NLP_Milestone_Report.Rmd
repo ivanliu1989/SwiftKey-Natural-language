@@ -5,12 +5,6 @@ date: "13 November 2014"
 output: html_document
 ---
 
-### Overview
-Flowchart
-
-
-### Preprocess
-
 ```{r echo=FALSE, message=FALSE}
 setwd('/Users/ivan/Work_directory/SwiftKey')
 require(tm); require(SnowballC); require(data.table)
@@ -18,8 +12,38 @@ require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud)
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
-tokenization() is a function developped to handle all issues in preprocess stage of datasets
 
+### Overview
+In this project, the documents are consist of text data collected by HC Corpora (www.corpora.heliohost.org) from three source (blogs, news, twitter).
+Flowchart
+
+
+### Preprocess
+The preprocess for text mining mainly includes cleaning, tokenization and stemming. The objectives of these processes are to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
+
+1. Capital/Lower case
+2. Numbers
+3. Punctuations
+4. Whitespace
+5. Profanity words
+6. Special notation/Noise like mistypes, UTF-16 encoded characters, foreign words, etc.
+
+To overcome all issues above, function tokenization() has been constructed and following is an output of applying this function on our documents.
+ 
+```{r echo=FALSE}
+docs <- en_US.document[1]
+trans <- c(F,T,T,T,F,F,T,T)
+ChartoSpace <- c('/','\\|')
+stopWords <- 'english'
+ownStopWords <- c()
+swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+names(swearwords)<-'swearwords'
+filter <- rep('***', length(swearwords))
+profanity <- data.frame(swearwords, target = filter)
+profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
+tokenized_docs <- tokenization(docs, trans, ChartoSpace,
+                               stopWords, ownStopWords, profanity)
+```
 
 
 
