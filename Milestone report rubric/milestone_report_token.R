@@ -1,4 +1,5 @@
 setwd('/Users/ivan/Work_directory/SwiftKey')
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 require(tm); require(SnowballC); require(data.table)
 require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud)
@@ -25,8 +26,14 @@ tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 
 
-validCharWords<-words[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', words, perl=T )>0]
+save(tokenized_docs, file=paste('data/',meta(en_US.document[[1]])$id,'_token.RData', sep=''))
+
+load('data/en_US.blogs.txt_token.RData')
+tokenized_docs<-words[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', tokenized_docs, perl=T )>0]
 sample_df <- data.frame(text=unlist(sapply(sample_corpus, '[',"content")),stringsAsFactors=F)
-
-
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
+
+
+tokenized_docs<-tokenized_docs[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', tokenized_docs, perl=T )>0]
+stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
+df <- data.frame(text=unlist(sapply(tokenized_docs, '[',"content")),stringsAsFactors=F)

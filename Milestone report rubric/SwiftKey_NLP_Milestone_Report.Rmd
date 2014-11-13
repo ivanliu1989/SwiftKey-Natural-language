@@ -45,11 +45,13 @@ tokenized_docs <- tokenization(docs, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 ```
 
+After tokenizations, stemming is applied to documents to remove common words endings for English words, such as "es", "ed" and "s". 
+```{r echo=FALSE}
+tokenized_docs<-tokenized_docs[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', tokenized_docs, perl=T )>0]
+stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
+df <- data.frame(text=unlist(sapply(tokenized_docs, '[',"content")),stringsAsFactors=F)
+```
 
-
-Special notation
-tokenization
-filter
 sample
 corpus - data.frame - ngrams
 
