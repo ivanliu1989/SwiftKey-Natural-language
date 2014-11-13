@@ -2,7 +2,11 @@
 title: "SwiftKey NLP Milestone Report"
 author: "Tianxiang(Ivan) Liu"
 date: "13 November 2014"
-output: html_document
+output: 
+    html_document:
+        theme: cerulean
+        highlight: tango
+        keep_md: true
 ---
 
 ```{r echo=FALSE, message=FALSE}
@@ -14,30 +18,30 @@ rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
 
-
 ### Introduction
 This milestone report introduced a preliminary research about SwiftKey's NLP project.
 
-The SwiftKey's NLP project is mainly aimed to implement NLP(Natural language processing) techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. This predictive model will be built up for mobile keyboards, so a tradeoff between model capbility and efficiency will be considered during project.
+The SwiftKey's NLP project is mainly aimed to implement **NLP (Natural language processing)** techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. 
 
 The word prediction project has been started and an initial assessment of the task completed. This report describes the goals of the overall project, the magnitude of the challenge, and gives some initial assessments of the results.
 
 In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
 
-Following flowchart gives us the main steps will be included of SwiftKey's NLP project. 
+> Main steps of SwiftKey's NLP project. 
+
 ![Flowchart of project.](/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/flowchart.png)
 
 ### Preprocess
-The preprocess for text mining mainly includes cleaning, tokenization and stemming. The objectives of these processes are to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
+The preprocess for text mining mainly includes **cleaning, tokenization and stemming**. The objectives of these processes are to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
 
-1. Capital/Lower case
-2. Numbers
-3. Punctuations
-4. Whitespace
-5. Profanity words
-6. Special notation/Noise like mistypes, UTF-16 encoded characters, foreign words, etc.
+- Capital/Lower case
+- Numbers
+- Punctuations
+- Whitespace
+- Profanity words
+- Special notation/Noise like mistypes, UTF-16 encoded characters, foreign words, etc.
 
-To overcome all issues above, function tokenization() has been constructed and following is an output of applying this function on our documents.
+To overcome all issues above, function **tokenization()** has been constructed and following is an output of applying this function on our documents.
  
 ```{r echo=FALSE}
 setwd('/Users/ivan/Work_directory/SwiftKey')
@@ -57,7 +61,7 @@ profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']"
 tokenized_docs <- tokenization(docs, trans, ChartoSpace, stopWords, ownStopWords, profanity)
 ```
 
-After tokenizations, stemming is applied to documents to remove common words endings for English words, such as "es", "ed" and "s". 
+After tokenizations, **stemming** is applied to documents to remove common words endings for English words, such as "es", "ed" and "s". 
 
 ```{r echo=FALSE}
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
@@ -67,7 +71,9 @@ So far, we have done the basic cleaning/transformation steps for raw documents. 
 
 ### Preliminary Statistics/Visualization
 In this part, through doing some basic statistics analysis and data visualization on our data sets, we can get a brief understanding of our data. 
-First, we explore the total lines and number of words in each document.
+First, we explore the **total lines** and **number of words** in each document.
+
+> Total Word Count / Lines by Text Source. 
 
 ```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
 setwd('/Users/ivan/Work_directory/SwiftKey')
@@ -75,13 +81,12 @@ load('./SwiftKey-Natural-language/Other/melt_df.RData')
 melt_df
 # barplot of total word counts
 ggplot(melt_df,aes(x=names,y=value)) + 
-    geom_bar(stat='identity',color='grey60',fill='cornsilk') + facet_wrap(~variable, scales = "free") + 
+    geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~variable, scales = "free") + 
     xlab('Source')+ylab('Word Count/Lines') + theme(legend.position='none') + 
-    ggtitle('Total Word Count / Lines by Text Source') + theme_bw() +
-    geom_text(aes(label=format(value,big.mark=","),size=3),labels=comma,vjust=-0.2) 
+    theme_bw() + geom_text(aes(label=format(value,big.mark=","),size=3),labels=comma,vjust=-0.2) 
 ```
 
-Second, we convert our text corpus into Document Term Matrix based on different ngrams, so that we can easily figure out the frequency and correlation between different words. 
+Second, we convert our text corpus into **Document Term Matrix** based on different **ngrams**, so that we can easily figure out the frequency and correlation between different words. 
 
 ```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
 # setwd('/Users/ivan/Work_directory/SwiftKey')
@@ -105,7 +110,7 @@ df<-df[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z])
 sparsity
 
 ### Application
-After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be settled on a Shiny server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement 1-4 grams algorithms for our online application.
+After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be released on a Shiny server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement 1-4 grams algorithms for our online application.
 
 The main functionalities should be included in Shiny app:
 

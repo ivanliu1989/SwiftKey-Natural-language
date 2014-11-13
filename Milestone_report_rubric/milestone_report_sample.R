@@ -34,4 +34,4 @@ profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']"
 tokenized_docs <- tokenization(en_US_corpus_sample, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 
-save(tokenized_docs, file='data/tokenized_en_US_ALL.RData') ## all 3 doc tokens
+save(tokenized_docs, file='data/en_US_tokenized_sample_ALL.RData') ## all 3 doc tokens
