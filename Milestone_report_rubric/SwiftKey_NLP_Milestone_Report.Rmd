@@ -25,7 +25,7 @@ The word prediction project has been started and an initial assessment of the ta
 In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
 
 Following flowchart gives us the main steps will be included of SwiftKey's NLP project. 
-![Flowchart of project.](/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone report rubric/flowchart.png)
+![Flowchart of project.](/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/flowchart.png)
 
 ### Preprocess
 The preprocess for text mining mainly includes cleaning, tokenization and stemming. The objectives of these processes are to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
