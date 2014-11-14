@@ -13,7 +13,7 @@ The word prediction project has been started and an initial assessment of the ta
 
 In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
 
-> Main steps of SwiftKey's NLP project. 
+##### Main steps of SwiftKey's NLP project. 
 
 ![Flowchart of project.](/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/flowchart.png)
 
@@ -76,7 +76,7 @@ So far, we have done the basic cleaning/transformation steps for raw documents. 
 In this part, through doing some basic statistics analysis and data visualization on our data sets, we can get a brief understanding of our data. 
 First, we explore the **total lines** and **number of words** in each document.
 
-> Total Word Count / Lines by Text Source. 
+##### Total Word Count / Lines by Text Source. 
 
 
 ```
@@ -93,15 +93,17 @@ First, we explore the **total lines** and **number of words** in each document.
 
 Second, we convert our text corpus into **Document Term Matrix** based on different **ngrams**, so that we can easily figure out the frequency and correlation between different words. 
 
-> Terms frequency - Wordcloud / DTM
+##### Terms frequency - Wordcloud / DTM
 
 ![](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-5-1.png) 
+
+![](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-6-1.png) 
 
 Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
 
 Following are terms correlation diagram which reveal the relationships between different terms of our text data.
 
-> Terms correlation diagram
+##### Terms correlation diagram
 
 
 
@@ -118,7 +120,7 @@ The main functionalities should be included in Shiny app:
 - Detecting the nearest 1 to 3 words of users' typing and taking them as the inputs of model. 
 - Return the predictions of model to the user interface.
 
-> Example: 
+##### Example: 
 
 <img src="/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/app.png" width="300" height="100">
 

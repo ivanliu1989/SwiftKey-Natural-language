@@ -26,7 +26,7 @@ The word prediction project has been started and an initial assessment of the ta
 
 In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
 
-> Main steps of SwiftKey's NLP project. 
+##### Main steps of SwiftKey's NLP project. 
 
 ![Flowchart of project.](/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/flowchart.png)
 
@@ -72,7 +72,7 @@ So far, we have done the basic cleaning/transformation steps for raw documents. 
 In this part, through doing some basic statistics analysis and data visualization on our data sets, we can get a brief understanding of our data. 
 First, we explore the **total lines** and **number of words** in each document.
 
-> Total Word Count / Lines by Text Source. 
+##### Total Word Count / Lines by Text Source. 
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=3}
 setwd('/Users/ivan/Work_directory/SwiftKey')
@@ -87,11 +87,11 @@ ggplot(melt_df,aes(x=names,y=value)) +
 
 Second, we convert our text corpus into **Document Term Matrix** based on different **ngrams**, so that we can easily figure out the frequency and correlation between different words. 
 
-> Terms frequency - Wordcloud / DTM
+##### Terms frequency - Wordcloud / DTM
 
-```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=9}
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=3}
 setwd('/Users/ivan/Work_directory/SwiftKey')
-rm(list=ls(all=TRUE));par(mfrow=c(2,2))
+rm(list=ls(all=TRUE));par(mfrow=c(1,4))
 load('./SwiftKey-Natural-language/Other/freq_onetoken.RData')
 load('./SwiftKey-Natural-language/Other/freq_bitoken.RData')
 load('./SwiftKey-Natural-language/Other/freq_tritoken.RData')
@@ -103,23 +103,25 @@ wordcloud(names(freq_tritoken), freq_tritoken, min.freq=3, colors=brewer.pal(6, 
 wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=2, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
 ```
 
-```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=3}
+```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
 setwd('/Users/ivan/Work_directory/SwiftKey')
 rm(list=ls(all=TRUE))
 load('./SwiftKey-Natural-language/Other/wf_alltoken.RData')
 ggplot(wf_alltoken,aes(x=word,y=freq)) + 
     geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~ngrams, scales = "free") + 
-    xlab('Terms')+ylab('Frequency') + theme(legend.position='none') + 
-    theme_bw() + geom_text(aes(label=format(freq,big.mark=","),size=3),labels=comma,vjust=-0.2) 
+    xlab('Terms')+ylab('Frequency') + theme(legend.position='none', axis.title.x = element_text(size=12), 
+                                            axis.title.y = element_text(size=12), 
+                                            axis.text.x  = element_text(angle=90, vjust=0.5, size=10)) + 
+    theme_bw() + geom_text(aes(label=format(freq,big.mark=","),size=3),labels=comma,vjust=-0.2)
 ```
 
 Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
 
 Following are terms correlation diagram which reveal the relationships between different terms of our text data.
 
-> Terms correlation diagram
+##### Terms correlation diagram
 
-```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
+```{r echo=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 # setwd('/Users/ivan/Work_directory/SwiftKey')
 # rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 # source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
@@ -139,7 +141,7 @@ The main functionalities should be included in Shiny app:
 - Detecting the nearest 1 to 3 words of users' typing and taking them as the inputs of model. 
 - Return the predictions of model to the user interface.
 
-> Example: 
+##### Example: 
 
 <img src="/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/app.png" width="300" height="100">
 
