@@ -24,6 +24,7 @@ save(en_US_news_sample, file='data/sample/en_US_news_sample.RData')
 save(en_US_twitter_sample, file='data/sample/en_US_twitter_sample.RData')
 
 en_US <- file.path('.','data','sample')
+en_US <- file.path('.','final','en_US')
 en_US_corpus_sample <- Corpus(DirSource(en_US, encoding="UTF-8"), 
                          readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
 save(en_US_corpus_sample, file='data/en_US_corpus_sample_ALL.RData') ## all 3 doc corpus sample
@@ -42,6 +43,7 @@ tokenized_docs <- tokenization(en_US_corpus_sample, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 save(stem_docs, file='data/sample/stem_docs.RData') ## all 3 doc corpus sample
+load('data/sample/stem_docs.RData')
 
 ##########################################################################################################################################
 stem_df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFactors=F)
@@ -123,8 +125,8 @@ wordcloud(names(freq_onetoken), freq_onetoken, min.freq=50, colors=brewer.pal(6,
 wordcloud(names(freq_bitoken), freq_bitoken, min.freq=10, colors=brewer.pal(6, 'Dark2'), rot.per=.2, scale=c(5,.1))
 wordcloud(names(freq_tritoken), freq_tritoken, min.freq=5, colors=brewer.pal(6, 'Dark2'), rot.per=.2, scale=c(5,.1))
 wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=3, colors=brewer.pal(6, 'Dark2'), rot.per=.2, scale=c(5,.1))
-
 ##########################################################################################################################################
+token_delim <- " \\t\\r\\n.!?,;\"()"
 OnegramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 1, max = 1))
 BigramTokenizer <- function(x) 
@@ -134,23 +136,28 @@ TrigramTokenizer <- function(x)
 QuatrgramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 4, max = 4, delimiters = token_delim))
 # dtm_ngram
-Onegram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = OnegramTokenizer))
+Onegram_DTM <- DocumentTermMatrix(en_US_corpus_sample, control = list(tokenize = OnegramTokenizer))
 class(Onegram_DTM); dim(Onegram_DTM)
-Bigram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = BigramTokenizer))
-Trigram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = TrigramTokenizer))
-Quatrgram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = QuatrgramTokenizer))
+Bigram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = BigramTokenizer))
+class(Bigram_DTM); dim(Bigram_DTM)
+Trigram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = TrigramTokenizer))
+class(Bigram_DTM); dim(Bigram_DTM)
+Quatrgram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = QuatrgramTokenizer))
+class(Bigram_DTM); dim(Bigram_DTM)
 
 #########################
 ### Correlation Plots ###
 #########################
-plot(Onegram_DTM, terms=findFreqTerms(Onegram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
+require(Rgraphviz)
+plot(Onegram_DTM, terms=findFreqTerms(Onegram_DTM, lowfreq=50)[1:50], corThreshold=0.5)
 plot(Bigram_DTM, terms=findFreqTerms(Bigram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
-plot(Trigram_DTM, terms=findFreqTerms(Trigram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
-plot(Quatrgram_DTM, terms=findFreqTerms(Quatrgram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
+plot(Trigram_DTM, terms=findFreqTerms(Trigram_DTM, lowfreq=3)[1:50], corThreshold=0.5)
+plot(Quatrgram_DTM, terms=findFreqTerms(Quatrgram_DTM, lowfreq=2)[1:50], corThreshold=0.5)
 
-
+findAssocs(Onegram_DTM, 'from', corlimit = .5)
 ##########################################################################################################################################
-
+source("http://bioconductor.org/biocLite.R")
+biocLite("Rgraphviz")
 
 
 

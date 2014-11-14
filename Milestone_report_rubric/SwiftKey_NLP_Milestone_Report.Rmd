@@ -97,10 +97,10 @@ load('./SwiftKey-Natural-language/Other/freq_bitoken.RData')
 load('./SwiftKey-Natural-language/Other/freq_tritoken.RData')
 load('./SwiftKey-Natural-language/Other/freq_quatrtoken.RData')
 library(wordcloud); set.seed(888)
-wordcloud(names(freq_onetoken), freq_onetoken, min.freq=30, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
-wordcloud(names(freq_bitoken), freq_bitoken, min.freq=12, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
-wordcloud(names(freq_tritoken), freq_tritoken, min.freq=3, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
-wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=2, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
+wordcloud(names(freq_onetoken), freq_onetoken, min.freq=40, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
+wordcloud(names(freq_bitoken), freq_bitoken, min.freq=15, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
+wordcloud(names(freq_tritoken), freq_tritoken, min.freq=4, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
+wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=3, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
@@ -111,7 +111,7 @@ ggplot(wf_alltoken,aes(x=word,y=freq)) +
     geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~ngrams, scales = "free") + 
     xlab('Terms')+ylab('Frequency') + theme(legend.position='none', axis.title.x = element_text(size=12), 
                                             axis.title.y = element_text(size=12), 
-                                            axis.text.x  = element_text(angle=90, vjust=0.5, size=10)) + 
+                                            axis.text.x  = element_text(angle=45, hjust=1)) + 
     theme_bw() + geom_text(aes(label=format(freq,big.mark=","),size=3),labels=comma,vjust=-0.2)
 ```
 
