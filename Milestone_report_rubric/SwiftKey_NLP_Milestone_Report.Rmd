@@ -128,12 +128,11 @@ Following are terms correlation diagram which reveal the relationships between d
 # load('./data/all_corpus.RData')
 ```
 
+### Sparcity
+print(paste("Out of ", length(validCharWords)," there are ", sum(validWordCount==1), " words that appear in the corpus once"))
+file:///Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/RPubs%20-%20Data%20Science%20Milestone%20Report.htm
 
-
-### Prediction Algorithm
-sparsity
-
-### Application
+### Algorithm / Application
 After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be released on a **Shiny** server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement **2 or 3 grams** algorithms for our online application.
 
 The main functionalities should be included in Shiny app:
