@@ -1,3 +1,4 @@
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 ### create sample ###
 stem_path <- file.path('.','final/en_US')
 dir(stem_path)
@@ -56,8 +57,9 @@ save(bitoken, file='data/sample/bitoken.RData')
 save(tritoken, file='data/sample/tritoken.RData')
 save(quatrtoken, file='data/sample/quatrtoken.RData')
 
-plot(quatrtoken, terms=findFreqTerms(quatrtoken, lowfreq=10)[1:50], corThreshold=0.5)
-
+#################
+### bar chart ###
+#################
 # freq_onetoken
 freq_onetoken <- sort(table(onetoken), decreasing=T)
 wf_onetoken <- data.frame(word=names(freq_onetoken), freq = freq_onetoken) 
@@ -66,11 +68,19 @@ subset(wf_onetoken, freq > 500) %>%
     ggplot(aes(word, freq)) +
     geom_bar(stat='identity') + 
     theme(axis.text.x=element_text(angle=45,hjust=1))
-# freq_quatrtoken
-freq_quatrtoken <- sort(table(quatrtoken), decreasing=T)
-wf_quatrtoken <- data.frame(word=names(freq_quatrtoken), freq = freq_quatrtoken) 
-head(wf_quatrtoken)
-subset(wf_quatrtoken, freq > 3) %>%
+# freq_bitoken
+freq_bitoken <- sort(table(bitoken), decreasing=T)
+wf_bitoken <- data.frame(word=names(freq_bitoken), freq = freq_bitoken) 
+head(wf_bitoken)
+subset(wf_bitoken, freq > 50) %>%
+    ggplot(aes(word, freq)) +
+    geom_bar(stat='identity') + 
+    theme(axis.text.x=element_text(angle=45,hjust=1))
+# freq_tritoken
+freq_tritoken <- sort(table(tritoken), decreasing=T)
+wf_tritoken <- data.frame(word=names(freq_tritoken), freq = freq_tritoken) 
+head(wf_tritoken)
+subset(wf_tritoken, freq > 5) %>%
     ggplot(aes(word, freq)) +
     geom_bar(stat='identity') + 
     theme(axis.text.x=element_text(angle=45,hjust=1))
@@ -82,14 +92,26 @@ subset(wf_quatrtoken, freq > 3) %>%
     ggplot(aes(word, freq)) +
     geom_bar(stat='identity') + 
     theme(axis.text.x=element_text(angle=45,hjust=1))
-# freq_quatrtoken
-freq_quatrtoken <- sort(table(quatrtoken), decreasing=T)
-wf_quatrtoken <- data.frame(word=names(freq_quatrtoken), freq = freq_quatrtoken) 
-head(wf_quatrtoken)
-subset(wf_quatrtoken, freq > 3) %>%
-    ggplot(aes(word, freq)) +
-    geom_bar(stat='identity') + 
-    theme(axis.text.x=element_text(angle=45,hjust=1))
+
+save(freq_onetoken, file='./SwiftKey-Natural-language/Other/freq_onetoken.RData')
+save(freq_bitoken, file='./SwiftKey-Natural-language/Other/freq_bitoken.RData')
+save(freq_tritoken, file='./SwiftKey-Natural-language/Other/freq_tritoken.RData')
+save(freq_quatrtoken, file='./SwiftKey-Natural-language/Other/freq_quatrtoken.RData')
+
+save(wf_onetoken, file='./SwiftKey-Natural-language/Other/wf_onetoken.RData')
+save(wf_bitoken, file='./SwiftKey-Natural-language/Other/wf_bitoken.RData')
+save(wf_tritoken, file='./SwiftKey-Natural-language/Other/wf_tritoken.RData')
+save(wf_quatrtoken, file='./SwiftKey-Natural-language/Other/wf_quatrtoken.RData')
+
+##################
+### word cloud ###
+##################
+library(wordcloud); set.seed(888)
+wordcloud(names(freq_onetoken), freq_onetoken, min.freq=50, colors=brewer.pal(6, 'Dark2'), rot.per=.2, scale=c(5,.1))
+wordcloud(names(freq_bitoken), freq_bitoken, min.freq=10, colors=brewer.pal(6, 'Dark2'), rot.per=.2, scale=c(5,.1))
+wordcloud(names(freq_tritoken), freq_tritoken, min.freq=5, colors=brewer.pal(6, 'Dark2'), rot.per=.2, scale=c(5,.1))
+wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=3, colors=brewer.pal(6, 'Dark2'), rot.per=.2, scale=c(5,.1))
+
 ##########################################################################################################################################
 OnegramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 1, max = 1))
@@ -105,6 +127,16 @@ class(Onegram_DTM); dim(Onegram_DTM)
 Bigram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = BigramTokenizer))
 Trigram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = TrigramTokenizer))
 Quatrgram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = QuatrgramTokenizer))
+
+#########################
+### Correlation Plots ###
+#########################
+plot(Onegram_DTM, terms=findFreqTerms(Onegram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
+plot(Bigram_DTM, terms=findFreqTerms(Bigram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
+plot(Trigram_DTM, terms=findFreqTerms(Trigram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
+plot(Quatrgram_DTM, terms=findFreqTerms(Quatrgram_DTM, lowfreq=10)[1:50], corThreshold=0.5)
+
+
 ##########################################################################################################################################
 
 

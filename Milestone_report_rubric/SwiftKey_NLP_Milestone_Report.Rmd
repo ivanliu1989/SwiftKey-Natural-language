@@ -90,11 +90,22 @@ Second, we convert our text corpus into **Document Term Matrix** based on differ
 > Terms frequency - Wordcloud / DTM
 
 ```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
-# setwd('/Users/ivan/Work_directory/SwiftKey')
-# rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
-# source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
-# load('./data/all_corpus.RData')
+setwd('/Users/ivan/Work_directory/SwiftKey')
+rm(list=ls(all=TRUE));par(mfrow=c(2,2))
+load('./SwiftKey-Natural-language/Other/freq_onetoken.RData')
+load('./SwiftKey-Natural-language/Other/freq_bitoken.RData')
+load('./SwiftKey-Natural-language/Other/freq_tritoken.RData')
+load('./SwiftKey-Natural-language/Other/freq_quatrtoken.RData')
+library(wordcloud); set.seed(888)
+wordcloud(names(freq_onetoken), freq_onetoken, min.freq=30, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
+wordcloud(names(freq_bitoken), freq_bitoken, min.freq=12, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
+wordcloud(names(freq_tritoken), freq_tritoken, min.freq=3, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
+wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=2, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
 ```
+
+Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
+
+Following are terms correlation diagram which reveal the relationships between different terms of our text data.
 
 > Terms correlation diagram
 
@@ -106,10 +117,6 @@ Second, we convert our text corpus into **Document Term Matrix** based on differ
 ```
 
 
-corpus - data.frame - ngram
-
-df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFactors=F)
-df<-df[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', df, perl=T )>0]
 
 ### Prediction Algorithm
 sparsity
