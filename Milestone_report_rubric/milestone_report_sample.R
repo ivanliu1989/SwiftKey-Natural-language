@@ -107,8 +107,13 @@ wf_onetoken$ngrams <- '1-gram'
 wf_bitoken$ngrams <- '2-grams'
 wf_tritoken$ngrams <- '3-grams'
 wf_quatrtoken$ngrams <- '4-grams'
-wf_alltoken<- rbind(wf_onetoken,wf_bitoken,wf_tritoken,wf_quatrtoken)
+wf_alltoken<- rbind(subset(wf_onetoken, freq > 500),subset(wf_bitoken, freq > 50),subset(wf_tritoken, freq > 10),subset(wf_quatrtoken, freq > 3))
 save(wf_alltoken, file='./SwiftKey-Natural-language/Other/wf_alltoken.RData')
+ggplot(wf_alltoken,aes(x=word,y=freq)) + 
+    geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~ngrams, scales = "free") + 
+    xlab('Terms')+ylab('Frequency') + theme(legend.position='none') + 
+    theme_bw() + geom_text(aes(label=format(freq,big.mark=","),size=3),labels=comma,vjust=-0.2) 
+
 
 ##################
 ### word cloud ###

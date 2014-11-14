@@ -106,27 +106,13 @@ wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=2, colors=brewer.pal
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=3}
 setwd('/Users/ivan/Work_directory/SwiftKey')
 rm(list=ls(all=TRUE))
-load('./SwiftKey-Natural-language/Other/wf_onetoken.RData')
-load('./SwiftKey-Natural-language/Other/wf_bitoken.RData')
-load('./SwiftKey-Natural-language/Other/wf_tritoken.RData')
-load('./SwiftKey-Natural-language/Other/wf_quatrtoken.RData')
-subset(wf_onetoken, freq > 500) %>%
-    ggplot(aes(word, freq)) +
-    geom_bar(stat='identity') + 
-    theme(axis.text.x=element_text(angle=45,hjust=1))
-subset(wf_bitoken, freq > 50) %>%
-    ggplot(aes(word, freq)) +
-    geom_bar(stat='identity') + 
-    theme(axis.text.x=element_text(angle=45,hjust=1))
-subset(wf_tritoken, freq > 5) %>%
-    ggplot(aes(word, freq)) +
-    geom_bar(stat='identity') + 
-    theme(axis.text.x=element_text(angle=45,hjust=1))
-subset(wf_quatrtoken, freq > 3) %>%
-    ggplot(aes(word, freq)) +
-    geom_bar(stat='identity') + 
-    theme(axis.text.x=element_text(angle=45,hjust=1))
+load('./SwiftKey-Natural-language/Other/wf_alltoken.RData')
+ggplot(wf_alltoken,aes(x=word,y=freq)) + 
+    geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~ngrams, scales = "free") + 
+    xlab('Terms')+ylab('Frequency') + theme(legend.position='none') + 
+    theme_bw() + geom_text(aes(label=format(freq,big.mark=","),size=3),labels=comma,vjust=-0.2) 
 ```
+
 Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
 
 Following are terms correlation diagram which reveal the relationships between different terms of our text data.
