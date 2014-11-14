@@ -14,7 +14,6 @@ setwd('/Users/ivan/Work_directory/SwiftKey')
 require(tm); require(SnowballC); require(data.table)
 require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud);require(reshape2)
-rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
 
