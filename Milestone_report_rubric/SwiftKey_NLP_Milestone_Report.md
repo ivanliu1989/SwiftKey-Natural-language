@@ -5,20 +5,18 @@ Tianxiang(Ivan) Liu
 
 
 ### Introduction
-This milestone report introduced a preliminary research about SwiftKey's NLP project.
+This report mainly provides a preliminary research regarding SwiftKey's NLP project.
 
-The SwiftKey's NLP project is mainly aimed to implement **NLP (Natural language processing)** techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. 
+The SwiftKey's NLP project is aimed to implement **NLP (Natural language processing)** techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. 
 
-The word prediction project has been started and an initial assessment of the task completed. This report describes the goals of the overall project, the magnitude of the challenge, and gives some initial assessments of the results.
-
-In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
+In this report, the basic research such as preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications are introduced in order to provide readers with overall concepts about the project.
 
 ##### Main steps of SwiftKey's NLP project. 
 
-![Flowchart of project.](/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/flowchart.png)
+![Flowchart of project.](flowchart.png)
 
 ### Preprocess
-The preprocess for text mining mainly includes **cleaning, tokenization and stemming**. The objectives of these processes are to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
+The preprocess for text mining mainly includes **cleaning, tokenization and stemming**. These steps are implemented to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
 
 - Capital/Lower case
 - Numbers
@@ -89,15 +87,14 @@ First, we explore the **total lines** and **number of words** in each document.
 ## 6 twitter word_counts 30373543
 ```
 
-![](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-4.png) 
 
 Second, we convert our text corpus into **Document Term Matrix** based on different **ngrams**, so that we can easily figure out the frequency and correlation between different words. 
 
 ##### Terms frequency - Wordcloud / DTM
 
-![](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-5-1.png) 
-
-![](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-6-1.png) 
+![plot of chunk unnamed-chunk-5](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-5.png) 
+![plot of chunk unnamed-chunk-6](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-6.png) 
 
 Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
 
@@ -107,12 +104,11 @@ Following are terms correlation diagram which reveal the relationships between d
 
 
 
+### Sparcity
+print(paste("Out of ", length(validCharWords)," there are ", sum(validWordCount==1), " words that appear in the corpus once"))
+file:///Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/RPubs%20-%20Data%20Science%20Milestone%20Report.htm
 
-
-### Prediction Algorithm
-sparsity
-
-### Application
+### Algorithm / Application
 After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be released on a **Shiny** server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement **2 or 3 grams** algorithms for our online application.
 
 The main functionalities should be included in Shiny app:
@@ -122,7 +118,7 @@ The main functionalities should be included in Shiny app:
 
 ##### Example: 
 
-<img src="/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/app.png" width="300" height="100">
+<img src="app.png" width="300" height="100">
 
 *<br>Thank you!<br>*
 *Tianxiang(Ivan) Liu<br>*

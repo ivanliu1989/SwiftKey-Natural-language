@@ -10,28 +10,26 @@ output:
 ---
 
 ```{r echo=FALSE, message=FALSE}
-setwd('/Users/ivan/Work_directory/SwiftKey')
+setwd('H:/Machine_Learning/SwiftKey')
 require(tm); require(SnowballC); require(data.table)
 require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud);require(reshape2)
-source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+source('./SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 ```
 
 ### Introduction
-This milestone report introduced a preliminary research about SwiftKey's NLP project.
+This report mainly provides a preliminary research regarding SwiftKey's NLP project.
 
-The SwiftKey's NLP project is mainly aimed to implement **NLP (Natural language processing)** techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. 
+The SwiftKey's NLP project is aimed to implement **NLP (Natural language processing)** techniques to build an algorithm in R environment. The algorithm will be trained by a larged amounts of collected text/documents and eventually, it will be able to make predictions of words that users are most likely to type. 
 
-The word prediction project has been started and an initial assessment of the task completed. This report describes the goals of the overall project, the magnitude of the challenge, and gives some initial assessments of the results.
-
-In this report, the basic research like preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications will be introduced so that reader can have an overall concept regarding the project and where the project is heading to.
+In this report, the basic research such as preprocess of raw data, preliminary statistics/visualization analysis, plans for algorithm and applications are introduced in order to provide readers with overall concepts about the project.
 
 ##### Main steps of SwiftKey's NLP project. 
 
-![Flowchart of project.](/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/flowchart.png)
+![Flowchart of project.](flowchart.png)
 
 ### Preprocess
-The preprocess for text mining mainly includes **cleaning, tokenization and stemming**. The objectives of these processes are to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
+The preprocess for text mining mainly includes **cleaning, tokenization and stemming**. These steps are implemented to clean the collections of text documents provided and transfer the documents into a form of text segmentation which can be used for further analysis easily. To be more specific, the following issues in text documents will be solved during preprocess:
 
 - Capital/Lower case
 - Numbers
@@ -43,8 +41,8 @@ The preprocess for text mining mainly includes **cleaning, tokenization and stem
 To overcome all issues above, function **tokenization()** has been constructed and following is an output of applying this function on our documents.
  
 ```{r echo=FALSE}
-setwd('/Users/ivan/Work_directory/SwiftKey')
-en_US <- file.path('.','final','en_US_s')
+setwd('H:/Machine_Learning/SwiftKey')
+en_US <- file.path('.','SwiftKey-Natural-language','Other','en_US_s')
 en_US.document <- Corpus(DirSource(en_US, encoding="UTF-8"), 
                          readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
 docs <- en_US.document
@@ -52,7 +50,7 @@ trans <- c(F,T,T,T,F,F,T,T)
 ChartoSpace <- c('/','\\|')
 stopWords <- 'english'
 ownStopWords <- c()
-swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+swearwords <- read.table('./SwiftKey-Natural-language/profanity filter/en', sep='\n')
 names(swearwords)<-'swearwords'
 filter <- rep('***', length(swearwords))
 profanity <- data.frame(swearwords, target = filter)
@@ -74,23 +72,32 @@ First, we explore the **total lines** and **number of words** in each document.
 
 ##### Total Word Count / Lines by Text Source. 
 
-```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=3}
-setwd('/Users/ivan/Work_directory/SwiftKey')
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=2.5}
+setwd('H:/Machine_Learning/SwiftKey')
 load('./SwiftKey-Natural-language/Other/melt_df.RData')
 melt_df
 # barplot of total word counts
 ggplot(melt_df,aes(x=names,y=value)) + 
     geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~variable, scales = "free") + 
     xlab('Source')+ylab('Word Count/Lines') + theme(legend.position='none') + 
-    theme_bw() + geom_text(aes(label=format(value,big.mark=","),size=3),labels=comma,vjust=-0.2) 
+    theme_bw() + geom_text(aes(label=format(value,big.mark=",")),size=3,labels=comma,vjust=-0.2) 
 ```
 
 Second, we convert our text corpus into **Document Term Matrix** based on different **ngrams**, so that we can easily figure out the frequency and correlation between different words. 
 
 ##### Terms frequency - Wordcloud / DTM
 
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=6}
+setwd('H:/Machine_Learning/SwiftKey')
+rm(list=ls(all=TRUE))
+load('./SwiftKey-Natural-language/Other/wf_alltoken.RData')
+ggplot(wf_alltoken,aes(x=word,y=freq)) + 
+    geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~ngrams, scales = "free", ncol=1,nrow=4) + 
+    xlab('Terms')+ylab('Frequency') + theme(legend.position='none', axis.title.x = element_text(size=3), axis.title.y = element_text(size=3), axis.text.x  = element_text(angle=45, hjust=1)) + 
+    theme_bw() + geom_text(aes(label=format(freq,big.mark=",")),size=3 ,labels=comma,vjust=-0.2)
+```
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=3}
-setwd('/Users/ivan/Work_directory/SwiftKey')
+setwd('H:/Machine_Learning/SwiftKey')
 rm(list=ls(all=TRUE));par(mfrow=c(1,4))
 load('./SwiftKey-Natural-language/Other/freq_onetoken.RData')
 load('./SwiftKey-Natural-language/Other/freq_bitoken.RData')
@@ -103,30 +110,7 @@ wordcloud(names(freq_tritoken), freq_tritoken, min.freq=4, colors=brewer.pal(6, 
 wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=3, colors=brewer.pal(6, 'Dark2'), rot.per=.2)
 ```
 
-```{r echo=FALSE, warning=FALSE, fig.width=10, fig.height=4}
-setwd('/Users/ivan/Work_directory/SwiftKey')
-rm(list=ls(all=TRUE))
-load('./SwiftKey-Natural-language/Other/wf_alltoken.RData')
-ggplot(wf_alltoken,aes(x=word,y=freq)) + 
-    geom_bar(stat='identity',color='grey60',fill='#56B4E9') + facet_wrap(~ngrams, scales = "free") + 
-    xlab('Terms')+ylab('Frequency') + theme(legend.position='none', axis.title.x = element_text(size=12), 
-                                            axis.title.y = element_text(size=12), 
-                                            axis.text.x  = element_text(angle=45, hjust=1)) + 
-    theme_bw() + geom_text(aes(label=format(freq,big.mark=","),size=3),labels=comma,vjust=-0.2)
-```
-
 Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
-
-Following are terms correlation diagram which reveal the relationships between different terms of our text data.
-
-##### Terms correlation diagram
-
-```{r echo=FALSE, warning=FALSE, fig.width=8, fig.height=2}
-# setwd('/Users/ivan/Work_directory/SwiftKey')
-# rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
-# source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
-# load('./data/all_corpus.RData')
-```
 
 ### Sparcity
 print(paste("Out of ", length(validCharWords)," there are ", sum(validWordCount==1), " words that appear in the corpus once"))
@@ -142,7 +126,7 @@ The main functionalities should be included in Shiny app:
 
 ##### Example: 
 
-<img src="/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/app.png" width="300" height="100">
+<img src="app.png" width="300" height="100">
 
 *<br>Thank you!<br>*
 *Tianxiang(Ivan) Liu<br>*
