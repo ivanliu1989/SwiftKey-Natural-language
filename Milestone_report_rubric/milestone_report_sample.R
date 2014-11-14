@@ -103,6 +103,13 @@ save(wf_bitoken, file='./SwiftKey-Natural-language/Other/wf_bitoken.RData')
 save(wf_tritoken, file='./SwiftKey-Natural-language/Other/wf_tritoken.RData')
 save(wf_quatrtoken, file='./SwiftKey-Natural-language/Other/wf_quatrtoken.RData')
 
+wf_onetoken$ngrams <- '1-gram'
+wf_bitoken$ngrams <- '2-grams'
+wf_tritoken$ngrams <- '3-grams'
+wf_quatrtoken$ngrams <- '4-grams'
+wf_alltoken<- rbind(wf_onetoken,wf_bitoken,wf_tritoken,wf_quatrtoken)
+save(wf_alltoken, file='./SwiftKey-Natural-language/Other/wf_alltoken.RData')
+
 ##################
 ### word cloud ###
 ##################

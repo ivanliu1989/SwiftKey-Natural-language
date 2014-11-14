@@ -3,11 +3,6 @@ Tianxiang(Ivan) Liu
 13 November 2014  
 
 
-```
-##          used (Mb) gc trigger (Mb) max used (Mb)
-## Ncells 760928 40.7    1073225 57.4   760928 40.7
-## Vcells 946731  7.3    1598044 12.2   946731  7.3
-```
 
 ### Introduction
 This milestone report introduced a preliminary research about SwiftKey's NLP project.
@@ -100,17 +95,17 @@ Second, we convert our text corpus into **Document Term Matrix** based on differ
 
 > Terms frequency - Wordcloud / DTM
 
+![](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-5-1.png) 
 
+Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
+
+Following are terms correlation diagram which reveal the relationships between different terms of our text data.
 
 > Terms correlation diagram
 
 
 
 
-corpus - data.frame - ngram
-
-df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFactors=F)
-df<-df[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', df, perl=T )>0]
 
 ### Prediction Algorithm
 sparsity
@@ -127,6 +122,6 @@ The main functionalities should be included in Shiny app:
 
 <img src="/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/app.png" width="300" height="100">
 
-*Thank you!<br>*
+*<br>Thank you!<br>*
 *Tianxiang(Ivan) Liu<br>*
 *13 November 2014*
