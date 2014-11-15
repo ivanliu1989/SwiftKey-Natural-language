@@ -66,7 +66,7 @@ stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 
 So far, we have done the basic cleaning/transformation steps for raw documents. Next we will do some preliminary statistics analysis and data visualisation to collected data.
 
-### Preliminary Statistics/Visualization
+### Basic Statistics/Visualization
 In this part, through doing some basic statistics analysis and data visualization on our data sets, we can get a brief understanding of our data. 
 First, we explore the **total lines** and **number of words** in each document.
 
@@ -112,22 +112,34 @@ wordcloud(names(freq_quatrtoken), freq_quatrtoken, min.freq=3, colors=brewer.pal
 
 Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
 
-### Sparcity
+### Further Terms Frequency Analysis
+#### Word frequency distribution
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=3}
 setwd('H:/Machine_Learning/SwiftKey')
-rm(list=ls(all=TRUE));par(mfrow=c(1,4))
-load('data/stemming_en_US_ALL.RData')
-length(stem_docs)
-validWordMatrix<-wordMatrix[,validCharWords]
-validWordCount<-colSums(validWordMatrix)
-hist(log10(validWordCount), xlab="Word frequency in corpus  (log10)", col = "red", 
-     ylab="Number of words", main = "Word frequency distribution")
+rm(list=ls(all=TRUE))
+load('SwiftKey-Natural-language/Other/wf_onetoken.RData')
+load('SwiftKey-Natural-language/Other/wf_bitoken.RData')
+load('SwiftKey-Natural-language/Other/wf_tritoken.RData')
+load('SwiftKey-Natural-language/Other/wf_quatrtoken.RData')
+par(mfcol = c(1,4))
+hist(log10(table(wf_onetoken[,2])), xlab="", col = "#56B4E9", 
+     ylab="Number of words", main = "Unigram")
+hist(log10(table(wf_bitoken[,2])), xlab="Word frequency in corpus  (log10)", col = "#56B4E9", 
+     ylab="", main = "Bigrams")
+hist(log10(table(wf_tritoken[,2])), xlab="", col = "#56B4E9", 
+     ylab="", main = "Trigrams")
+hist(log10(table(wf_quatrtoken[,2])), xlab="", col = "#56B4E9", 
+     ylab="", main = "Quargrams")
+load('SwiftKey-Natural-language/Other/sparcity_all.RData')
+sparcity_all
+rm(list=ls(all=TRUE))
 ```
-print(paste("Out of ", length(validCharWords)," there are ", sum(validWordCount==1), " words that appear in the corpus once"))
 
+We can see in the above plots and table how many words it would take to reach **50%** and **90%** coverage in our 1-4 grams models.<br>
+For example, **124** words are needed to account for 50% of the entire Unigram corpora and **2783** words are needed to account for 90% of the entire Unigram corpora. They are the same as **1.53%** and **34.26%** of total rows in our one-word sample corpus.
 
 ### Algorithm / Application
-After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be released on a **Shiny** server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement **2 or 3 grams** algorithms for our online application.
+This project is also required to develop an online application with user-friendly interface. In this project, the application will be released on a **Shiny** server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement **2 or 3 grams** algorithms for our online application.
 
 The main functionalities should be included in Shiny app:
 
@@ -138,6 +150,6 @@ The main functionalities should be included in Shiny app:
 
 <img src="app.png" width="300" height="100">
 
-*<br>Thank you!<br>*
-*Tianxiang(Ivan) Liu<br>*
+
+*<br>Tianxiang(Ivan) Liu<br>*
 *13 November 2014*

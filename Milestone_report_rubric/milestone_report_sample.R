@@ -52,7 +52,7 @@ tokenized_docs <- tokenization(en_US_corpus_sample, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 save(stem_docs, file='data/sample/stem_docs.RData') ## all 3 doc corpus sample
-load('data/sample/stem_docs.RData')
+load('SwiftKey-Natural-language/Other/stem_docs.RData')
 
 ##########################################################################################################################################
 load('data/stemming_en_US_ALL.RData')

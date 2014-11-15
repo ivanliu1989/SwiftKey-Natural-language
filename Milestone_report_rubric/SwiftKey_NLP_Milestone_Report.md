@@ -70,7 +70,7 @@ After tokenizations, **stemming** is applied to documents to remove common words
 
 So far, we have done the basic cleaning/transformation steps for raw documents. Next we will do some preliminary statistics analysis and data visualisation to collected data.
 
-### Preliminary Statistics/Visualization
+### Basic Statistics/Visualization
 In this part, through doing some basic statistics analysis and data visualization on our data sets, we can get a brief understanding of our data. 
 First, we explore the **total lines** and **number of words** in each document.
 
@@ -98,18 +98,23 @@ Second, we convert our text corpus into **Document Term Matrix** based on differ
 
 Above wordcloud diagrams give us a intuitive view towards the frequency of 1,2,3,4 grams terms and bar charts based on our Document Terms Matrix also display top frequent terms in our documents. 
 
-Following are terms correlation diagram which reveal the relationships between different terms of our text data.
+### Further Terms Frequency Analysis
+#### Word frequency distribution
+![plot of chunk unnamed-chunk-7](./SwiftKey_NLP_Milestone_Report_files/figure-html/unnamed-chunk-7.png) 
 
-##### Terms correlation diagram
+```
+##        Type 50% Coverage % of Total Row 90% Coverage % of Total Row
+## 1   Unigram          124          1.527         2783          34.26
+## 2    Bigram        12584         27.531        39084          85.51
+## 3   Trigram        30158         47.657        56658          89.53
+## 4 Quatrgram        32772         49.734        59271          89.95
+```
 
-
-
-### Sparcity
-print(paste("Out of ", length(validCharWords)," there are ", sum(validWordCount==1), " words that appear in the corpus once"))
-file:///Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/Milestone_report_rubric/RPubs%20-%20Data%20Science%20Milestone%20Report.htm
+We can see in the above plots and table how many words it would take to reach **50%** and **90%** coverage in our 1-4 grams models.<br>
+For example, **124** words are needed to account for 50% of the entire Unigram corpora and **2783** words are needed to account for 90% of the entire Unigram corpora. They are the same as **1.53%** and **34.26%** of total rows in our one-word sample corpus.
 
 ### Algorithm / Application
-After training the predictive algorithm, we also need to develop an online application with user-friendly interface. In this project, the application will be released on a **Shiny** server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement **2 or 3 grams** algorithms for our online application.
+This project is also required to develop an online application with user-friendly interface. In this project, the application will be released on a **Shiny** server. However, considering that the algorithm is built for mobile app, we have to also take the size and speed of model into account. So we only implement **2 or 3 grams** algorithms for our online application.
 
 The main functionalities should be included in Shiny app:
 
@@ -120,6 +125,6 @@ The main functionalities should be included in Shiny app:
 
 <img src="app.png" width="300" height="100">
 
-*<br>Thank you!<br>*
-*Tianxiang(Ivan) Liu<br>*
+
+*<br>Tianxiang(Ivan) Liu<br>*
 *13 November 2014*
