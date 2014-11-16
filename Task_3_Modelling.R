@@ -85,3 +85,21 @@ Trigram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = Trigra
 class(Bigram_DTM); dim(Bigram_DTM)
 Quatrgram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = QuatrgramTokenizer))
 class(Bigram_DTM); dim(Bigram_DTM)
+
+en_US <- file.path('.','final','en_US_s')
+en_US_corpus <- Corpus(DirSource(en_US, encoding="UTF-8"), 
+                       readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
+source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+trans <- c(F,T,T,T,F,F,T,T)
+ChartoSpace <- c('/','\\|')
+stopWords <- 'english'
+ownStopWords <- c()
+swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+names(swearwords)<-'swearwords'
+filter <- rep('***', length(swearwords))
+profanity <- data.frame(swearwords, target = filter)
+profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
+# find bottlenecks
+Rprof(tokenization(en_US_corpus, trans, ChartoSpace,
+                   stopWords, ownStopWords, profanity))
