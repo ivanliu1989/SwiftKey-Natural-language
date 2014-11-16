@@ -31,3 +31,57 @@
 ##############
 ### Script ###
 ##############
+setwd('H:/Machine_Learning/SwiftKey/')
+setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\SwiftKey')
+setwd('/Users/ivan/Work_directory/SwiftKey')
+Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre7\\")
+
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
+require(tm); require(SnowballC); require(data.table)
+require(ggplot2); require(RWeka); require(qdap);
+require(scales); require(gridExtra); require(wordcloud)
+
+en_US <- file.path('.','final','en_US')
+en_US_corpus <- Corpus(DirSource(en_US, encoding="UTF-8"), 
+                              readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
+source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+trans <- c(F,T,T,T,F,F,T,T)
+ChartoSpace <- c('/','\\|')
+stopWords <- 'english'
+ownStopWords <- c()
+swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
+names(swearwords)<-'swearwords'
+filter <- rep('***', length(swearwords))
+profanity <- data.frame(swearwords, target = filter)
+profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
+tokenized_docs <- tokenization(en_US_corpus, trans, ChartoSpace,
+                               stopWords, ownStopWords, profanity)
+
+stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
+save(tokenized_docs, file='data/tokenized_docs_all.RData')
+save(stem_docs, file='data/stem_docs_all.RData')
+
+load('data/stem_docs_all.RData')
+Onegram_DTM <- DocumentTermMatrix(stem_docs)
+save(Onegram_DTM, file='data/Unigram_DTM.RData')
+class(Onegram_DTM); dim(Onegram_DTM)
+inspect(Onegram_DTM[1,2100:3000])
+
+token_delim <- " \\t\\r\\n.!?,;\"()"
+OnegramTokenizer <- function(x) 
+    NGramTokenizer(x, Weka_control(min = 1, max = 1))
+BigramTokenizer <- function(x) 
+    NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = token_delim))
+TrigramTokenizer <- function(x) 
+    NGramTokenizer(x, Weka_control(min = 3, max = 3, delimiters = token_delim))
+QuatrgramTokenizer <- function(x) 
+    NGramTokenizer(x, Weka_control(min = 4, max = 4, delimiters = token_delim))
+# dtm_ngram
+Onegram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = OnegramTokenizer))
+class(Onegram_DTM); dim(Onegram_DTM)
+Bigram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = BigramTokenizer))
+class(Bigram_DTM); dim(Bigram_DTM)
+Trigram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = TrigramTokenizer))
+class(Bigram_DTM); dim(Bigram_DTM)
+Quatrgram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = QuatrgramTokenizer))
+class(Bigram_DTM); dim(Bigram_DTM)
