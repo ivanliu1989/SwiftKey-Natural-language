@@ -41,6 +41,7 @@ require(tm); require(SnowballC); require(data.table)
 require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud)
 
+## get raw data
 en_US <- file.path('.','final','en_US')
 
 con <- file("./final/en_US/en_US.blogs.txt")
@@ -54,8 +55,10 @@ twitter <- readLines(con)
 close(con)
 length(blogs);length(news);length(twitter)
 all <- rbind(blogs, news, twitter) ## all raw text
+head(all)
 en_US_corpus <- Corpus(VectorSource(all))
 
+## tokenization
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 trans <- c(F,T,T,T,F,F,T,T)
 ChartoSpace <- c('/','\\|')
@@ -73,6 +76,7 @@ stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 save(tokenized_docs, file='data/tokenized_docs_all.RData')
 save(stem_docs, file='data/stem_docs_all.RData')
 
+## frequency - ngrams
 load('data/stem_docs_all.RData')
 Onegram_DTM <- DocumentTermMatrix(stem_docs)
 save(Onegram_DTM, file='data/Unigram_DTM.RData')
