@@ -6,7 +6,7 @@ Created on Tue Nov 18 09:47:53 2014
 """
 import re, collections
 
-def words(text): return re.findall('[a-z]+', text.lower()) 
+def words(text): return re.findall('[a-z]+', text.lower())
 
 def train(features):
     model = collections.defaultdict(lambda: 1)
@@ -14,6 +14,7 @@ def train(features):
         model[f] += 1
     return model
 
+text = file('/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/spelling correction/big.txt').read()
 NWORDS = train(words(file('/Users/ivan/Work_directory/SwiftKey/SwiftKey-Natural-language/spelling correction/big.txt').read()))
 
 alphabet = 'abcdefghijklmnopqrstuvwxyz'
