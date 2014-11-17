@@ -42,8 +42,20 @@ require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud)
 
 en_US <- file.path('.','final','en_US')
-en_US_corpus <- Corpus(DirSource(en_US, encoding="UTF-8"), 
-                              readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
+
+con <- file("./final/en_US/en_US.blogs.txt")
+blogs <- readLines(con)
+close(con)
+con <- file("./final/en_US/en_US.news.txt")
+news <- readLines(con)
+close(con)
+con <- file("./final/en_US/en_US.twitter.txt")
+twitter <- readLines(con)
+close(con)
+length(blogs);length(news);length(twitter)
+all <- rbind(blogs, news, twitter) ## all raw text
+en_US_corpus <- Corpus(VectorSource(all))
+
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 trans <- c(F,T,T,T,F,F,T,T)
 ChartoSpace <- c('/','\\|')
