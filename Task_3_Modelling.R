@@ -54,9 +54,11 @@ con <- file("./final/en_US/en_US.twitter.txt")
 twitter <- readLines(con)
 close(con)
 length(blogs);length(news);length(twitter)
-all <- rbind(blogs, news, twitter) ## all raw text
-head(all)
+head(blogs);head(news);head(twitter)
+all <- c(blogs, news, twitter) ## all raw text
+length(all); head(all)
 en_US_corpus <- Corpus(VectorSource(all))
+object.size(en_US_corpus); gc()
 
 ## tokenization
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
@@ -71,18 +73,11 @@ profanity <- data.frame(swearwords, target = filter)
 profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
 tokenized_docs <- tokenization(en_US_corpus, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
-
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
-save(tokenized_docs, file='data/tokenized_docs_all.RData')
-save(stem_docs, file='data/stem_docs_all.RData')
+save(tokenized_docs, file='data/tokenized_docs_All_in_one.RData')
+save(stem_docs, file='data/stem_docs_All_in_one.RData')
 
 ## frequency - ngrams
-load('data/stem_docs_all.RData')
-Onegram_DTM <- DocumentTermMatrix(stem_docs)
-save(Onegram_DTM, file='data/Unigram_DTM.RData')
-class(Onegram_DTM); dim(Onegram_DTM)
-inspect(Onegram_DTM[1,2100:3000])
-
 token_delim <- " \\t\\r\\n.!?,;\"()"
 OnegramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 1, max = 1))
@@ -92,30 +87,3 @@ TrigramTokenizer <- function(x)
     NGramTokenizer(x, Weka_control(min = 3, max = 3, delimiters = token_delim))
 QuatrgramTokenizer <- function(x) 
     NGramTokenizer(x, Weka_control(min = 4, max = 4, delimiters = token_delim))
-# dtm_ngram
-Onegram_DTM <- DocumentTermMatrix(stem_docs, control = list(tokenize = OnegramTokenizer))
-class(Onegram_DTM); dim(Onegram_DTM)
-Bigram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = BigramTokenizer))
-class(Bigram_DTM); dim(Bigram_DTM)
-Trigram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = TrigramTokenizer))
-class(Bigram_DTM); dim(Bigram_DTM)
-Quatrgram_DTM <- DocumentTermMatrix(stem_docs[1], control = list(tokenize = QuatrgramTokenizer))
-class(Bigram_DTM); dim(Bigram_DTM)
-
-en_US <- file.path('.','final','en_US_s')
-en_US_corpus <- Corpus(DirSource(en_US, encoding="UTF-8"), 
-                       readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
-source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
-source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
-trans <- c(F,T,T,T,F,F,T,T)
-ChartoSpace <- c('/','\\|')
-stopWords <- 'english'
-ownStopWords <- c()
-swearwords <- read.table('SwiftKey-Natural-language/profanity filter/en', sep='\n')
-names(swearwords)<-'swearwords'
-filter <- rep('***', length(swearwords))
-profanity <- data.frame(swearwords, target = filter)
-profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
-# find bottlenecks
-Rprof(tokenization(en_US_corpus, trans, ChartoSpace,
-                   stopWords, ownStopWords, profanity))
