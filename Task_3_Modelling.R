@@ -59,6 +59,8 @@ all <- c(blogs, news, twitter) ## all raw text
 length(all); head(all)
 en_US_corpus <- Corpus(DirSource(en_US, encoding="UTF-8"), 
                        readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
+
+blogs_corpus <- Corpus(VectorSource(blogs))
 object.size(en_US_corpus); gc()
 
 ## tokenization
