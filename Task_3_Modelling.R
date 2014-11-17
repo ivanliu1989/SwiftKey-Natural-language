@@ -75,16 +75,19 @@ profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']"
 tokenized_docs <- tokenization(en_US_corpus, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
-save(tokenized_docs, file='data/tokenized_docs_All_in_one.RData')
-save(stem_docs, file='data/stem_docs_All_in_one.RData')
+save(tokenized_docs, file='data_18_Nov_2014/tokenized_docs_All_in_one.RData')
+save(stem_docs, file='data_18_Nov_2014/stem_docs_All_in_one.RData')
 
-## frequency - ngrams
+
+stem_df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFactors=F)
+save(stem_df, file='data_18_Nov_2014/stem_df_All_in_one.RData')
+dim(stem_df); 
+load('data_18_Nov_2014/stem_df_All_in_one.RData')
+# stem_df<-df[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', df, perl=T )>0]
 token_delim <- " \\t\\r\\n.!?,;\"()"
-OnegramTokenizer <- function(x) 
-    NGramTokenizer(x, Weka_control(min = 1, max = 1))
-BigramTokenizer <- function(x) 
-    NGramTokenizer(x, Weka_control(min = 2, max = 2, delimiters = token_delim))
-TrigramTokenizer <- function(x) 
-    NGramTokenizer(x, Weka_control(min = 3, max = 3, delimiters = token_delim))
-QuatrgramTokenizer <- function(x) 
-    NGramTokenizer(x, Weka_control(min = 4, max = 4, delimiters = token_delim))
+# df_ngram
+onetoken <- NGramTokenizer(stem_df, Weka_control(min=1,max=1))
+bitoken <- NGramTokenizer(stem_df, Weka_control(min=2,max=2, delimiters = token_delim))
+tritoken <- NGramTokenizer(stem_df, Weka_control(min=3,max=3, delimiters = token_delim))
+quatrtoken <- NGramTokenizer(stem_df, Weka_control(min=4,max=4, delimiters = token_delim))
+
