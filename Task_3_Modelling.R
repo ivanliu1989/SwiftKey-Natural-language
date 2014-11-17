@@ -59,11 +59,17 @@ all <- c(blogs, news, twitter) ## all raw text
 length(all); head(all)
 en_US_corpus <- Corpus(DirSource(en_US, encoding="UTF-8"), 
                        readerControl = list(reader = readPlain,language = "en_US",load = TRUE))
-
-blogs_corpus <- Corpus(VectorSource(blogs))
+blog_corpus <- en_US_corpus[1]
+news_corpus <- en_US_corpus[2]
+twitter_corpus <- en_US_corpus[3]
+# writeCorpus
+save(blog_corpus, file='data_18_Nov_2014/blog_corpus.RData')
+save(news_corpus, file='data_18_Nov_2014/news_corpus.RData')
+save(twitter_corpus, file='data_18_Nov_2014/twitter_corpus.RData')
 object.size(en_US_corpus); gc()
 
 ## tokenization
+load('data_18_Nov_2014/blog_corpus.RData')
 source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
 trans <- c(F,T,T,T,F,F,T,T)
 ChartoSpace <- c('/','\\|')
@@ -74,7 +80,7 @@ names(swearwords)<-'swearwords'
 filter <- rep('***', length(swearwords))
 profanity <- data.frame(swearwords, target = filter)
 profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']","â ","ã","ð"), target = c(" ","'","'","'")))
-tokenized_docs <- tokenization(en_US_corpus, trans, ChartoSpace,
+tokenized_docs <- tokenization(blog_corpus, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 save(tokenized_docs, file='data_18_Nov_2014/tokenized_docs_All_in_one.RData')
