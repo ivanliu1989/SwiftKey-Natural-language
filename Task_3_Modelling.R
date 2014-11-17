@@ -83,8 +83,8 @@ profanity <- rbind(profanity, data.frame(swearwords = c("[^[:alpha:][:space:]']"
 tokenized_docs <- tokenization(blog_corpus, trans, ChartoSpace,
                                stopWords, ownStopWords, profanity)
 stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
-save(tokenized_docs, file='data_18_Nov_2014/tokenized_docs_All_in_one.RData')
-save(stem_docs, file='data_18_Nov_2014/stem_docs_All_in_one.RData')
+save(tokenized_docs, file='data_18_Nov_2014/blog_tokenized_corpus.RData')
+save(stem_docs, file='data_18_Nov_2014/blog_stemming_corpus.RData')
 
 
 stem_df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFactors=F)
