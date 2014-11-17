@@ -17,3 +17,42 @@
 ##############
 ### Script ###
 ##############
+require(stringr)
+input <- 'How are you?'
+predictNgrams <- function(input){
+    ## clean input text
+    # remove numbers, punctuations
+    word <- gsub("[^a-zA-Z\n\']", " ", input)
+    # convert all words to lowercase
+    word <- tolower(word)
+    # remove extra spaces
+    trim <- function(x) return(gsub("^ *|(?<= ) | *$", "", x, perl=T))
+    word<-trim(word)      
+    
+    str <- unlist(str_split(word," "))
+    len <- length(str)
+    
+    if (len>=3){
+        ##trigram 
+        ngram<- paste(str[len-2],str[len-1],str[len])
+        hit <- freq4gDF[freq4gDF$start == ngram,]
+        sgt<-sgt4g
+        
+        if(nrow(hit)==0){
+            ##bigram
+            ngram<- paste(str[len-1],str[len])
+            hit <- freq3gDF[freq3gDF$start == ngram,]
+            sgt<-sgt3g
+        }
+        
+        if(nrow(hit)==0){
+            ##unigram 
+            ngram<- paste(str[len])
+            hit<- freq2gDF[freq2gDF$start == ngram,]
+            sgt<-sgt2g
+        }
+    }
+    
+    return(word)
+}
+predictNgrams(input)
