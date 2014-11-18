@@ -86,11 +86,11 @@ stem_docs <- tm_map(tokenized_docs, stemDocument, 'english') # SnowballStemmer
 save(tokenized_docs, file='data_18_Nov_2014/blog_tokenized_corpus.RData')
 save(stem_docs, file='data_18_Nov_2014/blog_stemming_corpus.RData')
 
-
+load('data_18_Nov_2014/blog_stemming_corpus.RData')
 stem_df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFactors=F)
-save(stem_df, file='data_18_Nov_2014/stem_df_All_in_one.RData')
+save(stem_df, file='data_18_Nov_2014/blog_df.RData')
 dim(stem_df); 
-load('data_18_Nov_2014/stem_df_All_in_one.RData')
+load('data_18_Nov_2014/blog_df.RData')
 # stem_df<-df[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', df, perl=T )>0]
 token_delim <- " \\t\\r\\n.!?,;\"()"
 # df_ngram
