@@ -114,6 +114,15 @@ ngram_chunks <- list()
 for (j in 1:c){
     ngram_chunks[[j]] <- NGramTokenizer(chunks[[j]], Weka_control(min=3,max=3))    
 }
+ngram_chunks_all <- c()
+for (z in 1:c){
+    ngram_chunks_all <- c(ngram_chunks_all, ngram_chunks[[z]])
+}
+length(ngram_chunks_all); object.size(ngram_chunks_all); gc()
+ngram_freq_tb <- table(ngram_chunks_all)
+
+
+
 version3 <- function (){
     a <- data.frame(k=1:1000000, v=rep(1,1000000))
     b <- data.frame(k=500001:1500000, v=rep(1,1000000))
