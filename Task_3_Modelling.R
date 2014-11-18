@@ -104,10 +104,11 @@ quatrtoken <- NGramTokenizer(stem_df, Weka_control(min=4,max=4))
 #####################
 ## Chunks Spliting ##
 #####################
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 load('data_18_Nov_2014/blog_df.RData')
 source('SwiftKey-Natural-language/Task_4.5_ngram_split_func.R')
 split_num <- 100
-grams <- 4
+grams <- 3
 ngram_pred <- system.time(ngramify(split_num, stem_df, grams))
 
 
