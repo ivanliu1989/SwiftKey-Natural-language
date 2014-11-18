@@ -69,9 +69,15 @@ dim(ngram_pred)
 round(object.size(ngram_pred),0)
 
 save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_trigrams.RData')
-load('data_18_Nov_2014/ngrams/blog_trigrams.RData')
 
 ######################
 ## Ngrams Cleansing ##
 ######################
+load('data_18_Nov_2014/ngrams/blog_trigrams.RData')
+
 tail(ngram_pred, 50)
+
+
+
+
+
