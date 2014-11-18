@@ -101,6 +101,13 @@ head(ngram_pred,50)
 test_ngram <- ngram_pred[1:10,]
 ngram_pred_clean<-test_ngram[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', test_ngram[,1], perl=T )>0,]
 
-
-
-
+#########################
+## Combine Three Files ##
+#########################
+load('data_18_Nov_2014/ngrams/blog_Unigrams.RData')
+blog_Unigrams<-ngram_pred
+load('data_18_Nov_2014/ngrams/news_Unigrams.RData')
+news_Unigrams<-ngram_pred
+load('data_18_Nov_2014/ngrams/twitter_Unigrams.RData')
+twitter_Unigrams<-ngram_pred
+rm(ngram_pred)
