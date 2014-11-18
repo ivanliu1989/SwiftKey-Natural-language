@@ -108,9 +108,10 @@ rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 load('data_18_Nov_2014/blog_df.RData')
 source('SwiftKey-Natural-language/Task_4.5_ngram_split_func.R')
 split_num <- 100
-grams <- 3
-ngram_pred <- system.time(ngramify(split_num, stem_df, grams))
-
+grams <- 2
+ngram_pred <- ngramify(split_num, stem_df, grams)
+dim(ngram_pred)
+round(object.size(ngram_pred)/1024/1024,0)
 
 version3 <- function (){
     a <- data.frame(k=1:1000000, v=rep(1,1000000))
