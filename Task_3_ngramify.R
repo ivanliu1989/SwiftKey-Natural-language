@@ -29,8 +29,8 @@ object.size(en_US_corpus); gc()
 ###############################
 ### Tokenization & Stemming ###
 ###############################
-load('data_18_Nov_2014/Corpus/blog_corpus.RData')
-source('SwiftKey-Natural-language/Task_1.5_Tokenization_func.R')
+load('data_18_Nov_2014/Corpus/news_corpus.RData')
+source('SwiftKey-Natural-language/func/Task_1.5_Tokenization_func.R')
 
 trans <- c(F,T,T,T,F,F,T,T)
 ChartoSpace <- c('/','\\|')
