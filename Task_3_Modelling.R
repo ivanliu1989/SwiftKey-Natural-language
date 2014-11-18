@@ -101,6 +101,19 @@ bitoken <- NGramTokenizer(stem_df, Weka_control(min=2,max=2))
 tritoken <- NGramTokenizer(stem_df, Weka_control(min=3,max=3))
 quatrtoken <- NGramTokenizer(stem_df, Weka_control(min=4,max=4))
 
+#####################
+## Chunks Spliting ##
+#####################
+load('data_18_Nov_2014/blog_df.RData')
+c <- 100
+chunks <- list()
+for (i in 1:c){
+    chunks[[i]] <- stem_df[(ceiling(nrow(stem_df)/c)*(i-1)+1):(ceiling(nrow(stem_df)/c)*i),1]
+} 
+ngram_chunks <- list()
+for (j in 1:c){
+    ngram_chunks[[j]] <- NGramTokenizer(chunks[[j]], Weka_control(min=3,max=3))    
+}
 version3 <- function (){
     a <- data.frame(k=1:1000000, v=rep(1,1000000))
     b <- data.frame(k=500001:1500000, v=rep(1,1000000))
