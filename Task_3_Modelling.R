@@ -91,11 +91,23 @@ stem_df <- data.frame(text=unlist(sapply(stem_docs, '[',"content")),stringsAsFac
 save(stem_df, file='data_18_Nov_2014/blog_df.RData')
 dim(stem_df); 
 load('data_18_Nov_2014/blog_df.RData')
+nrow(stem_df)
+stem_df_sample <- head(stem_df, nrow(stem_df)/10)
 # stem_df<-df[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', df, perl=T )>0]
 token_delim <- " \\t\\r\\n.!?,;\"()"
 # df_ngram
-onetoken <- NGramTokenizer(stem_df, Weka_control(min=1,max=1))
-bitoken <- NGramTokenizer(stem_df, Weka_control(min=2,max=2, delimiters = token_delim))
-tritoken <- NGramTokenizer(stem_df, Weka_control(min=3,max=3, delimiters = token_delim))
-quatrtoken <- NGramTokenizer(stem_df, Weka_control(min=4,max=4, delimiters = token_delim))
+onetoken <- NGramTokenizer(stem_df_sample, Weka_control(min=1,max=1))
+bitoken <- NGramTokenizer(stem_df, Weka_control(min=2,max=2))
+tritoken <- NGramTokenizer(stem_df, Weka_control(min=3,max=3))
+quatrtoken <- NGramTokenizer(stem_df, Weka_control(min=4,max=4))
 
+version3 <- function (){
+    a <- data.frame(k=1:1000000, v=rep(1,1000000))
+    b <- data.frame(k=500001:1500000, v=rep(1,1000000))
+    a <- a[order(a$k),]
+    b <- b[order(b$k),]
+    a$v[a$k %in% b$k] <-  a$v[a$k %in% b$k] + b$v[b$k %in% a$k]
+    c <- rbind(a, b[!(b$k %in% a$k),])
+    c
+}
+size4 <- unlist(lapply(extended[grep("[^ ]*[aeiouyAEIOUY]+[^ ]* [^ ]*[aeiouyAEIOUY]+[^ ]* [^ ]*[aeiouyAEIOUY]+[^ ]* [^ ]*[aeiouyAEIOUY]+[^ ]*", extended)], function(x) make.ngrams(txt.to.words(x, splitting.rule = "[ \t\n]+"), ngram.size = 4)))
