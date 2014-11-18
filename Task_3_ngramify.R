@@ -76,7 +76,8 @@ save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_trigrams.RData')
 load('data_18_Nov_2014/ngrams/blog_trigrams.RData')
 
 tail(ngram_pred, 50)
-
+test_ngram <- ngram_pred[1:10,]
+ngram_pred_clean<-test_ngram[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', test_ngram[,1], perl=T )>0,]
 
 
 
