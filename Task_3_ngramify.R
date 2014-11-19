@@ -7,7 +7,7 @@ setwd('/Users/ivan/Work_directory/SwiftKey')
 Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre7\\")
 
 rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
-require(tm); require(SnowballC); require(data.table)
+require(tm); require(SnowballC); require(data.table); require(stringr)
 require(ggplot2); require(RWeka); require(qdap);
 require(scales); require(gridExtra); require(wordcloud)
 
@@ -82,32 +82,60 @@ load('data_18_Nov_2014/df/twitter_df.RData')
 source('SwiftKey-Natural-language/func/Task_4.5_ngram_split_func.R')
 
 split_num <- 100
-grams <- 1  # 1/2/3
-ngram_pred <- ngramify(split_num, stem_df_news, grams)
+grams <- 3  # 1/2/3
+ngram_pred <- ngramify(split_num, stem_df_twitter, grams)
 dim(ngram_pred)
 round(object.size(ngram_pred),0)
 
-save(ngram_pred, file='data_18_Nov_2014/ngrams/news_Unigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/news_Bigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/news_Trigrams.RData')
-
-######################
-## Ngrams Cleansing ##
-######################
-load('data_18_Nov_2014/ngrams/blog_trigrams.RData')
-
-tail(ngram_pred, 50)
-head(ngram_pred,50)
-test_ngram <- ngram_pred[1:10,]
-ngram_pred_clean<-test_ngram[regexpr(pattern = '^([a-zA-Z])(?!(\\1{1,}))[a-zA-Z]*([a-zA-Z]+-([a-zA-Z]){2,})?(\'(s)?)?$', test_ngram[,1], perl=T )>0,]
+save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Unigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Bigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
 
 #########################
 ## Combine Three Files ##
 #########################
-load('data_18_Nov_2014/ngrams/blog_Unigrams.RData')
+load('data_18_Nov_2014/ngrams/blog_Trigrams.RData')
 blog_Unigrams<-ngram_pred
-load('data_18_Nov_2014/ngrams/news_Unigrams.RData')
+dim(blog_Unigrams)
+load('data_18_Nov_2014/ngrams/news_Trigrams.RData')
 news_Unigrams<-ngram_pred
-load('data_18_Nov_2014/ngrams/twitter_Unigrams.RData')
+dim(news_Unigrams)
+load('data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
 twitter_Unigrams<-ngram_pred
+dim(twitter_Unigrams)
+
 rm(ngram_pred)
+
+head(blog_Unigrams); head(news_Unigrams); head(twitter_Unigrams)
+Unigrams_all <- merge.data.frame(x = blog_Unigrams,y = news_Unigrams, by = 'terms', all = T)
+Unigrams_all <- merge.data.frame(x = Unigrams_all,y = twitter_Unigrams, by = 'terms',all = T)
+Unigrams_all[is.na(Unigrams_all)]<-0
+Unigrams_all$freq_all <- Unigrams_all[,2] + Unigrams_all[,3] + Unigrams_all[,4]
+Unigrams_all$freq.x <- NULL
+Unigrams_all$freq.y <- NULL
+Unigrams_all$freq <- NULL
+Unigrams_all <- Unigrams_all[order(Unigrams_all$freq_all,decreasing = T),]
+head(Unigrams_all, 20)
+dim(Unigrams_all)
+round(object.size(Unigrams_all),0)
+
+save(Unigrams_all, file='data_18_Nov_2014/ngrams/Unigrams_All.RData')
+
+######################
+## Ngrams Cleansing ##
+######################
+load('data_18_Nov_2014/ngrams/Unigrams_All.RData')
+load('data_18_Nov_2014/ngrams/Bigrams_All.RData')
+load('data_18_Nov_2014/ngrams/Trigrams_All.RData')
+
+dim(Unigrams_all)
+
+Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[A-Za-z]", NA)
+head(Unigrams_all_unicode); length(Unigrams_all_unicode)
+length(Unigrams_all_unicode[!is.na(Unigrams_all_unicode)])
+length(is.na(Unigrams_all_unicode))
+
+?regex
+?regexpr
+
+save(Unigrams_all, file='data_18_Nov_2014/ngrams/Unigrams_All_cleaned.RData')
