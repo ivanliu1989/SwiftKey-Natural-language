@@ -125,6 +125,7 @@ save(Unigrams_all, file='data_18_Nov_2014/ngrams/Quatrgrams_All.RData')
 ######################
 ## Ngrams Cleansing ##
 ######################
+require(stringr)
 rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 load('data_18_Nov_2014/ngrams/Unigrams_All.RData')
 load('data_18_Nov_2014/ngrams/Bigrams_All.RData')
