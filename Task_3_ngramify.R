@@ -29,7 +29,7 @@ object.size(en_US_corpus); gc()
 ###############################
 ### Tokenization & Stemming ###
 ###############################
-load('data_18_Nov_2014/Corpus/news_corpus.RData')
+load('data_18_Nov_2014/Corpus/twitter_corpus.RData')
 source('SwiftKey-Natural-language/func/Task_1.5_Tokenization_func.R')
 
 trans <- c(F,T,T,T,F,F,T,T)
@@ -79,17 +79,17 @@ rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 load('data_18_Nov_2014/df/blog_df.RData')
 load('data_18_Nov_2014/df/news_df.RData')
 load('data_18_Nov_2014/df/twitter_df.RData')
-source('SwiftKey-Natural-language/Task_4.5_ngram_split_func.R')
+source('SwiftKey-Natural-language/func/Task_4.5_ngram_split_func.R')
 
 split_num <- 100
 grams <- 3  # 1/2/3
-ngram_pred <- ngramify(split_num, stem_df_twitter, grams)
+ngram_pred <- ngramify(split_num, stem_df_news, grams)
 dim(ngram_pred)
 round(object.size(ngram_pred),0)
 
-save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Unigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Bigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/news_Unigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/news_Bigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/news_Trigrams.RData')
 
 ######################
 ## Ngrams Cleansing ##
