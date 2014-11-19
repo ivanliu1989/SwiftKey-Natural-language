@@ -29,7 +29,7 @@ object.size(en_US_corpus); gc()
 ###############################
 ### Tokenization & Stemming ###
 ###############################
-load('data_18_Nov_2014/Corpus/twitter_corpus.RData')
+load('data_18_Nov_2014/Corpus/blog_corpus.RData')
 source('SwiftKey-Natural-language/func/Task_1.5_Tokenization_func.R')
 
 trans <- c(F,T,T,T,F,F,T,T)
@@ -82,7 +82,7 @@ load('data_18_Nov_2014/df/twitter_df.RData')
 source('SwiftKey-Natural-language/func/Task_4.5_ngram_split_func.R')
 
 split_num <- 100
-grams <- 3  # 1/2/3
+grams <- 4  # 1/2/3/4
 ngram_pred <- ngramify(split_num, stem_df_twitter, grams)
 dim(ngram_pred)
 round(object.size(ngram_pred),0)
@@ -90,17 +90,18 @@ round(object.size(ngram_pred),0)
 save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Unigrams.RData')
 save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Bigrams.RData')
 save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Quatrgrams.RData')
 
 #########################
 ## Combine Three Files ##
 #########################
-load('data_18_Nov_2014/ngrams/blog_Trigrams.RData')
+load('data_18_Nov_2014/ngrams/blog_Quatrgrams.RData')
 blog_Unigrams<-ngram_pred
 dim(blog_Unigrams)
-load('data_18_Nov_2014/ngrams/news_Trigrams.RData')
+load('data_18_Nov_2014/ngrams/news_Quatrgrams.RData')
 news_Unigrams<-ngram_pred
 dim(news_Unigrams)
-load('data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
+load('data_18_Nov_2014/ngrams/split/twitter_Quatrgrams.RData')
 twitter_Unigrams<-ngram_pred
 dim(twitter_Unigrams)
 
@@ -119,23 +120,33 @@ head(Unigrams_all, 20)
 dim(Unigrams_all)
 round(object.size(Unigrams_all),0)
 
-save(Unigrams_all, file='data_18_Nov_2014/ngrams/Unigrams_All.RData')
+save(Unigrams_all, file='data_18_Nov_2014/ngrams/Quatrgrams_All.RData')
 
 ######################
 ## Ngrams Cleansing ##
 ######################
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
 load('data_18_Nov_2014/ngrams/Unigrams_All.RData')
 load('data_18_Nov_2014/ngrams/Bigrams_All.RData')
 load('data_18_Nov_2014/ngrams/Trigrams_All.RData')
+load('data_18_Nov_2014/ngrams/Quatrgrams_All.RData')
 
 dim(Unigrams_all)
+head(Unigrams_all, 50)
+tail(Unigrams_all, 50)
 
 Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[A-Za-z]", NA)
 head(Unigrams_all_unicode); length(Unigrams_all_unicode)
 length(Unigrams_all_unicode[!is.na(Unigrams_all_unicode)])
-length(is.na(Unigrams_all_unicode))
+
+Unigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
+dim(Unigrams_all_cleaned); head(Unigrams_all_cleaned)
+Bigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
+dim(Bigrams_all_cleaned); head(Bigrams_all_cleaned)
+Trigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
+dim(Trigrams_all_cleaned); head(Trigrams_all_cleaned)
 
 ?regex
 ?regexpr
 
-save(Unigrams_all, file='data_18_Nov_2014/ngrams/Unigrams_All_cleaned.RData')
+save(Unigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Unigrams_All_cleaned.RData')
