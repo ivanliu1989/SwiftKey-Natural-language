@@ -82,7 +82,7 @@ load('data_18_Nov_2014/df/twitter_df.RData')
 source('SwiftKey-Natural-language/func/Task_4.5_ngram_split_func.R')
 
 split_num <- 100
-grams <- 3  # 1/2/3
+grams <- 1  # 1/2/3
 ngram_pred <- ngramify(split_num, stem_df_news, grams)
 dim(ngram_pred)
 round(object.size(ngram_pred),0)
