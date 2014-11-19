@@ -132,12 +132,11 @@ load('data_18_Nov_2014/ngrams/Trigrams_All.RData')
 load('data_18_Nov_2014/ngrams/Quatrgrams_All.RData')
 
 dim(Unigrams_all)
-head(Unigrams_all, 50)
-tail(Unigrams_all, 50)
+cbind(head(Unigrams_all, 50),tail(Unigrams_all, 50))
 
 Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[A-Za-z]", NA)
-head(Unigrams_all_unicode); length(Unigrams_all_unicode)
 length(Unigrams_all_unicode[!is.na(Unigrams_all_unicode)])
+Unigrams_all_unicode[!is.na(Unigrams_all_unicode)]
 
 Unigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Unigrams_all_cleaned); head(Unigrams_all_cleaned)
@@ -150,3 +149,13 @@ dim(Trigrams_all_cleaned); head(Trigrams_all_cleaned)
 ?regexpr
 
 save(Unigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Unigrams_All_cleaned.RData')
+save(Bigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Bigrams_All_cleaned.RData')
+save(Trigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Trigrams_All_cleaned.RData')
+
+#############
+## predict ##
+#############
+load('data_18_Nov_2014/ngrams/Trigrams_All_cleaned.RData')
+input <- 'are you'
+predict <- grep(input, Trigrams_all_cleaned[,1])
+Trigrams_all_cleaned[predict[1:5],]
