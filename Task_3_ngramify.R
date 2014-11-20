@@ -133,19 +133,25 @@ load('data_18_Nov_2014/ngrams/Trigrams_All.RData')
 load('data_18_Nov_2014/ngrams/Quatrgrams_All.RData')
 
 dim(Unigrams_all)
+# [^a-z]
+# [^a-z][:blank:][^a-z]
+# [^a-z][:blank:][^a-z][:blank:][^a-z]
 cbind(head(Unigrams_all, 50),tail(Unigrams_all, 50))
-
-Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[^a-z]", NA)
+Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[^a-z][:blank:][^a-z]", NA)
 length(Unigrams_all_unicode[is.na(Unigrams_all_unicode)])
 
+# Unigram
 Unigrams_all_cleaned <- Unigrams_all[!is.na(Unigrams_all_unicode),]
+Unigrams_all_dirt <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Unigrams_all_cleaned); head(Unigrams_all_cleaned)
 Unigrams_all_cleaned <- Unigrams_all_cleaned[1:10,]
-
-Bigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
+# Bigram
+Bigrams_all_cleaned <- Unigrams_all[!is.na(Unigrams_all_unicode),]
+Bigrams_all_dirt <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Bigrams_all_cleaned); head(Bigrams_all_cleaned)
-
-Trigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
+# Trigram
+Trigrams_all_cleaned <- Unigrams_all[!is.na(Unigrams_all_unicode),]
+Trigrams_all_dirt <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Trigrams_all_cleaned); head(Trigrams_all_cleaned)
 
 ?regex
