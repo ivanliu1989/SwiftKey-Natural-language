@@ -107,9 +107,13 @@ dim(twitter_Unigrams)
 
 rm(ngram_pred)
 
-cbind(head(blog_Unigrams), head(news_Unigrams), head(twitter_Unigrams))
-Unigrams_all <- merge.data.frame(x = blog_Unigrams,y = news_Unigrams, by = 'terms', all = T)
-Unigrams_all <- merge.data.frame(x = Unigrams_all,y = twitter_Unigrams, by = 'terms',all = T)
+load('data_18_Nov_2014/ngrams/Trigrams_blog_freq_cleaned.RData')
+load('data_18_Nov_2014/ngrams/Trigrams_news_freq_cleaned.RData')
+load('data_18_Nov_2014/ngrams/Trigrams_twitter_freq_cleaned.RData')
+
+cbind(head(Trigrams_blog_cleaned), head(Trigrams_news_cleaned), head(Trigrams_twitter_cleaned))
+Unigrams_all <- merge.data.frame(x = Trigrams_blog_cleaned,y = Trigrams_news_cleaned, by = 'terms', all = T)
+Unigrams_all <- merge.data.frame(x = Unigrams_all,y = Trigrams_twitter_cleaned, by = 'terms',all = T)
 Unigrams_all[is.na(Unigrams_all)]<-0
 Unigrams_all$freq_all <- Unigrams_all[,2] + Unigrams_all[,3] + Unigrams_all[,4]
 Unigrams_all$freq.x <- NULL
@@ -120,7 +124,7 @@ head(Unigrams_all, 20)
 dim(Unigrams_all)
 round(object.size(Unigrams_all),0)
 
-save(Unigrams_all, file='data_18_Nov_2014/ngrams/Bigrams_All.RData')
+save(Unigrams_all, file='data_18_Nov_2014/ngrams/Trigrams_all_freq_cleaned.RData.RData')
 
 ######################
 ## Ngrams Cleansing ##
@@ -149,10 +153,18 @@ Unigrams_all_cleaned <- Unigrams_all_cleaned[1:10,]
 Bigrams_all_cleaned <- Unigrams_all[!is.na(Unigrams_all_unicode),]
 Bigrams_all_dirt <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Bigrams_all_cleaned); head(Bigrams_all_cleaned)
-# Trigram
-Trigrams_all_cleaned <- Unigrams_all[!is.na(Unigrams_all_unicode),]
-Trigrams_all_dirt <- Unigrams_all[is.na(Unigrams_all_unicode),]
-dim(Trigrams_all_cleaned); head(Trigrams_all_cleaned)
+### Trigram ###
+load('data_18_Nov_2014/ngrams/split/twitter_Trigrams.RData')
+dim(ngram_pred)
+cbind(head(ngram_pred, 50),tail(ngram_pred, 50))
+Unigrams_all_unicode <- str_replace_all(ngram_pred[,1], "[^a-z][:blank:][^a-z][:blank:][^a-z]", NA)
+length(Unigrams_all_unicode[is.na(Unigrams_all_unicode)])
+
+Trigrams_twitter_cleaned <- ngram_pred[!is.na(Unigrams_all_unicode),]
+Trigrams_twitter_dirt <- ngram_pred[is.na(Unigrams_all_unicode),]
+dim(Trigrams_twitter_cleaned); head(Trigrams_twitter_cleaned)
+
+save(Trigrams_twitter_cleaned, file='data_18_Nov_2014/ngrams/Trigrams_twitter_cleaned.RData')
 
 ?regex
 ?regexpr
@@ -160,6 +172,31 @@ dim(Trigrams_all_cleaned); head(Trigrams_all_cleaned)
 save(Unigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Unigrams_All_cleaned.RData')
 save(Bigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Bigrams_All_cleaned.RData')
 save(Trigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Trigrams_All_cleaned.RData')
+
+########################
+## Ngrams Cleansing 2 ##
+########################
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
+load('data_18_Nov_2014/ngrams/Trigrams_news_cleaned.RData')
+
+dim(Trigrams_blog_cleaned)
+Trigrams_blog_cleaned <- Trigrams_blog_cleaned[-which(Trigrams_blog_cleaned[,2] == 1), ]
+save(Trigrams_blog_cleaned, file='data_18_Nov_2014/ngrams/Trigrams_blog_freq_cleaned.RData')
+
+dim(Trigrams_news_cleaned)
+Trigrams_news_cleaned <- Trigrams_news_cleaned[-which(Trigrams_news_cleaned[,2] == 1), ]
+save(Trigrams_news_cleaned, file='data_18_Nov_2014/ngrams/Trigrams_news_freq_cleaned.RData')
+
+dim(Trigrams_twitter_cleaned)
+Trigrams_twitter_cleaned <- Trigrams_twitter_cleaned[-which(Trigrams_twitter_cleaned[,2] == 1), ]
+save(Trigrams_twitter_cleaned, file='data_18_Nov_2014/ngrams/Trigrams_twitter_freq_cleaned.RData')
+
+load('data_18_Nov_2014/ngrams/Bigrams_all_cleaned.RData')
+dim(Bigrams_all_cleaned)
+Bigrams_all_cleaned <- Bigrams_all_cleaned[-which(Bigrams_all_cleaned[,2] == 1), ]
+save(Bigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Bigrams_all_freq_cleaned.RData')
+
+
 
 #############
 ## predict ##
