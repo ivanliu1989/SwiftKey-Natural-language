@@ -157,11 +157,11 @@ dim(Bigrams_all_cleaned); head(Bigrams_all_cleaned)
 load('data_18_Nov_2014/ngrams/split/twitter_Trigrams.RData')
 dim(ngram_pred)
 cbind(head(ngram_pred, 50),tail(ngram_pred, 50))
-Unigrams_all_unicode <- str_replace_all(ngram_pred[,1], "[^a-z][:blank:][^a-z][:blank:][^a-z]", NA)
+Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[^a-z][:blank:][^a-z][:blank:][^a-z]", NA)
 length(Unigrams_all_unicode[is.na(Unigrams_all_unicode)])
 
 Trigrams_twitter_cleaned <- ngram_pred[!is.na(Unigrams_all_unicode),]
-Trigrams_twitter_dirt <- ngram_pred[is.na(Unigrams_all_unicode),]
+Trigrams_twitter_dirt <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Trigrams_twitter_cleaned); head(Trigrams_twitter_cleaned)
 
 save(Trigrams_twitter_cleaned, file='data_18_Nov_2014/ngrams/Trigrams_twitter_cleaned.RData')
@@ -196,7 +196,10 @@ dim(Bigrams_all_cleaned)
 Bigrams_all_cleaned <- Bigrams_all_cleaned[-which(Bigrams_all_cleaned[,2] == 1), ]
 save(Bigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Bigrams_all_freq_cleaned.RData')
 
-
+load('data_18_Nov_2014/ngrams/Trigrams_all_freq_cleaned.RData.RData')
+dim(Unigrams_all)
+Bigrams_all_cleaned <- Bigrams_all_cleaned[-which(Bigrams_all_cleaned[,2] == 1), ]
+save(Bigrams_all_cleaned, file='data_18_Nov_2014/ngrams/Bigrams_all_freq_cleaned.RData')
 
 #############
 ## predict ##
