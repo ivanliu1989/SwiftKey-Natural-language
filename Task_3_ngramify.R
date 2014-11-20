@@ -95,13 +95,13 @@ save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
 #########################
 ## Combine Three Files ##
 #########################
-load('data_18_Nov_2014/ngrams/split/blog_Bigrams.RData')
+load('data_18_Nov_2014/ngrams/split/blog_Trigrams.RData')
 blog_Unigrams<-ngram_pred
 dim(blog_Unigrams)
-load('data_18_Nov_2014/ngrams/split/news_Bigrams.RData')
+load('data_18_Nov_2014/ngrams/split/news_Trigrams.RData')
 news_Unigrams<-ngram_pred
 dim(news_Unigrams)
-load('data_18_Nov_2014/ngrams/split/twitter_Bigrams.RData')
+load('data_18_Nov_2014/ngrams/split/twitter_Trigrams.RData')
 twitter_Unigrams<-ngram_pred
 dim(twitter_Unigrams)
 
@@ -135,14 +135,16 @@ load('data_18_Nov_2014/ngrams/Quatrgrams_All.RData')
 dim(Unigrams_all)
 cbind(head(Unigrams_all, 50),tail(Unigrams_all, 50))
 
-Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[A-Za-z]", NA)
-length(Unigrams_all_unicode[!is.na(Unigrams_all_unicode)])
-Unigrams_all_unicode[!is.na(Unigrams_all_unicode)]
+Unigrams_all_unicode <- str_replace_all(Unigrams_all[,1], "[^a-z]", NA)
+length(Unigrams_all_unicode[is.na(Unigrams_all_unicode)])
 
-Unigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
+Unigrams_all_cleaned <- Unigrams_all[!is.na(Unigrams_all_unicode),]
 dim(Unigrams_all_cleaned); head(Unigrams_all_cleaned)
+Unigrams_all_cleaned <- Unigrams_all_cleaned[1:10,]
+
 Bigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Bigrams_all_cleaned); head(Bigrams_all_cleaned)
+
 Trigrams_all_cleaned <- Unigrams_all[is.na(Unigrams_all_unicode),]
 dim(Trigrams_all_cleaned); head(Trigrams_all_cleaned)
 
