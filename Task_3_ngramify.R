@@ -52,22 +52,22 @@ save(tokenized_blog, file='data_18_Nov_2014/tokenized/blog_tokenized.RData')
 save(tokenized_news, file='data_18_Nov_2014/tokenized/news_tokenized.RData')
 save(tokenized_twitter, file='data_18_Nov_2014/tokenized/twitter_tokenized.RData')
 
-stem_blog <- tm_map(tokenized_blog, stemDocument, 'english') # SnowballStemmer
-stem_news <- tm_map(tokenized_news, stemDocument, 'english') # SnowballStemmer
-stem_twitter <- tm_map(tokenized_twitter, stemDocument, 'english') # SnowballStemmer
-save(stem_blog, file='data_18_Nov_2014/stemming/blog_stemming.RData')
-save(stem_news, file='data_18_Nov_2014/stemming/news_stemming.RData')
-save(stem_twitter, file='data_18_Nov_2014/stemming/twitter_stemming.RData')
+# stem_blog <- tm_map(tokenized_blog, stemDocument, 'english') # SnowballStemmer
+# stem_news <- tm_map(tokenized_news, stemDocument, 'english') # SnowballStemmer
+# stem_twitter <- tm_map(tokenized_twitter, stemDocument, 'english') # SnowballStemmer
+# save(stem_blog, file='data_18_Nov_2014/stemming/blog_stemming.RData')
+# save(stem_news, file='data_18_Nov_2014/stemming/news_stemming.RData')
+# save(stem_twitter, file='data_18_Nov_2014/stemming/twitter_stemming.RData')
 
 
 ##############################
 ### Transfer to Data Frame ###
 ##############################
-load('data_18_Nov_2014/stemming/twitter_stemming.RData')
+load('data_18_Nov_2014/tokenized/twitter_tokenized.RData')
 
-stem_df_blog <- data.frame(text=unlist(sapply(stem_blog, '[',"content")),stringsAsFactors=F)
-stem_df_news <- data.frame(text=unlist(sapply(stem_news, '[',"content")),stringsAsFactors=F)
-stem_df_twitter <- data.frame(text=unlist(sapply(stem_twitter, '[',"content")),stringsAsFactors=F)
+stem_df_blog <- data.frame(text=unlist(sapply(tokenized_docs, '[',"content")),stringsAsFactors=F)
+stem_df_news <- data.frame(text=unlist(sapply(tokenized_news, '[',"content")),stringsAsFactors=F)
+stem_df_twitter <- data.frame(text=unlist(sapply(tokenized_twitter, '[',"content")),stringsAsFactors=F)
 save(stem_df_blog, file='data_18_Nov_2014/df/blog_df.RData')
 save(stem_df_news, file='data_18_Nov_2014/df/news_df.RData')
 save(stem_df_twitter, file='data_18_Nov_2014/df/twitter_df.RData')
@@ -82,15 +82,15 @@ load('data_18_Nov_2014/df/twitter_df.RData')
 source('SwiftKey-Natural-language/func/Task_4.5_ngram_split_func.R')
 
 split_num <- 100
-grams <- 4  # 1/2/3/4
-ngram_pred <- ngramify(split_num, stem_df_twitter, grams)
+grams <- 2  # 1/2/3/4
+ngram_pred <- ngramify(split_num, stem_df_blog, grams)
 dim(ngram_pred)
 round(object.size(ngram_pred),0)
 
-save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Unigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Bigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Quatrgrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Unigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Bigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Trigrams.RData')
+# save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Quatrgrams.RData')
 
 #########################
 ## Combine Three Files ##
