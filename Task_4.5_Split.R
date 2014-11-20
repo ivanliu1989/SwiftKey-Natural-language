@@ -22,3 +22,9 @@ predict[1:5, ]
 ###################
 ## Split Columns ##
 ###################
+Trigram_all <- as.data.table(Unigrams_all)
+Trigram_all[,ngram:=strsplit(Trigram_all$terms, '\\s')]
+Trigram_all[, `:=`(w1=sapply(terms, function(s) s[1]),
+                   w2=sapply(terms, function(s) s[2]),
+                   w3=sapply(terms, function(s) s[3]),
+                   terms=NULL)]
