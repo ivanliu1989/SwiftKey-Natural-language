@@ -82,32 +82,32 @@ load('data_18_Nov_2014/df/twitter_df.RData')
 source('SwiftKey-Natural-language/func/Task_4.5_ngram_split_func.R')
 
 split_num <- 100
-grams <- 2  # 1/2/3/4
-ngram_pred <- ngramify(split_num, stem_df_blog, grams)
+grams <- 1  # 1/2/3/4
+ngram_pred <- ngramify(split_num, stem_df_twitter, grams)
 dim(ngram_pred)
 round(object.size(ngram_pred),0)
 
-save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Unigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Bigrams.RData')
-save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Trigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Unigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Bigrams.RData')
+save(ngram_pred, file='data_18_Nov_2014/ngrams/twitter_Trigrams.RData')
 # save(ngram_pred, file='data_18_Nov_2014/ngrams/blog_Quatrgrams.RData')
 
 #########################
 ## Combine Three Files ##
 #########################
-load('data_18_Nov_2014/ngrams/blog_Quatrgrams.RData')
+load('data_18_Nov_2014/ngrams/split/blog_Bigrams.RData')
 blog_Unigrams<-ngram_pred
 dim(blog_Unigrams)
-load('data_18_Nov_2014/ngrams/news_Quatrgrams.RData')
+load('data_18_Nov_2014/ngrams/split/news_Bigrams.RData')
 news_Unigrams<-ngram_pred
 dim(news_Unigrams)
-load('data_18_Nov_2014/ngrams/split/twitter_Quatrgrams.RData')
+load('data_18_Nov_2014/ngrams/split/twitter_Bigrams.RData')
 twitter_Unigrams<-ngram_pred
 dim(twitter_Unigrams)
 
 rm(ngram_pred)
 
-head(blog_Unigrams); head(news_Unigrams); head(twitter_Unigrams)
+cbind(head(blog_Unigrams), head(news_Unigrams), head(twitter_Unigrams))
 Unigrams_all <- merge.data.frame(x = blog_Unigrams,y = news_Unigrams, by = 'terms', all = T)
 Unigrams_all <- merge.data.frame(x = Unigrams_all,y = twitter_Unigrams, by = 'terms',all = T)
 Unigrams_all[is.na(Unigrams_all)]<-0
@@ -120,7 +120,7 @@ head(Unigrams_all, 20)
 dim(Unigrams_all)
 round(object.size(Unigrams_all),0)
 
-save(Unigrams_all, file='data_18_Nov_2014/ngrams/Quatrgrams_All.RData')
+save(Unigrams_all, file='data_18_Nov_2014/ngrams/Bigrams_All.RData')
 
 ######################
 ## Ngrams Cleansing ##
