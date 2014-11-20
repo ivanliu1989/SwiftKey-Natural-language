@@ -22,9 +22,20 @@ predict[1:5, ]
 ###################
 ## Split Columns ##
 ###################
+load('completed/Trigrams_all_freq_cleaned.RData')
+class(Unigrams_all$terms)
+Unigrams_all$terms <- as.character(Unigrams_all$terms)
 Trigram_all <- as.data.table(Unigrams_all)
-Trigram_all[,ngram:=strsplit(Trigram_all$terms, '\\s')]
-Trigram_all[, `:=`(w1=sapply(terms, function(s) s[1]),
-                   w2=sapply(terms, function(s) s[2]),
-                   w3=sapply(terms, function(s) s[3]),
-                   terms=NULL)]
+rm(Unigrams_all)
+Trigram_all[,ngram:=strsplit(terms, '\\s')]
+Trigram_all[, `:=`(w1=sapply(ngram, function(s) s[1]),
+                   w2=sapply(ngram, function(s) s[2]),
+                   w3=sapply(ngram, function(s) s[3]),
+                   terms=NULL, ngram=NULL)]
+head(Trigram_all)
+Trigram_all <- as.data.frame(Trigram_all)
+Trigram_all_clean <- str_replace_all(Trigram_all$w1, "[^a-z]", NA)
+length(Trigram_all_clean[is.na(Trigram_all_clean)])
+Trigram_all[is.na(Trigram_all_clean)]
+
+save(Trigram_all, file='completed/Trigrams_all_freq_cleaned.RData')
