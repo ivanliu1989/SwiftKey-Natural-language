@@ -25,26 +25,27 @@ predict
 ## Split Columns ##
 ###################
 load('completed/Trigrams_all_freq_cleaned.RData') # 6231160
-class(ngram_pred$terms)
-Unigrams_all_cleaned$terms <- as.character(Unigrams_all_cleaned$terms)
-Quatrgrams_blog <- as.data.table(ngram_pred)
+class(Trigram_all$term)
+Trigram_all$term <- as.character(Trigram_all$term)
+Trigram_all <- as.data.table(Trigram_all)
 rm(ngram_pred)
 
-Quatrgrams_blog[,ngram:=strsplit(terms, '\\s')]
-Quatrgrams_blog[, `:=`(w1=sapply(ngram, function(s) s[1]),
+Trigram_all[,ngram:=strsplit(term, '\\s')]
+Trigram_all[, `:=`(w1=sapply(ngram, function(s) s[1]),
                     w2=sapply(ngram, function(s) s[2]),
-                    w3=sapply(ngram, function(s) s[3]),
-                    w4=sapply(ngram, function(s) s[4]),
-                   terms=NULL, ngram=NULL)]
-Quatrgrams_blog <- as.data.frame(Quatrgrams_blog)
+                    # w3=sapply(ngram, function(s) s[3]),
+                    # w4=sapply(ngram, function(s) s[4]),
+                   term=NULL, ngram=NULL)]
+Trigram_all <- as.data.frame(Trigram_all)
 
-head(Quatrgrams_blog); dim(Quatrgrams_blog); object.size(Quatrgrams_blog)
-Trigram_all_clean <- str_replace_all(Unigrams_all$w1, "[^a-z]", NA)
-length(Trigram_all_clean[is.na(Trigram_all_clean)])
-Unigrams_all[is.na(Trigram_all_clean),]
-Unigrams_all <- Unigrams_all[!is.na(Trigram_all_clean),]
+head(Trigram_all); dim(Trigram_all); object.size(Trigram_all)
 
-save(Unigrams_all, file='completed/Unigrams_completed.RData')
+    Trigram_all_clean <- str_replace_all(Unigrams_all$w1, "[^a-z]", NA)
+    length(Trigram_all_clean[is.na(Trigram_all_clean)])
+    Unigrams_all[is.na(Trigram_all_clean),]
+    Unigrams_all <- Unigrams_all[!is.na(Trigram_all_clean),]
+
+save(Trigram_all, file='completed/Trigrams_completed.RData')
 
 ##########################
 ## Probabilities Matrix ##
@@ -67,10 +68,11 @@ Trigram_all_trimmed <- data.frame(freq=NULL,pred=NULL,term=NULL)
 #     row <- ifelse(nrow(Trigram_all[which(Trigram_all$term==i),])<10,nrow(Trigram_all[which(Trigram_all$term==i),]),10)
 #     Trigram_all_trimmed <- rbind(Trigram_all_trimmed, Trigram_all[which(Trigram_all$term==i),][1:row,])
 # }
-for (i in 1:nrow(Trigram_all)){
-    Trigram_all$p[i] <- Trigram_all[i,1]/sum(Trigram_all[which(Trigram_all$term==Trigram_all[i,3]),1])
-}
+# for (i in 1:nrow(Trigram_all)){
+#     Trigram_all$p[i] <- Trigram_all[i,1]/sum(Trigram_all[which(Trigram_all$term==Trigram_all[i,3]),1])
+# }
 
+### predict time ###
 setkeyv(Trigram_all, c( 'w1','w2','w3','freq'))
 Trigram_all[list('how', 'are', 'you')]
 system.time(a <- tail(Trigram_all[list('how are')]))
