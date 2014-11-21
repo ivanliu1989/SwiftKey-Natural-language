@@ -66,3 +66,6 @@ Trigram_all_trimmed <- data.frame(freq=NULL,pred=NULL,term=NULL)
 for (i in vocabulary){
     Trigram_all_trimmed <- rbind(Trigram_all_trimmed, Trigram_all[which(Trigram_all$term==i),][1:10,])
 }
+for (i in 1:nrow(Traingram_all_trimmed)){
+    Trigram_all_trimmed$p <- Trigram_all_trimmed[i,1]/sum(Trigram_all[which(Trigram_all$term==i),1])
+}
