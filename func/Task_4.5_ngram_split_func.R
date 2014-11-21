@@ -29,7 +29,7 @@ ngramify <- function(split_num=100, ngram_df, grams = 3){
     rm(ngram_chunks_all); gc()
     
     cat(paste('\n (Step 5 of 5) Finishing the process...'))
-    ngram_pred <- data.frame(terms = names(ngram_freq_tb), freq = ngram_freq_tb, row.names = NULL)
+    ngram_pred <- data.frame(terms = names(ngram_freq_tb), freq = ngram_freq_tb, row.names = NULL, stringsAsFactors = F)
     rm(ngram_freq_tb); gc()
     
     return(ngram_pred)
