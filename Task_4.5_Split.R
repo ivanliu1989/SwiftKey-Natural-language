@@ -63,9 +63,10 @@ vocabulary <- names(table(Trigram_all$term))
 Trigram_all <- as.data.frame(Trigram_all)
 
 Trigram_all_trimmed <- data.frame(freq=NULL,pred=NULL,term=NULL)
-for (i in vocabulary){
-    Trigram_all_trimmed <- rbind(Trigram_all_trimmed, Trigram_all[which(Trigram_all$term==i),][1:10,])
-}
-for (i in 1:nrow(Traingram_all_trimmed)){
-    Trigram_all_trimmed$p <- Trigram_all_trimmed[i,1]/sum(Trigram_all[which(Trigram_all$term==i),1])
+# for (i in vocabulary){
+#     row <- ifelse(nrow(Trigram_all[which(Trigram_all$term==i),])<10,nrow(Trigram_all[which(Trigram_all$term==i),]),10)
+#     Trigram_all_trimmed <- rbind(Trigram_all_trimmed, Trigram_all[which(Trigram_all$term==i),][1:row,])
+# }
+for (i in 1:nrow(Trigram_all)){
+    Trigram_all$p <- Trigram_all[i,1]/sum(Trigram_all[which(Trigram_all$term==Trigram_all[i,3]),1])
 }
