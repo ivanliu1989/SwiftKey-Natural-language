@@ -68,5 +68,5 @@ Trigram_all_trimmed <- data.frame(freq=NULL,pred=NULL,term=NULL)
 #     Trigram_all_trimmed <- rbind(Trigram_all_trimmed, Trigram_all[which(Trigram_all$term==i),][1:row,])
 # }
 for (i in 1:nrow(Trigram_all)){
-    Trigram_all$p <- Trigram_all[i,1]/sum(Trigram_all[which(Trigram_all$term==Trigram_all[i,3]),1])
+    Trigram_all$p[i] <- Trigram_all[i,1]/sum(Trigram_all[which(Trigram_all$term==Trigram_all[i,3]),1])
 }
