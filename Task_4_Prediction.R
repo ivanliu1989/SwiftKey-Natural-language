@@ -84,3 +84,49 @@ w1   w2  w3 freq    w4
 })
 user  system elapsed 
 6.636   0.514   7.148
+
+################
+### Script 3 ###
+################
+setwd('H:/Machine_Learning/SwiftKey/')
+setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\SwiftKey')
+setwd('/Users/ivan/Work_directory/SwiftKey')
+Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre7\\")
+
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
+require(tm); require(SnowballC); require(stringr);require(RWeka); 
+require(qdap); require(scales); require(gridExtra); require(data.table)
+
+load('completed/Quatrgrams_completed.RData') 
+load('completed/Trigrams_completed.RData') 
+load('completed/Bigrams_completed.RData') 
+load('completed/Unigrams_completed.RData') 
+
+save(Bigrams_all,Quatrgrams_all,Trigram_all,Unigrams_all,file='completed/ngrams_completed.RData')
+dim(Unigrams_all); dim(Bigrams_all); dim(Trigram_all); dim(Quatrgrams_all)
+head(Unigrams_all);head(Bigrams_all);head(Trigram_all);head(Quatrgrams_all)
+
+Trigram_all<-as.data.frame(Trigram_all)
+for (i in 1:nrow(Trigram_all)){
+    Trigram_all$p[i] <- Trigram_all[i,1]/sum(Trigram_all[which(Trigram_all$term==Trigram_all[i,3]),1])
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
