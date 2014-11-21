@@ -7,7 +7,9 @@ SwiftKey, our corporate partner in this capstone, builds a smart keyboard that m
 
 ##### Tips:
 1. P=C(p|w1-w4)/C(w1-w4)
-2. Smooth
+2. Smooth (Katz's back-off model with Good-Turing frequency estimation)
 3. Sort
-4. 4grams->3->2->1gram
-5. Shiny
+4. Remove longer grams that predict the same results as shorter grams
+5. hash reduce size
+6. 4grams->3->2->1gram
+7. Shiny

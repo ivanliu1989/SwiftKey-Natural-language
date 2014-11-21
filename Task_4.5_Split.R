@@ -17,6 +17,7 @@ load('data_18_Nov_2014/ngrams/Unigrams_All_cleaned.RData')
 
 input <- 'how are you'
 system.time(predict <- Unigrams_all[Unigrams_all$terms == input, ])
+match(input, Unigrams_all$terms)
 predict[1:5, ]
 
 ###################
