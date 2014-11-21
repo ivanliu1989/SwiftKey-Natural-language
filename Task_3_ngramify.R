@@ -107,24 +107,25 @@ dim(twitter_Unigrams)
 
 rm(ngram_pred)
 
-load('data_18_Nov_2014/ngrams/Trigrams_blog_freq_cleaned.RData')
-load('data_18_Nov_2014/ngrams/Trigrams_news_freq_cleaned.RData')
-load('data_18_Nov_2014/ngrams/Trigrams_twitter_freq_cleaned.RData')
+load('completed/Quatrgram_blog_completed.RData')
+load('completed/Quatrgram_news_completed.RData')
+load('completed/Quatrgram_twitter_completed.RData')
 
-cbind(head(Trigrams_blog_cleaned), head(Trigrams_news_cleaned), head(Trigrams_twitter_cleaned))
-Unigrams_all <- merge.data.frame(x = Trigrams_blog_cleaned,y = Trigrams_news_cleaned, by = 'terms', all = T)
-Unigrams_all <- merge.data.frame(x = Unigrams_all,y = Trigrams_twitter_cleaned, by = 'terms',all = T)
-Unigrams_all[is.na(Unigrams_all)]<-0
-Unigrams_all$freq_all <- Unigrams_all[,2] + Unigrams_all[,3] + Unigrams_all[,4]
-Unigrams_all$freq.x <- NULL
-Unigrams_all$freq.y <- NULL
-Unigrams_all$freq <- NULL
-Unigrams_all <- Unigrams_all[order(Unigrams_all$freq_all,decreasing = T),]
-head(Unigrams_all, 20)
-dim(Unigrams_all)
-round(object.size(Unigrams_all),0)
+dim(Quatrgram_blog_cleaned);dim(Quatrgram_news_cleaned);dim(Quatrgram_twitter_cleaned);
+cbind(head(Quatrgram_blog_cleaned), head(Quatrgram_news_cleaned), head(Quatrgram_twitter_cleaned))
+Quatrgrams_all <- merge.data.frame(x = Quatrgram_blog_cleaned,y = Quatrgram_news_cleaned, by = 'terms', all = T)
+Quatrgrams_all <- merge.data.frame(x = Quatrgrams_all,y = Quatrgram_twitter_cleaned, by = 'terms',all = T)
+Quatrgrams_all[is.na(Quatrgrams_all)]<-0
+Quatrgrams_all$freq_all <- Quatrgrams_all[,2] + Quatrgrams_all[,3] + Quatrgrams_all[,4]
+Quatrgrams_all$freq.x <- NULL
+Quatrgrams_all$freq.y <- NULL
+Quatrgrams_all$freq <- NULL
+Quatrgrams_all <- Quatrgrams_all[order(Quatrgrams_all$freq_all,decreasing = T),]
+head(Quatrgrams_all, 20)
+dim(Quatrgrams_all)
+round(object.size(Quatrgrams_all),0)
 
-save(Unigrams_all, file='data_18_Nov_2014/ngrams/Trigrams_all_freq_cleaned.RData.RData')
+save(Quatrgrams_all, file='completed/Quatrgrams_all_completed.RData')
 
 ######################
 ## Ngrams Cleansing ##

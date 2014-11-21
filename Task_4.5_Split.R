@@ -24,40 +24,42 @@ predict
 ###################
 ## Split Columns ##
 ###################
-load('completed/Trigrams_all_freq_cleaned.RData') # 6231160
-class(Trigram_all$term)
-Trigram_all$term <- as.character(Trigram_all$term)
-Trigram_all <- as.data.table(Trigram_all)
+load('completed/Quatrgrams_all_completed.RData') # 6231160
+class(Quatrgrams_all$terms)
+ngram_pred$terms <- as.character(ngram_pred$terms)
+Quatrgrams_all <- as.data.table(Quatrgrams_all)
 rm(ngram_pred)
 
-Trigram_all[,ngram:=strsplit(term, '\\s')]
-Trigram_all[, `:=`(w1=sapply(ngram, function(s) s[1]),
-                    w2=sapply(ngram, function(s) s[2]),
-                    # w3=sapply(ngram, function(s) s[3]),
-                    # w4=sapply(ngram, function(s) s[4]),
-                   term=NULL, ngram=NULL)]
-Trigram_all <- as.data.frame(Trigram_all)
+Quatrgrams_all[,ngram:=strsplit(terms, '\\s')]
+Quatrgrams_all[, `:=`(w1=sapply(ngram, function(s) s[1]),
+                     w2=sapply(ngram, function(s) s[2]),
+                     w3=sapply(ngram, function(s) s[3]),
+                     w4=sapply(ngram, function(s) s[4]),
+                   terms=NULL, ngram=NULL)]
+Quatrgrams_all <- as.data.frame(Quatrgrams_all)
 
-head(Trigram_all); dim(Trigram_all); object.size(Trigram_all)
+head(Quatrgrams_all); dim(Quatrgram_twitter_cleaned); object.size(Quatrgrams_all)
 
-    Trigram_all_clean <- str_replace_all(Unigrams_all$w1, "[^a-z]", NA)
-    length(Trigram_all_clean[is.na(Trigram_all_clean)])
-    Unigrams_all[is.na(Trigram_all_clean),]
-    Unigrams_all <- Unigrams_all[!is.na(Trigram_all_clean),]
+    Quatrgram_blog_clean <- str_replace_all(Quatrgrams_all$w4, "[^a-z]", NA)
+    length(Quatrgram_blog_clean[is.na(Quatrgram_blog_clean)])
+    Quatrgram_twitter[is.na(Quatrgram_blog_clean),]
+    Quatrgram_twitter <- Quatrgram_twitter[!is.na(Quatrgram_blog_clean),]
 
-save(Trigram_all, file='completed/Trigrams_completed.RData')
+    Quatrgram_twitter_cleaned <- Quatrgrams_all[-which(Quatrgrams_all$freq_all == 1), ]
+
+save(Quatrgrams_all, file='completed/Quatrgrams_all_completed.RData')
 
 ##########################
 ## Probabilities Matrix ##
 ##########################
 load('completed/Trigrams_completed.RData')
-head(Trigram_all); dim(Trigram_all); object.size(Trigram_all)
-Trigram_all <- data.table(Trigram_all)
+head(Quatrgrams_twitter); dim(Quatrgrams_twitter); object.size(Quatrgrams_twitter)
+Quatrgram_twitter_cleaned <- as.data.table(Quatrgram_twitter_cleaned)
 
-Bigrams_all <- Bigrams_all[, `:=`(terms = paste(w1,w2,sep=' '), 
-                           w1=NULL, w2=NULL)]
+Quatrgram_twitter_cleaned <- Quatrgram_twitter_cleaned[, `:=`(terms = paste(w1,w2,w3,w4,sep=' '), 
+                           w1=NULL, w2=NULL, w3=NULL, w4=NULL)]
 setnames(Trigram_all, c('freq', 'term'))
-save(Trigram_all, file='completed/Trigrams_completed_trimmed.RData')
+save(Quatrgrams_twitter, file='completed/entire/Quatrgram_twitter_completed.RData')
 
 # only keep top 10 of each term
 vocabulary <- names(table(Trigram_all$term))
