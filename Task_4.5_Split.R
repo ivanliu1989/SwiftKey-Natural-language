@@ -70,3 +70,7 @@ Trigram_all_trimmed <- data.frame(freq=NULL,pred=NULL,term=NULL)
 for (i in 1:nrow(Trigram_all)){
     Trigram_all$p[i] <- Trigram_all[i,1]/sum(Trigram_all[which(Trigram_all$term==Trigram_all[i,3]),1])
 }
+
+setkeyv(Trigram_all, c( 'w1','w2','w3','freq'))
+Trigram_all[list('how', 'are', 'you')]
+system.time(a <- tail(Trigram_all[list('how are')]))
