@@ -32,7 +32,7 @@ predictNgrams <- function(input){
             predict <- c(predict,head(ngram[order(ngram$freq, decreasing=T),]$pred))    
         }
         
-    }else if(len=2){
+    }else if(len==2){
         W1 <- str[len-1]; W2 <- str[len]
         ngram <- Trigram_all[list(W1, W2)]
         predict <- head(ngram[order(ngram$freq, decreasing=T),]$pred)
@@ -43,7 +43,7 @@ predictNgrams <- function(input){
             predict <- c(predict,head(ngram[order(ngram$freq, decreasing=T),]$pred))    
         }
         
-    }else if(len=1){
+    }else if(len==1){
         W1 <- str[len]
         ngram <- Bigrams_all[list(W1)]
         predict <- head(ngram[order(ngram$freq, decreasing=T),]$pred)

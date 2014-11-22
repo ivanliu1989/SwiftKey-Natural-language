@@ -29,6 +29,6 @@ load('completed/ngrams_model.RData')
 source('Swiftkey-Natural-language/func/Task_5.5_Predict_func.R')
 
 ## make prediction
-input <- 'could you'
+input <- "KISS MY ASS BITCH"
 system.time(result <- predictNgrams(input))
 result
