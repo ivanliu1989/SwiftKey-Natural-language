@@ -53,7 +53,7 @@ predictNgrams <- function(input){
     predict <- predict[!is.na(predict)]
     
     if(length(predict)<5){
-        predict <- c(predict, Unigrams_model$pred[1:5])
+        predict <- c(predict, Unigrams_model$pred)
     }
     return(predict[1:5])
 }
