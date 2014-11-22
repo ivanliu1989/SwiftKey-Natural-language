@@ -29,6 +29,14 @@ load('completed/ngrams_model.RData')
 source('Swiftkey-Natural-language/func/Task_5.5_Predict_func.R')
 
 ## make prediction
-input <- "KISS MY ASS BITCH"
+input <- "this is a project"
 system.time(result <- predictNgrams(input))
 result
+
+object.size(Quatrgrams_model)/1024/1024; dim(Quatrgrams_model);head(Quatrgrams_model)
+Bigrams_model <- Bigrams_all[-which(Bigrams_all$freq==2),]
+Trigrams_model <- Trigram_all[-which(Trigram_all$freq==2),]
+Quatrgrams_model <- Quatrgrams_all[-which(Quatrgrams_all$freq==2),]
+Unigrams_model <- Unigrams_all[1:6,]
+save(Unigrams_model, Bigrams_model, Trigrams_model, Quatrgrams_model,
+     file='completed/ngrams_model.RData')

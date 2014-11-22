@@ -17,35 +17,35 @@ predictNgrams <- function(input){
     if (len>=3){
         ##trigram 
         W1 <- str[len-2]; W2 <- str[len-1]; W3 <- str[len]
-        ngram <- Quatrgrams_all[list(W1, W2, W3)]
+        ngram <- Quatrgrams_model[list(W1, W2, W3)]
         predict <- head(ngram[order(ngram$freq, decreasing=T),]$pred)
         
         if(length(predict)<6){
             ##bigram
-            ngram <- Trigram_all[list(W2, W3)]
+            ngram <- Trigrams_model[list(W2, W3)]
             predict <- c(predict,head(ngram[order(ngram$freq, decreasing=T),]$pred))    
         }
         
         if(length(predict)<6){
             ##unigram
-            ngram <- Bigrams_all[list(W3)]
+            ngram <- Bigrams_model[list(W3)]
             predict <- c(predict,head(ngram[order(ngram$freq, decreasing=T),]$pred))    
         }
         
     }else if(len==2){
         W1 <- str[len-1]; W2 <- str[len]
-        ngram <- Trigram_all[list(W1, W2)]
+        ngram <- Trigrams_model[list(W1, W2)]
         predict <- head(ngram[order(ngram$freq, decreasing=T),]$pred)
         
         if(length(predict)<6){
             ##unigram
-            ngram <- Bigrams_all[list(W2)]
+            ngram <- Bigrams_model[list(W2)]
             predict <- c(predict,head(ngram[order(ngram$freq, decreasing=T),]$pred))    
         }
         
     }else if(len==1){
         W1 <- str[len]
-        ngram <- Bigrams_all[list(W1)]
+        ngram <- Bigrams_model[list(W1)]
         predict <- head(ngram[order(ngram$freq, decreasing=T),]$pred)
         
     }    
@@ -53,7 +53,7 @@ predictNgrams <- function(input){
     predict <- predict[!is.na(predict)]
     
     if(length(predict)<5){
-        predict <- c(predict, Unigrams_all$pred[1:5])
+        predict <- c(predict, Unigrams_model$pred[1:5])
     }
-    return(predict)
+    return(predict[1:5])
 }
