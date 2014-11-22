@@ -16,3 +16,19 @@
 ##############
 ### Script ###
 ##############
+setwd('H:/Machine_Learning/SwiftKey/')
+setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\SwiftKey')
+setwd('/Users/ivan/Work_directory/SwiftKey')
+Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre7\\")
+
+rm(list=ls(all=TRUE));gc(reset=TRUE);par(mfrow=c(1,1))
+require(tm); require(SnowballC); require(stringr);require(RWeka); 
+require(qdap); require(scales); require(gridExtra); require(data.table)
+
+load('completed/ngrams_model.RData') 
+source('Swiftkey-Natural-language/func/Task_5.5_Predict_func.R')
+
+## make prediction
+input <- 'tell me something about'
+system.time(result <- predictNgrams(input))
+result
