@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n# \n# http://www.rstudio.com/shiny/\n#\n\nlibrary(shiny)\n\nshinyServer(function(input, output) {\n   \n  output$distPlot <- renderPlot({\n    \n    # generate bins based on input$bins from ui.R\n    x    <- faithful[, 2] \n    bins <- seq(min(x), max(x), length.out = input$bins + 1)\n    \n    # draw the histogram with the specified number of bins\n    hist(x, breaks = bins, col = 'darkgray', border = 'white')\n    \n  })\n  \n})\n",
+    "created" : 1416723360916.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2269286695",
+    "id" : "5799545",
+    "lastKnownWriteTime" : 1406656542,
+    "path" : "H:/Machine_Learning/SwiftKey/Swiftkey-Natural-language/Shiny_App/SwiftKey-Language-Modelling/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

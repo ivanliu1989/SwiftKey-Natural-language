@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n# \n# http://www.rstudio.com/shiny/\n#\n\nlibrary(shiny)\n\nshinyUI(pageWithSidebar(\n  \n  # Application title\n  headerPanel(\"Old Faithful Geyser Data\"),\n  \n  # Sidebar with a slider input for number of bins\n  sidebarPanel(\n    sliderInput(\"bins\",\n                \"Number of bins:\",\n                min = 1,\n                max = 50,\n                value = 30)\n  ),\n  \n  # Show a plot of the generated distribution\n  mainPanel(\n    plotOutput(\"distPlot\")\n  )\n))\n",
+    "created" : 1416723360232.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "488785571",
+    "id" : "2FD0BBC2",
+    "lastKnownWriteTime" : 1406656542,
+    "path" : "H:/Machine_Learning/SwiftKey/Swiftkey-Natural-language/Shiny_App/SwiftKey-Language-Modelling/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
