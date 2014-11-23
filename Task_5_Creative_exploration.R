@@ -29,9 +29,10 @@ load('completed/ngrams_model.RData')
 source('Swiftkey-Natural-language/func/Task_5.5_Predict_func.R')
 
 ## make prediction
-input <- "started telling me about his"
+input <- "me about his"
 system.time(result <- predictNgrams(input))
 result
+Quatrgrams_model[list('me', 'about', 'his')]
 
 object.size(Quatrgrams_model)/1024/1024; dim(Quatrgrams_model);head(Quatrgrams_model)
 Bigrams_model <- Bigrams_all[-which(Bigrams_all$freq==2),]
