@@ -20,7 +20,11 @@ shinyUI(
                                     br(),
                                     h6("This App is built based on:"),
                                     a("Data Science Capstone", href="https://www.coursera.org/course/dsscapstone"),
-                                    p("class started on 10-27-2014")
+                                    p("class started on 10-27-2014"),
+                                    br(),
+                                    a(img(src = "GitHub-Mark.png", height = 30, width = 30),href="https://github.com/ivanliu1989/SwiftKey-Natural-language"),
+                                    a(img(src = "linkedin.png", height = 26, width = 26),href="https://www.linkedin.com/in/ivanliu1989"),
+                                    a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com")
                                 ),
                                 mainPanel(
                                     textInput("entry", 
@@ -46,12 +50,7 @@ shinyUI(
                                       code("Predict_func.R"), code("server.R"), code("ui.R"), 
                                       'cand be found in', a("SwiftKey-Natural-language.",href="https://github.com/ivanliu1989/SwiftKey-Natural-language"))
                                 )
-                            ),
-                                fluidRow(
-                                    p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
-                                    p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
-                                    p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
-                                    )
+                            )
                    ),
                    tabPanel("Model/Algorithm",
                             sidebarLayout(
@@ -64,7 +63,11 @@ shinyUI(
                                     helpText(h5("Note:")),
                                     helpText("For more information, you can go to Documents on the navi bar
                                              to read relevant intrim report and final report of this data product."),
-                                    br()
+                                    br(),
+                                    br(),
+                                    a(img(src = "GitHub-Mark.png", height = 30, width = 30),href="https://github.com/ivanliu1989/SwiftKey-Natural-language"),
+                                    a(img(src = "linkedin.png", height = 26, width = 26),href="https://www.linkedin.com/in/ivanliu1989"),
+                                    a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com")
                                     ),
                                 mainPanel(
                                     tabsetPanel(type="tabs",
@@ -123,11 +126,6 @@ shinyUI(
                                                 )
                                                 )
                                     )
-                            ),
-                            fluidRow(
-                                p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
-                                p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
-                                p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
                             )
                             ),
                    navbarMenu("Documents",
