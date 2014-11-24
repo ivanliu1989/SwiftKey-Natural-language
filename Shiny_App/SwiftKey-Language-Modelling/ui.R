@@ -53,7 +53,7 @@ shinyUI(
                                     p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
                                     )
                    ),
-                   tabPanel("App Algorithm",
+                   tabPanel("Model/Algorithm",
                             sidebarLayout(
                                 sidebarPanel(
                                     helpText(h5("Help Instruction:")),
@@ -88,6 +88,9 @@ shinyUI(
                                    and the joint probability of all unobserved species. The last three words of users\' input sentence will be extracted first and used
                                                            for seach in 4-grams matrix. If none result is return, then we will move back to 3-grams, and then 2-grams and 1-gram.
                                                            the final predictions will be chosen accordingly by the frequency and n-grams of the model.' ),                                                         
+                                                         br(),
+                                                         h4("A glance of model table"),
+                                                         dataTableOutput('modelTable'),
                                                          br(),
                                                          br()
                                                          ),
