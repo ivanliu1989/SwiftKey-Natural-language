@@ -5,30 +5,48 @@ shinyUI(
                    tabPanel("Prediction",
                             fluidRow(
                                 sidebarPanel(
-                                    helpText("Tips:"),
-                                    helpText("This is a summary re all diamonds information in our diamonds dataset. It has been visualized by a point plot on the right side. You are able to customize your own summary by selecting different variables you want to explore on x or y axis. You can also choose the categories of diamonds to reflect them on the diagram. Please make the adjustments below."),
-                                    selectInput(inputId = "x",
-                                                label = "Choose X",
-                                                choices = c('clarity', 'depth', 'price', 'carat'),
-                                                selected = "price"),
-                                    selectInput(inputId = "y",
-                                                label = "Choose Y",
-                                                choices = c('clarity', 'depth', 'price', 'carat'),
-                                                selected = "caret"),
-                                    selectInput(inputId= "z",
-                                                label = "Choose Category",
-                                                choices = c('cut','color','clarity'),
-                                                selected = 'cut')
+                                    textInput("entry", 
+                                              h5("What's the next word for my sentence? Input here:"),
+                                              "How are you"),
+                                    submitButton("SUBMIT"),
+                                    br(),
+                                    helpText("Help Instruction:"),
+                                    helpText("To predict the next word, please type a sentence
+                                             into the input box and then press SUBMIT button.
+                                             Enjoy!", style="color:blue"),
+                                    br(),
+                                    helpText("Note:"),
+                                    helpText("The App will be initialized at the first usage.
+                                             After 100% loading, you will see the prediction
+                                             for the default sentence example \"How are you?\"
+                                             on the right side."),
+                                    br(),
+                                    h6("This App is built based on:"),
+                                    a("Data Science Capstone", href="https://www.coursera.org/course/dsscapstone"),
+                                    p("class started on 10-27-2014")
                                 ),
                                 mainPanel(
                                     
                                 )
-                            )
+                            ),
+                            fluidRow(
+                                p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
+                                p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
+                                p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
+                                )
                    ),
                    tabPanel("App Algorithm",
                             sidebarLayout(
                                 sidebarPanel(
-                                    helpText("Tips:")
+                                    helpText("Help Instruction:"),
+                                    helpText("Please switch the panels on the right side to figure out:"),
+                                    helpText("1. How this predictive model works?"),
+                                    helpText("2. How this App works?"),
+                                    br(),
+                                    helpText("Note:"),
+                                    helpText("Next, you can go to Documents on the navi bar to read relevant
+                                             intrim report and final report of this data product."),
+                                    br()
                                 ),
                                 mainPanel(
                                     tabsetPanel(
