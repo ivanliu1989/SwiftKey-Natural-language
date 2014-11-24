@@ -1,5 +1,4 @@
-setwd('/Users/ivan/Work_directory/SwiftKey')
-load('completed/ngrams_model.RData') 
+load('ngrams_model.RData') 
 require(stringr); require(data.table)
 
 predictNgrams <- function(input){
