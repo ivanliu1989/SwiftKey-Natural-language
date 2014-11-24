@@ -21,7 +21,7 @@ shinyUI(
                                                 selected = 'cut')
                                 ),
                                 mainPanel(
-                                    showOutput("myChart1", "polycharts")
+                                    
                                 )
                             )
                    ),
@@ -37,38 +37,17 @@ shinyUI(
                             )
                     ),
                    navbarMenu("Documents",
-                              tabPanel("Inter",
-                                       sidebarLayout(
-                                           sidebarPanel(
-                                               helpText("Tips:"),
-                                               helpText("You can download the table for diamonds information here. Please select a type of diamonds that you are interested first and ensure the right table is the one you are willing to download. Then click the download button below. It will be a .csv format file on your drive."),
-                                               selectInput("datasetD", "Choose a dataset:", 
-                                                           choices = c("Fair Cut", "Good Cut", 
-                                                                       "Very Good Cut", "Premium Cut", 
-                                                                       "Ideal Cut", "All"), 'All'),
-                                               downloadButton('downloadData', 'Download')
-                                           ),
-                                           mainPanel(
-                                               tableOutput('table_download')
-                                           )
-                                       )),
-                              tabPanel("Exchange Rate", 
-                                       sidebarLayout(
-                                           sidebarPanel(
-                                               helpText("Tips:"),
-                                               helpText("You can obtain the latest exchange rate regarding your selected currency from the right chart. Please select a currency type first. Information will be collected from yahoo finance."),
-                                               textInput("symb", "Symbol", "AUD"),
-                                               dateRangeInput("dates", "Date range", 
-                                                              start = "2014-01-01", 
-                                                              end = as.character(Sys.Date())),
-                                               actionButton("get", "Get Exchange Rate"),
-                                               br(),br(),
-                                               checkboxInput("log", "Plot y axis on log scale", value = FALSE),
-                                               checkboxInput("adjust", "Adjust prices for inflation", value = FALSE)
-                                           ),
-                                           mainPanel(plotOutput("plot"))
+                              tabPanel("Interim Report",
+                                       fluidPage(
+                                           includeMarkdown('SwiftKey_NLP_Milestone_Report.md')
+                                       )
+                              ),
+                              tabPanel("Final Report",
+                                       fluidPage(
+                                           includeMarkdown('SwiftKey_NLP_Milestone_Report.md')
+                                           )  
                                        )
                               )
                    )
-        )
+        
 )
