@@ -34,7 +34,6 @@ shinyUI(
                                               "Nice to meet you"),
                                     submitButton("Predict!"),
                                     br(),
-## one                                    
                                     h3("Word Prediction"),
                                     h5('The sentence you just typed:'),                             
                                     span(h4(textOutput('sent')),style = "color:blue"),
@@ -42,11 +41,13 @@ shinyUI(
                                     h5('Single Word Prediction:'),
                                     span(h4(textOutput('top1')),style = "color:red"),
                                     br(),
-                                    h5('Other Possible Single Word Prediction:'),
+                                    h5('Other Possible Single Word Predictions:'),
                                     span(h5(textOutput('top2')),style = "color:green"),
                                     span(h5(textOutput('top3')),style = "color:green"),
                                     span(h5(textOutput('top4')),style = "color:green"),
                                     span(h5(textOutput('top5')),style = "color:green"),
+                                    br(),
+                                    plotOutput("wordCloud"), # wordcloud
                                     br(),
                                     p('More details of the prediction algorithm and source codes', 
                                       code("server.R"), code("ui.R"), code("Predict_func.R"), code("Tokenization_func.R"), code("ngramify_func.R"), 

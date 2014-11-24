@@ -1,6 +1,7 @@
-library(shiny)
+library(shiny);library(shinyIncubator)
 load('quatrgrams_model.RData') 
 source('Predict_func.R')
+source('Predict_func2.R')
 
 shinyServer(function(input, output) {
   dataInput <- reactive(predictNgrams(input$entry))
@@ -31,6 +32,16 @@ shinyServer(function(input, output) {
   output$modelTable = renderDataTable({
       Quatrgrams_models
   }, options = list(lengthMenu = c(5, 10, 20), pageLength = 5))
+  
+  # Define a reactive expression for the document term matrix
+  terms <- reactive(predictWordcloud(input$entry))
+  # Make the wordcloud drawing predictable during a session
+  wordcloud_rep <- repeatable(wordcloud)
+  output$wordCloud <- renderPlot({
+      v <- terms()
+      wordcloud_rep(names(v), v, scale=c(4,0.5),
+                    colors=brewer.pal(8, "Dark2"))
+  })
   
   withProgress(message = 'Loading Data ...', value = NULL, {
       Sys.sleep(0.25)
