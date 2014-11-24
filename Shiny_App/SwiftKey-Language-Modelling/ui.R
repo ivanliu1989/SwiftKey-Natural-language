@@ -9,28 +9,30 @@ shinyUI(
                                     helpText("Please have a try to make the prediction by using
                                              the dashboard on right side. Specifically, you can:"),
                                     helpText("1. Type your sentence in the text field", style="color:blue"),
-                                    helpText("2. Click SUBMIT button to pass the value to the model.", style="color:blue"),
+                                    helpText("2. Click Predict button to pass the value to the model.", style="color:blue"),
                                     helpText("3. Obtain predictions below.", style="color:blue"),
                                     br(),
                                     helpText(h5("Note:")),
                                     helpText("The App will be initialized at the first load.
-                                             After 100% loading, you will see the prediction
-                                             for the default sentence example \"How are you?\"
+                                             After", code("100% loading"), ", you will see the prediction
+                                             for the default sentence example \"Nice to meet you\"
                                              on the right side."),
                                     br(),
-                                    h6("This App is built based on:"),
-                                    a("Data Science Capstone", href="https://www.coursera.org/course/dsscapstone"),
+                                    h6("This App is built for:"),
+                                    a("Data Science Capstone (SwiftKey)", href="https://www.coursera.org/course/dsscapstone"),
                                     p("class started on 10-27-2014"),
                                     br(),
+                                    h6("For more information about Ivan Liu:"),
                                     a(img(src = "GitHub-Mark.png", height = 30, width = 30),href="https://github.com/ivanliu1989/SwiftKey-Natural-language"),
                                     a(img(src = "linkedin.png", height = 26, width = 26),href="https://www.linkedin.com/in/ivanliu1989"),
-                                    a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com")
+                                    a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com"),
+                                    br()
                                 ),
                                 mainPanel(
                                     textInput("entry", 
-                                              h5("What's the next word for my sentence? Input here:"),
-                                              "How are you"),
-                                    submitButton("SUBMIT"),
+                                              h5("Let me predict what's you want to type next ^_^",br(), "Please type your input here:"),
+                                              "Nice to meet you"),
+                                    submitButton("Predict!"),
                                     br(),
 ## one                                    
                                     h3("Word Prediction"),
@@ -47,8 +49,8 @@ shinyUI(
                                     span(h5(textOutput('top5')),style = "color:green"),
                                     br(),
                                     p('More details of the prediction algorithm and source codes', 
-                                      code("Predict_func.R"), code("server.R"), code("ui.R"), 
-                                      'cand be found in', a("SwiftKey-Natural-language.",href="https://github.com/ivanliu1989/SwiftKey-Natural-language"))
+                                      code("server.R"), code("ui.R"), code("Predict_func.R"), code("Tokenization_func.R"), code("ngramify_func.R"), 
+                                      'can be found at', a("SwiftKey-Natural-language.",href="https://github.com/ivanliu1989/SwiftKey-Natural-language"))
                                 )
                             )
                    ),
@@ -61,13 +63,15 @@ shinyUI(
                                     helpText("2. How does this App work?", style="color:blue"),
                                     br(),
                                     helpText(h5("Note:")),
-                                    helpText("For more information, you can go to Documents on the navi bar
+                                    helpText("For more information, you can go to", code("Document tab"), "on the navi bar
                                              to read relevant intrim report and final report of this data product."),
                                     br(),
                                     br(),
+                                    h6("For more information about Ivan Liu:"),
                                     a(img(src = "GitHub-Mark.png", height = 30, width = 30),href="https://github.com/ivanliu1989/SwiftKey-Natural-language"),
                                     a(img(src = "linkedin.png", height = 26, width = 26),href="https://www.linkedin.com/in/ivanliu1989"),
-                                    a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com")
+                                    a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com"),
+                                    br()
                                     ),
                                 mainPanel(
                                     tabsetPanel(type="tabs",
@@ -136,7 +140,7 @@ shinyUI(
                               ),
                               tabPanel("Final Report",
                                        fluidPage(
-                                           
+                                           h5("Coming soon...")
                                            )  
                                        )
                               )
