@@ -155,7 +155,21 @@ shinyUI(
                                    
                                                tabPanel("Key Concepts",                                                      
                                                         h3("Key Concepts/Terminology"),
+                                                        h5("Tokenization() function"),
+                                                        p(code("Tokenization()"), "function is developed by author based on",code("tm package"),
+                                                          "for data cleanning process, it mainly provides users with reproducible functionalities such as:",
+                                                          code("Simple Transformation"), code("Lowercase Transformation"), code("Remove Numbers"), 
+                                                          code("Remove Punctuations"), code("Remove Stop Words"), code("Profanity Filtering"),"with only one command."),
+                                                        h5("ngramify() function"),
+                                                        p(code("ngramify()"),"function is developed by author to mainly tackle the memory limits problem when generating
+                                                          ngrams model from database. It provides users with a reproducible functionality to split raw datasets into a bunch of
+                                                          user defined number of small ones and transform them into n-grams model.")
+                                                        h5("N-grams language model"),
                                                         
+                                                        h5("Computing probabilities"),
+                                                        h5("Smoothing"),
+                                                        h5("Interpolation"),
+                                                        h5("Backoff models"),
                                                         br()
                                                         )
                                                 )
