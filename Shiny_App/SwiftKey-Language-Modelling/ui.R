@@ -20,10 +20,7 @@ shinyUI(
                                     br(),
                                     h6("This App is built based on:"),
                                     a("Data Science Capstone", href="https://www.coursera.org/course/dsscapstone"),
-                                    p("class started on 10-27-2014"),
-                                    p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
-                                    p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
-                                    p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
+                                    p("class started on 10-27-2014")
                                 ),
                                 mainPanel(
                                     textInput("entry", 
@@ -49,7 +46,12 @@ shinyUI(
                                       code("Predict_func.R"), code("server.R"), code("ui.R"), 
                                       'cand be found in', a("SwiftKey-Natural-language.",href="https://github.com/ivanliu1989/SwiftKey-Natural-language"))
                                 )
-                            )
+                            ),
+                                fluidRow(
+                                    p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
+                                    p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
+                                    p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
+                                    )
                    ),
                    tabPanel("App Algorithm",
                             sidebarLayout(
@@ -62,12 +64,8 @@ shinyUI(
                                     helpText(h5("Note:")),
                                     helpText("For more information, you can go to Documents on the navi bar
                                              to read relevant intrim report and final report of this data product."),
-                                    br(),
-                                    helpText(h5("Contact:")),
-                                    p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
-                                    p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
-                                    p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
-                                ),
+                                    br()
+                                    ),
                                 mainPanel(
                                     tabsetPanel(type="tabs",
                                                 tabPanel("Predictive Model",                                                      
@@ -97,29 +95,36 @@ shinyUI(
                                                 tabPanel("App Workflow",                                                       
                                                          h3("Shiny App Prediction Algorithm"),
                                                          h4("Preprocess"),
-                                                         p("1. Obtain the data from the input box."),
-                                                         p("2. Clean the data sentence. Numbers, punctuations,
+                                                         p("1. Obtain the data from the", code("input box.")),
+                                                         p("2.", code("Cleaning"), "for the data sentence. Numbers, punctuations,
                                    extra spaces will be removed, and all words are converted to lowercase."),
                                                          br(),
                                                          h4("Tokenize"),
-                                                         p("After preprocessing, the sentence will be truncated from the last 3 words.
-                                   If there are less than 3 words, all the words will be used."),
+                                                         p("After preprocessing, the sentence will be truncated from the", code("last 3 words.")
+                                   , "If there are less than 3 words, all the words will be used."),
                                                          br(),
                                                          h4("Search pattern"),
-                                                         p("Search the pattern from the n-gram model. 
-                                   The algormithm will search the pattern from 
+                                                         p("Search the pattern from the", code("n-gram model."), 
+                                   "The algormithm will search the pattern from 
                                    the 3-grams frequency matrix, and then return the Top 5 frequent predictions.However, 
                                    if there is no result, it will automatically search the 2-grams, 
                                    and if it still no result, it will search the 1-gram matrix."),
                                                          br(),
                                                          h4("Predict the next single word"),
                                                          p("The next possible single word will be returned and displayed. 
-                                   Besides, the top 5 possible words also could be found.")
+                                   In addition, the top 5 possible words also could be found. The average predicting time for
+                                                           one input is usually", code("0.000 ~ 0.003s"), "by using this model, which 
+                                                           is pretty desent for a mobile predictive model based on such large datasets.")
                                                 )
                                                 )
                                     )
+                            ),
+                            fluidRow(
+                                p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
+                                p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
+                                p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
                             )
-                    ),
+                            ),
                    navbarMenu("Documents",
                               tabPanel("Interim Report",
                                        fluidPage(
@@ -133,5 +138,4 @@ shinyUI(
                                        )
                               )
                    )
-        
 )
