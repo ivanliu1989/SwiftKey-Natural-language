@@ -4,6 +4,8 @@ require(markdown)
 shinyUI(
     navbarPage("SwiftKey Natural Language Prediction", inverse = FALSE, collapsable = FALSE, 
                    tabPanel("Prediction",
+                            tags$head(includeScript("Google_Analytics.js")),
+                            # includeCSS("bootstrap.css"),
                             fluidRow(
                                 sidebarPanel(width=3,
                                              h5("Text Input:"),
