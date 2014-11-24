@@ -5,17 +5,12 @@ shinyUI(
                    tabPanel("Prediction",
                             fluidRow(
                                 sidebarPanel(
-                                    textInput("entry", 
-                                              h5("What's the next word for my sentence? Input here:"),
-                                              "How are you"),
-                                    submitButton("SUBMIT"),
-                                    br(),
-                                    helpText("Help Instruction:"),
+                                    helpText(h5("Help Instruction:")),
                                     helpText("To predict the next word, please type a sentence
                                              into the input box and then press SUBMIT button.
                                              Enjoy!", style="color:blue"),
                                     br(),
-                                    helpText("Note:"),
+                                    helpText(h5("Note:")),
                                     helpText("The App will be initialized at the first usage.
                                              After 100% loading, you will see the prediction
                                              for the default sentence example \"How are you?\"
@@ -26,7 +21,11 @@ shinyUI(
                                     p("class started on 10-27-2014")
                                 ),
                                 mainPanel(
-                                    
+                                    textInput("entry", 
+                                              h5("What's the next word for my sentence? Input here:"),
+                                              "How are you"),
+                                    submitButton("SUBMIT"),
+                                    br()
                                 )
                             ),
                             fluidRow(
@@ -38,18 +37,26 @@ shinyUI(
                    tabPanel("App Algorithm",
                             sidebarLayout(
                                 sidebarPanel(
-                                    helpText("Help Instruction:"),
+                                    helpText(h5("Help Instruction:")),
                                     helpText("Please switch the panels on the right side to figure out:"),
-                                    helpText("1. How this predictive model works?"),
-                                    helpText("2. How this App works?"),
+                                    helpText("1. How is the word being predicted?", style="color:blue"),
+                                    helpText("2. How does this App work?", style="color:blue"),
                                     br(),
-                                    helpText("Note:"),
-                                    helpText("Next, you can go to Documents on the navi bar to read relevant
-                                             intrim report and final report of this data product."),
+                                    helpText(h5("Note:")),
+                                    helpText("For more information, you can go to Documents on the navi bar
+                                             to read relevant intrim report and final report of this data product."),
                                     br()
                                 ),
                                 mainPanel(
-                                    tabsetPanel(
+                                    tabsetPanel(type="tabs",
+                                                tabPanel("Predictive Model"
+                                                         
+                                                         ),
+                                                tabPanel("App Workflow"
+                                                         
+                                                )
+                                                    
+                                        
                                     )
                                 )
                             )
