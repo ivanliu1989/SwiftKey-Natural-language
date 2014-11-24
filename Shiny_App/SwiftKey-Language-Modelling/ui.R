@@ -20,7 +20,10 @@ shinyUI(
                                     br(),
                                     h6("This App is built based on:"),
                                     a("Data Science Capstone", href="https://www.coursera.org/course/dsscapstone"),
-                                    p("class started on 10-27-2014")
+                                    p("class started on 10-27-2014"),
+                                    p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
+                                    p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
+                                    p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
                                 ),
                                 mainPanel(
                                     textInput("entry", 
@@ -43,15 +46,10 @@ shinyUI(
                                     span(h5(textOutput('top5')),style = "color:green"),
                                     br(),
                                     p('More details of the prediction algorithm and source codes', 
-                                      code("prediction.R"), code("server.R"), code("ui.R"), 
-                                      'cand be found in other Tags.')
+                                      code("Predict_func.R"), code("server.R"), code("ui.R"), 
+                                      'cand be found in', a("SwiftKey-Natural-language.",href="https://github.com/ivanliu1989/SwiftKey-Natural-language"))
                                 )
-                            ),
-                            fluidRow(
-                                p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
-                                p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
-                                p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
-                                )
+                            )
                    ),
                    tabPanel("App Algorithm",
                             sidebarLayout(
@@ -64,57 +62,62 @@ shinyUI(
                                     helpText(h5("Note:")),
                                     helpText("For more information, you can go to Documents on the navi bar
                                              to read relevant intrim report and final report of this data product."),
-                                    br()
+                                    br(),
+                                    helpText(h5("Contact:")),
+                                    p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
+                                    p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
+                                    p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
                                 ),
                                 mainPanel(
                                     tabsetPanel(type="tabs",
-                                                tabPanel("Predictive Model",
-## two                                                         
-                                                         h4("Prediction Model Building"),
-                                                         h5("Clean the training dataset"),
-                                                         p("The dataset was cleaned by using linux bash scripts. It's a fast and convinent way to clean large dataset."),
-                                                         p("The initial dataset is about 560M in total. 
-                                   After cleaning the dataset, and disgrading the words with freqency less than 5,
-                                   the size of 1-word frequncy list is 2M, 2-word frequency list is 26M, 
-                                   and 3-word frequency list is 36M, and 4-word frequency list is 20M"),
-                                                         h5("Build the model"),
+                                                tabPanel("Predictive Model",                                                      
+                                                         h3("Predictive Model Establishment"),
+                                                         h4("Clean the training dataset"),
+                                                         p("The dataset was cleaned by ", code("tokenization()"), "and", code("ngramify()"),
+                                                           "functions built by author in R. They are able to help users tokenize and ngramify
+                                                           the text data in an automatic way and allow user to split large datasets into a bunch of
+                                                           user defined number of small ones in order to reduce the", code("processing time"), "and avoid the 
+                                                           ", code("memory limits"), "issues."),
+                                                         p("The raw text datasets are about 580M in total-", code('en_US.blogs.txt-210M'),
+                                                           code('en_US.news.txt-206M'),code('en_US.twitter.txt-167M')),
+                                                         p("After the preprocessing to the datasets including cleaning, tokenizing and ngramifing, 
+                                                           the three raw datasets are combined and then 1-4 grams frequency matrix are built. 
+                                                           The total size of new dataset", code("ngrams_model.RData"), "is reduced to 36M."),
+                                                         br(),
+                                                         h4("Build the model"),
                                                          p(a("Simple Good-Turing", href = "https://class.coursera.org/nlp/lecture/32"),
-                                                           'technique was used for estimating the probabilities corresponding to the observed frequencies, 
-                                   and the joint probability of all unobserved species.' ),
-                                                         h5("About the Final model"),
-                                                         p("The final smoothed model are saved into RData file. The size is about 22M. 
-                                   It need to be loaded for the single word prediction."),
+                                                           'and Back off techniques were used for estimating the probabilities corresponding to the observed frequencies, 
+                                   and the joint probability of all unobserved species. The last three words of users\' input sentence will be extracted first and used
+                                                           for seach in 4-grams matrix. If none result is return, then we will move back to 3-grams, and then 2-grams and 1-gram.
+                                                           the final predictions will be chosen accordingly by the frequency and n-grams of the model.' ),                                                         
                                                          br(),
                                                          br()
                                                          ),
-                                                tabPanel("App Workflow",
-## three                                                         
-                                                         h4("Shiny App Prediction Algorithm"),
-                                                         
+
+                                                tabPanel("App Workflow",                                                       
+                                                         h3("Shiny App Prediction Algorithm"),
                                                          h4("Preprocess"),
                                                          p("1. Obtain the data from the input box."),
                                                          p("2. Clean the data sentence. Numbers, punctuations,
                                    extra spaces will be removed, and all words are converted to lowercase."),
+                                                         br(),
                                                          h4("Tokenize"),
                                                          p("After preprocessing, the sentence will be truncated from the last 3 words.
                                    If there are less than 3 words, all the words will be used."),
+                                                         br(),
                                                          h4("Search pattern"),
                                                          p("Search the pattern from the n-gram model. 
                                    The algormithm will search the pattern from 
-                                   the 3-gram dataframe, and then return the Top 5 hits.However, 
-                                   if there is no hit, it will automatically search the 2-gram, 
-                                   and if it still no hit, it will search the 1-gram dataframe."),
+                                   the 3-grams frequency matrix, and then return the Top 5 frequent predictions.However, 
+                                   if there is no result, it will automatically search the 2-grams, 
+                                   and if it still no result, it will search the 1-gram matrix."),
+                                                         br(),
                                                          h4("Predict the next single word"),
                                                          p("The next possible single word will be returned and displayed. 
                                    Besides, the top 5 possible words also could be found.")
                                                 )
                                                 )
                                     )
-                            ),
-                            fluidRow(
-                                p(em("Email:",a("ivan.liuyanfeng@gmail.com",href="mailto: ivan.liuyanfeng@gmail.com"))),
-                                p(em("Linkedin:",a("Tianxiang(Ivan) Liu",href="https://www.linkedin.com/in/ivanliu1989"))),
-                                p(em("Github Repository:",a("SwiftKey-Natural-language",href="https://github.com/ivanliu1989/SwiftKey-Natural-language")))
                             )
                     ),
                    navbarMenu("Documents",

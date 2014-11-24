@@ -1,5 +1,5 @@
 library(shiny)
-source('Task_5.5_Predict_func.R')
+source('Predict_func.R')
 
 shinyServer(function(input, output) {
   dataInput <- reactive(predictNgrams(input$entry))
