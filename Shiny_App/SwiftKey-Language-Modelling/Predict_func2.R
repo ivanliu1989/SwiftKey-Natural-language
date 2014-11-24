@@ -1,6 +1,5 @@
-load('ngrams_model.RData') 
 require(stringr); require(data.table)
-
+load('ngrams_model.RData')
 predictWordcloud <- function(input){
     ## clean input text
     # remove numbers, punctuations
@@ -22,13 +21,13 @@ predictWordcloud <- function(input){
         ngram <- Quatrgrams_model[list(W1, W2, W3)]
         predict <- rbind(predict, data.frame(ngram$freq,ngram$pred))
         
-        if(length(predict)<6){
+        if(nrow(predict)<6){
             ##bigram
             ngram <- Trigrams_model[list(W2, W3)]
             predict <- predict <- rbind(predict, data.frame(ngram$freq,ngram$pred)) 
         }
         
-        if(length(predict)<6){
+        if(nrow(predict)<6){
             ##unigram
             ngram <- Bigrams_model[list(W3)]
             predict <- predict <- rbind(predict, data.frame(ngram$freq,ngram$pred))    
@@ -39,7 +38,7 @@ predictWordcloud <- function(input){
         ngram <- Trigrams_model[list(W1, W2)]
         predict <- predict <- rbind(predict, data.frame(ngram$freq,ngram$pred))
         
-        if(length(predict)<6){
+        if(nrow(predict)<6){
             ##unigram
             ngram <- Bigrams_model[list(W2)]
             predict <- predict <- rbind(predict, data.frame(ngram$freq,ngram$pred))    
@@ -52,7 +51,7 @@ predictWordcloud <- function(input){
         
     }    
     
-    if(length(predict)<5){
+    if(nrow(predict)<5){
         ngram <- Unigrams_model
         predict <- rbind(predict, data.frame(ngram$freq,ngram$pred))
     }

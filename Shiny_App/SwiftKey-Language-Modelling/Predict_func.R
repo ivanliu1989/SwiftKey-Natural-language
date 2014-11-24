@@ -1,4 +1,3 @@
-load('ngrams_model.RData') 
 require(stringr); require(data.table)
 
 predictNgrams <- function(input){
