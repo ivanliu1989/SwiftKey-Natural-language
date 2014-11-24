@@ -10,6 +10,9 @@ shinyUI(
                                                        "The app will predict your next possible word you want to type. Now, please type your input here:",
                                                        "Nice to meet you"),
                                              # submitButton('Predict'),
+                                             sliderInput("max", 
+                                                         h5("Maximum Number of Words:"), 
+                                                         min = 10,  max = 200,  value = 100),
                                              br(),
                                              actionButton("update", "Update Word Cloud"),
                                              hr(),
@@ -60,7 +63,8 @@ shinyUI(
                                     column(5,
                                            h3("Word Cloud Diagram"),
                                            h5("A", code("word cloud"), "or data cloud is a data display which uses font size and/
-                                              or color to indicate numerical values like frequency of words."),
+                                              or color to indicate numerical values like frequency of words. Please click", code("Update Word Cloud"), 
+                                              "button and", code("Slide Input"), "in the side bar to update the plot for relevant prediction."),
                                            plotOutput("wordCloud"), # wordcloud
                                            br()
                                            )
