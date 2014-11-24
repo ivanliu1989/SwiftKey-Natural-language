@@ -1,4 +1,5 @@
 library(shiny)
+require(markdown)
 
 shinyUI(
     navbarPage("SwiftKey Natural Language Prediction", inverse = FALSE, collapsable = FALSE, 
