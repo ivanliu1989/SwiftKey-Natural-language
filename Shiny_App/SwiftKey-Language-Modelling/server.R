@@ -1,5 +1,5 @@
 library(shiny)
-load('ngrams_model.RData') 
+load('quatrgrams_model.RData') 
 source('Predict_func.R')
 
 shinyServer(function(input, output) {
@@ -29,7 +29,7 @@ shinyServer(function(input, output) {
   })
   
   output$modelTable = renderDataTable({
-      tail(Quatrgrams_model, 50)
+      Quatrgrams_models
   }, options = list(lengthMenu = c(5, 10, 20), pageLength = 5))
   
   withProgress(message = 'Loading Data ...', value = NULL, {
