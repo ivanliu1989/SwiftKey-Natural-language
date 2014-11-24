@@ -155,21 +155,26 @@ shinyUI(
                                    
                                                tabPanel("Key Concepts",                                                      
                                                         h3("Key Concepts/Terminology"),
-                                                        h5("Tokenization() function"),
+                                                        h4("1. Tokenization() function"),
                                                         p(code("Tokenization()"), "function is developed by author based on",code("tm package"),
                                                           "for data cleanning process, it mainly provides users with reproducible functionalities such as:",
                                                           code("Simple Transformation"), code("Lowercase Transformation"), code("Remove Numbers"), 
                                                           code("Remove Punctuations"), code("Remove Stop Words"), code("Profanity Filtering"),"with only one command."),
-                                                        h5("ngramify() function"),
+                                                        h4("2. ngramify() function"),
                                                         p(code("ngramify()"),"function is developed by author to mainly tackle the memory limits problem when generating
                                                           ngrams model from database. It provides users with a reproducible functionality to split raw datasets into a bunch of
-                                                          user defined number of small ones and transform them into n-grams model.")
-                                                        h5("N-grams language model"),
-                                                        
-                                                        h5("Computing probabilities"),
-                                                        h5("Smoothing"),
-                                                        h5("Interpolation"),
-                                                        h5("Backoff models"),
+                                                          user defined number of small ones and transform them into n-grams model."),
+                                                        h4("3. N-grams language model"),
+                                                        p("An", code("n-gram model"), "is a type of probabilistic language model for predicting the next item in such a sequence in the form of", 
+                                                          code("a (n - 1)"),"–order ", code("Markov model")),
+                                                        p("In this model, we are using 1-4 grams for prediction purpose, they are refering to", code("unigram"),
+                                                          code("bigram"),code("trigram"),code("quatrgram"),"respectively."),
+                                                        h4("4. Computing probabilities"),
+                                                        p("An", code("n-gram model"), "is a type of probabilistic language model for predicting the next item in such a sequence in the form of", 
+                                                          code("a (n - 1)"),"–order ", code("Markov model")),
+                                                        h4("5. Smoothing"),
+                                                        h4("6. Interpolation"),
+                                                        h4("7. Backoff models"),
                                                         br()
                                                         )
                                                 )
