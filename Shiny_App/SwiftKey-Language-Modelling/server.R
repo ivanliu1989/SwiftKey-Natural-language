@@ -5,19 +5,19 @@ shinyServer(function(input, output) {
   dataInput <- reactive(predictNgrams(input$entry))
   
   output$top1 <- renderText({
-      paste("Top 1:", dataInput[](1))
+      paste("Top 1:", dataInput()[1])
   })
   output$top2 <- renderText({
-      paste("Top 2:", dataInput[](2))
+      paste("Top 2:", dataInput()[2])
   })
   output$top3 <- renderText({
-      paste("Top 3:", dataInput[](3))
+      paste("Top 3:", dataInput()[3])
   })
   output$top4 <- renderText({
-      paste("Top 4:", dataInput[](4))
+      paste("Top 4:", dataInput()[4])
   })
   output$top5 <- renderText({
-      paste("Top 5:", dataInput[](5))
+      paste("Top 5:", dataInput()[5])
   })
   
   output$text <- renderText({
