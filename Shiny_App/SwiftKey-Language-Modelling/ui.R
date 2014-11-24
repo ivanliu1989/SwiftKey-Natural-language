@@ -45,26 +45,26 @@ shinyUI(
                                 mainPanel(
                                     column(5,
                                     
-                                    h3("Word Prediction"),
+                                    h3("Word Prediction"),hr(),
                                     h5('The sentence you just typed:'),                             
                                     span(h4(textOutput('sent')),style = "color:blue"),
-                                    br(),
+                                    hr(),
                                     h5('Single Word Prediction:'),
                                     span(h4(textOutput('top1')),style = "color:red"),
-                                    br(),
+                                    hr(),
                                     h5('Other Possible Single Word Predictions:'),
                                     span(h5(textOutput('top2')),style = "color:green"),
                                     span(h5(textOutput('top3')),style = "color:green"),
                                     span(h5(textOutput('top4')),style = "color:green"),
                                     span(h5(textOutput('top5')),style = "color:green"),
-                                    br(),
+                                    hr(),
                                     
                                     p('More details of the prediction algorithm and source codes', 
                                       code("server.R"), code("ui.R"), code("Predict_func.R"), code("Tokenization_func.R"), code("ngramify_func.R"), 
                                       'can be found at', a("SwiftKey-Natural-language.",href="https://github.com/ivanliu1989/SwiftKey-Natural-language"))
                                     ),
                                     column(5,
-                                           h3("Word Cloud Diagram"),
+                                           h3("Word Cloud Diagram"),hr(),
                                            h5("A", code("word cloud"), "or data cloud is a data display which uses font size and/
                                               or color to indicate numerical values like frequency of words. Please click", code("Update Word Cloud"), 
                                               "button and", code("Slide Input"), "in the side bar to update the plot for relevant prediction."),
@@ -100,7 +100,7 @@ shinyUI(
                                 mainPanel(
                                     tabsetPanel(type="tabs",
                                                 tabPanel("Predictive Model",                                                      
-                                                         h3("Predictive Model Establishment"),
+                                                         h3("Predictive Model Establishment"),hr(),
                                                          h4("Clean the training dataset"),
                                                          p("The dataset was cleaned by ", code("tokenization()"), "and", code("ngramify()"),
                                                            "functions built by author in R. They are able to help users tokenize and ngramify
@@ -112,14 +112,14 @@ shinyUI(
                                                          p("After the preprocessing to the datasets including cleaning, tokenizing and ngramifing, 
                                                            the three raw datasets are combined and then 1-4 grams frequency matrix are built. 
                                                            The total size of new dataset", code("ngrams_model.RData"), "is reduced to 36M."),
-                                                         
+                                                         hr(),
                                                          h4("Build the model"),
                                                          p(a("Simple Good-Turing", href = "https://class.coursera.org/nlp/lecture/32"),
                                                            'and Back off techniques were used for estimating the probabilities corresponding to the observed frequencies, 
                                    and the joint probability of all unobserved species. The last three words of users\' input sentence will be extracted first and used
                                                            for seach in 4-grams matrix. If none result is return, then we will move back to 3-grams, and then 2-grams and 1-gram.
                                                            the final predictions will be chosen accordingly by the frequency and n-grams of the model.' ),                                                         
-                                                        
+                                                         hr(),
                                                          h4("A glance of model table"),
                                                          dataTableOutput('modelTable'),
                                                          br(),
@@ -128,24 +128,25 @@ shinyUI(
 
                                                 tabPanel("App Workflow",                                                       
                                                          h3("Shiny App Prediction Algorithm"),
+                                                         hr(),
                                                          img(src="work_flow_shiny.png", height = 262, width = 800),
-                                                         br(),br(),
+                                                         hr(),
                                                          h4("Preprocess"),
                                                          p("1. Obtain the data from the", code("input box.")),
                                                          p("2.", code("Cleaning"), "for the data sentence. Numbers, punctuations,
                                    extra spaces will be removed, and all words are converted to lowercase."),
-                                                         
+                                                         hr(),
                                                          h4("Tokenize"),
                                                          p("After preprocessing, the sentence will be truncated from the", code("last 3 words.")
                                    , "If there are less than 3 words, all the words will be used."),
-                                                         
+                                   hr(),
                                                          h4("Search pattern"),
                                                          p("Search the pattern from the", code("n-gram model."), 
                                    "The algormithm will search the pattern from 
                                    the 3-grams frequency matrix, and then return the Top 5 frequent predictions.However, 
                                    if there is no result, it will automatically search the 2-grams, 
                                    and if it still no result, it will search the 1-gram matrix."),
-                                                         
+                                   hr(),
                                                          h4("Predict the next single word"),
                                                          p("The next possible single word will be returned and displayed. 
                                    In addition, the top 5 possible words also could be found. The average predicting time for
@@ -154,27 +155,39 @@ shinyUI(
                                                 ),
                                    
                                                tabPanel("Key Concepts",                                                      
-                                                        h3("Key Concepts/Terminology"),
+                                                        h3("Key Concepts/Terminology"),hr(),
                                                         h4("1. Tokenization() function"),
                                                         p(code("Tokenization()"), "function is developed by author based on",code("tm package"),
                                                           "for data cleanning process, it mainly provides users with reproducible functionalities such as:",
                                                           code("Simple Transformation"), code("Lowercase Transformation"), code("Remove Numbers"), 
                                                           code("Remove Punctuations"), code("Remove Stop Words"), code("Profanity Filtering"),"with only one command."),
+                                                        hr(),
                                                         h4("2. ngramify() function"),
                                                         p(code("ngramify()"),"function is developed by author to mainly tackle the memory limits problem when generating
                                                           ngrams model from database. It provides users with a reproducible functionality to split raw datasets into a bunch of
                                                           user defined number of small ones and transform them into n-grams model."),
+                                                        hr(),
                                                         h4("3. N-grams language model"),
                                                         p("An", code("n-gram model"), "is a type of probabilistic language model for predicting the next item in such a sequence in the form of", 
                                                           code("a (n - 1)"),"–order ", code("Markov model")),
                                                         p("In this model, we are using 1-4 grams for prediction purpose, they are refering to", code("unigram"),
                                                           code("bigram"),code("trigram"),code("quatrgram"),"respectively."),
+                                                        hr(),
                                                         h4("4. Computing probabilities"),
-                                                        p("An", code("n-gram model"), "is a type of probabilistic language model for predicting the next item in such a sequence in the form of", 
-                                                          code("a (n - 1)"),"–order ", code("Markov model")),
+                                                        p("To compute the probabilities of each token,",a("Markov chain", href="http://en.wikipedia.org/wiki/Markov_chain"),"is introduced and implemented
+                                                          in our model."),
+                                                        p("A Markov chain is a sequence of random variables X1, X2, X3, ... with the Markov property, namely that, 
+                                                          given the present state, the future and past states are independent. Formally,"),
+                                                        img(src = "markov.png", height = 100),
+                                                        hr(),
                                                         h4("5. Smoothing"),
-                                                        h4("6. Interpolation"),
-                                                        h4("7. Backoff models"),
+                                                        p("Smoothing techniques are main used to cope with unseen n-grams in text modelling.",
+                                                          a("Katz's back-off model", href="http://en.wikipedia.org/wiki/Katz%27s_back-off_model"),"is introduced in our model."),
+                                                        p(code("Katz back-off"),"is a generative n-gram language model that estimates the conditional probability of a word given its history 
+                                                          in the n-gram. It accomplishes this estimation by \"backing-off\" to models with smaller histories under certain conditions. 
+                                                          By doing so, the model with the most reliable information about a given history is used to provide the better results."),
+                                                        p("The equation for Katz's back-off model is:"),
+                                                        img(src = "backoff.png"),
                                                         br()
                                                         )
                                                 )
