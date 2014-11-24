@@ -31,11 +31,15 @@ shinyServer(function(input, output) {
   })
   
   # Define a reactive expression for the document term matrix
-  terms <- reactive(predictWordcloud(input$entry))
+  # terms <- reactive(predictWordcloud(input$entry))
+  terms <- reactive({
+      input$update
+      isolate({predictWordcloud(input$entry)})
+      })
   # Make the wordcloud drawing predictable during a session
   wordcloud_rep <- repeatable(wordcloud)
   output$wordCloud <- renderPlot({
-      v <- isolate(terms())
+      v <- terms()
       wordcloud_rep(v[,2], v[,1], max.words=100, scale=c(5,1.5),
                     colors=brewer.pal(4, "Dark2"))
   })
