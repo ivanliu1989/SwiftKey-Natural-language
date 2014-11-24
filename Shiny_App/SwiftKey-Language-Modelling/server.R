@@ -1,4 +1,5 @@
 library(shiny);library(shinyIncubator)
+library(wordcloud)
 load('quatrgrams_model.RData') 
 source('Predict_func.R')
 source('Predict_func2.R')
@@ -38,8 +39,8 @@ shinyServer(function(input, output) {
   # Make the wordcloud drawing predictable during a session
   wordcloud_rep <- repeatable(wordcloud)
   output$wordCloud <- renderPlot({
-      v <- terms()
-      wordcloud_rep(names(v), v, scale=c(4,0.5),
+      v <- isolate(terms())
+      wordcloud_rep(v[,2], v[,1], scale=c(4,0.5),
                     colors=brewer.pal(8, "Dark2"))
   })
   
