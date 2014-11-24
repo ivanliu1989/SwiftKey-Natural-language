@@ -97,6 +97,8 @@ shinyUI(
 
                                                 tabPanel("App Workflow",                                                       
                                                          h3("Shiny App Prediction Algorithm"),
+                                                         img(src="work_flow_shiny.png", height = 262, width = 800),
+                                                         br(),
                                                          h4("Preprocess"),
                                                          p("1. Obtain the data from the", code("input box.")),
                                                          p("2.", code("Cleaning"), "for the data sentence. Numbers, punctuations,
