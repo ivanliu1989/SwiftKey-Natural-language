@@ -3,8 +3,7 @@ require(markdown)
 
 shinyUI(
     navbarPage("SwiftKey Natural Language Prediction", inverse = FALSE, collapsable = FALSE, 
-                   tabPanel("Prediction",
-                            tags$head(includeScript("Google_Analytics.js")),
+                   tabPanel("Prediction", tags$head(includeScript("Google_Analytics.js")),
                             # includeCSS("bootstrap.css"),
                             fluidRow(
                                 sidebarPanel(width=3,
@@ -74,7 +73,7 @@ shinyUI(
                                 )
                             )
                    ),
-                   tabPanel("Model/Algorithm",
+                   tabPanel("Model/Algorithm", tags$head(includeScript("Google_Analytics.js")),
                             sidebarLayout(
                                 sidebarPanel(width=3,
                                     helpText(h5("Help Instruction:")),
@@ -195,7 +194,7 @@ shinyUI(
                             )
                             ),
                    navbarMenu("Documents",
-                              tabPanel("Interim Report", 
+                              tabPanel("Interim Report", tags$head(includeScript("Google_Analytics.js")),
                                        sidebarLayout(
                                            sidebarPanel(width=3,
                                                         helpText(h5("Note:")),
@@ -220,7 +219,7 @@ shinyUI(
                                            )
                                        )
                               ),
-                              tabPanel("Final Report",
+                              tabPanel("Final Report",tags$head(includeScript("Google_Analytics.js")),
                                        sidebarLayout(
                                            sidebarPanel(width=3,
                                                         helpText(h5("Note:")),

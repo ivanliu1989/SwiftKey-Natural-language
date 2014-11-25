@@ -5,11 +5,3 @@
 
   ga('create', 'UA-49140027-4', 'auto');
   ga('send', 'pageview');
-
-  $(document).on('change', 'text', function(e) {
-    ga('send', 'event', 'widget', 'input data', $(e.currentTarget).val());
-  });
-  
-  $(document).on('click', 'button', function() {
-    ga('send', 'event', 'button', 'plot data');
-  });
