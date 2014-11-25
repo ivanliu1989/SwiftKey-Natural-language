@@ -53,9 +53,7 @@ predictWordcloud <- function(input){
     
     if(nrow(predict)<5){
         ngram <- Unigrams_model
-        predict <- rbind(predict, data.frame(ngram$freq,ngram$pred))
-        predict <- predict[!is.na(predict[,1]),]
-        predict <- predict[-1,]
+        predict <- data.frame(ngram$freq,ngram$pred)
     }
     return(predict)
 }
