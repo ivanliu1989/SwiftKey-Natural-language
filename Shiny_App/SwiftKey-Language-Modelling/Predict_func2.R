@@ -1,5 +1,5 @@
 require(stringr); require(data.table)
-load('ngrams_model.RData')
+
 predictWordcloud <- function(input){
     ## clean input text
     # remove numbers, punctuations

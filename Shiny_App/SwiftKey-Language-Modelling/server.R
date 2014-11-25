@@ -1,6 +1,7 @@
 library(shiny)
 library(wordcloud)
-load('quatrgrams_model.RData')  
+load('quatrgrams_model.RData',.GlobalEnv)
+load('ngrams_model.RData',.GlobalEnv)
 source('Predict_func.R')
 source('Predict_func2.R')
 
