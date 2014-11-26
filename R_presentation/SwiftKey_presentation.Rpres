@@ -12,14 +12,13 @@ Mobile Typing Prediction
 type: sub-section
 incremental: false
 A data product designed to predict mobile users' typing behaviour.<br>
-<br>**Key Characters** 
 
-- <b>Prediction Algorithm</b> 
+- <b>**Prediction Algorithm**</b> 
     - high accuracy - ~~Katz back-off~~
-    - small size - 36 mb
-    - quick predictive response - 0.000~0.003 seconds 
-- Instructions
-- Experience of Application
+    - small size - ~~36 mb~~
+    - quick predictive response - ~~0.000~0.003 s~~ 
+- <b>**Instructions**</b>
+- <b>**Experience of Application**</b>
 
 Prediction Algorithm
 ========================================================
