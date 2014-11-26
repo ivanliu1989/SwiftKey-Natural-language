@@ -5,11 +5,9 @@ date: 25 November 2014
 transition: rotate
 class: illustration
 rtl: false
+css: custom.css
 navigation: slide
 font-family: 'Risque'
-css: custom.css
-width: 1024
-height: 768
 
 Outline
 ========================================================
@@ -29,24 +27,18 @@ Prediction Algorithm
 ========================================================
 type: prompt
 - <b>**Markov Chain**</b><br>
-<small>A mathematical system that undergoes transitions from one state to another on a state space. </small>
+
     ![Markov Chain](markov.png)
-- <b>**Kat back-off**</b><br>
-A generative ngram language model that estimates the conditional probability of a word given its history.
+- <b>**Kat back-off**</b> <br>
     ![Kat backoff](work_flow_shiny.png)
     
 Instructions
 ========================================================
-<b>**Input**</b>
--
-Users type their sentence into the text field of app.
-System will truncate the last 1~3 words 
-and take them as input of predictive algorithm. 
-<br><br>
-![Input](text_input.png)
+type: prompt
+<b>**Text Input**</b><br>
+    ![Input](text_input.png)
 ***
-<b>**Output**</b>
--
+<b>**Prediction Outcomes**</b>
 - Word prediction<br>
 ![Prediction](prediction.png)
 - Wordcloud<br>
@@ -56,16 +48,8 @@ and take them as input of predictive algorithm.
 Experience of App
 ========================================================
 type: prompt
-<b>**App Constructure**</b><br>
--
-![R](rlogo.png)
-![RStudio Shiny](Rstudiologo.png)
-![Amazon EC2](ec2logo.png)
-***
-<b>**User Interface**</b>
--
-![UI Design](ui.png)
-<b>**Manual Documents**</b>
--
-- Predictive Model / App Workflow / Teminology
-- Interim Report / Final Presentation
+- <b>**Predictive Model**</b>
+- <b>**App Workflow**</b>
+- <b>**Key Concepts**</b>
+
+
