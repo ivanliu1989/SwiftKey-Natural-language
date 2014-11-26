@@ -11,7 +11,6 @@ Mobile Typing Prediction
 ========================================================
 type: sub-section
 incremental: false
-A data product designed to predict mobile users' typing behaviour.<br>
 
 - <b>**Prediction Algorithm**</b> 
     - High accuracy - ~~Katz back-off~~
@@ -21,19 +20,35 @@ A data product designed to predict mobile users' typing behaviour.<br>
     - Input - ~~sentence (1~4 words)~~
     - Output - ~~top 5 possible words / wordcloud plot~~
 - <b>**Experience of Application**</b>
+    - App interface
+    - Documents
 
 Prediction Algorithm
 ========================================================
 type: sub-section
 incremental: false
-![alt text](myimage.png)
-
+- <b>**Computing Possibilities**</b>
+    - Markov Chain
+- <b>**Smoothing**</b> 
+    - Kat back-off
+    
 Instructions
 ========================================================
 type: sub-section
 incremental: false
+- <b>**Text Input**</b>
+- <b>**Prediction Outcomes**</b>
+    - Word prediction
+    - Wordcloud
+
 
 Experience of App
 ========================================================
 type: sub-section
 incremental: false
+- <b>**Predictive Model**</b>
+- <b>**App Workflow**</b>
+- <b>**Key Concepts**</b>
+
+![alt text](markov.png)
+
