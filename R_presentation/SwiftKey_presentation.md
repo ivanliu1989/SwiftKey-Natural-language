@@ -6,13 +6,12 @@ transition: rotate
 class: illustration
 rtl: false
 css: custom.css
+navigation: slide
 
 Outline
 ========================================================
-type: sub-section
-incremental: false
-
-- <b>**Prediction Algorithm**</b> 
+type: prompt
+- <b>**Prediction Algorithm**</b>
     - Efficient Modelling - ~~Markov Chain / Katz back-off~~
     - Cleaned/Compressed Datasets - ~~580MB -> 36MB~~
     - Quick predictive response - ~~0.000~0.003s~~ 
@@ -25,33 +24,31 @@ incremental: false
 
 Prediction Algorithm
 ========================================================
-type: sub-section
-incremental: false
+type: prompt
 - <b>**Markov Chain**</b><br>
+
     ![Markov Chain](markov.png)
 - <b>**Kat back-off**</b> <br>
     ![Kat backoff](work_flow_shiny.png)
     
 Instructions
 ========================================================
-type: sub-section
-incremental: false
-- <b>**Text Input**</b><br>
+type: prompt
+<b>**Text Input**</b><br>
     ![Input](text_input.png)
-- <b>**Prediction Outcomes**</b>
-    - Word prediction<br>
-    ![Prediction](prediction.png)
-    - Wordcloud<br>
-    ![Wordcloud](wordcloud.png)
+***
+<b>**Prediction Outcomes**</b>
+- Word prediction<br>
+![Prediction](prediction.png)
+- Wordcloud<br>
+![Wordcloud](wordcloud.png)
 
 
 Experience of App
 ========================================================
-type: sub-section
-incremental: false
+type: prompt
 - <b>**Predictive Model**</b>
 - <b>**App Workflow**</b>
 - <b>**Key Concepts**</b>
 
-![alt text](markov.png)
 

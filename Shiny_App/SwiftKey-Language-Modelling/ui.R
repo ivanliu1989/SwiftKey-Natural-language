@@ -222,6 +222,9 @@ shinyUI(
                               tabPanel("Final Report",
                                        sidebarLayout(
                                            sidebarPanel(width=3,
+                                                        helpText(h5("Please use the slides", code("navigation bar"), 
+                                                                    "on the right-bottom corner of the page.")),
+                                                        hr(),
                                                         helpText(h5("Note:")),
                                                         helpText("This document is a slide deck consisting of 5 slides created with", 
                                                                  a("R Studio Presenter", href="https://support.rstudio.com/hc/en-us/articles/200486468-Authoring-R-Presentations"),
@@ -240,7 +243,7 @@ shinyUI(
                                                         a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com"),
                                                         br()),
                                            mainPanel(
-                                               h5("coming soon...")
+                                               includeHTML("SwiftKey_presentation.html")
                                            )
                                        )
                               )
