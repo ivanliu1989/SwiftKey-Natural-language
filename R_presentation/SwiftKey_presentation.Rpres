@@ -1,4 +1,4 @@
-Introduction of SwiftKey Data Product - Typing Prediction
+Introduction of SwiftKey Data Product - Mobile Typing Prediction
 ========================================================
 author: Tianxiang(Ivan) Liu
 date: 25 November 2014
@@ -7,39 +7,42 @@ class: illustration
 rtl: false
 css: custom.css
 
-Mobile Typing Prediction
+Outline
 ========================================================
 type: sub-section
 incremental: false
 
 - <b>**Prediction Algorithm**</b> 
-    - High accuracy - ~~Katz back-off~~
-    - Small size - ~~36 mb~~
-    - Quick predictive response - ~~0.000~0.003 s~~ 
+    - Efficient Modelling - ~~Markov Chain / Katz back-off~~
+    - Cleaned/Compressed Datasets - ~~580MB -> 36MB~~
+    - Quick predictive response - ~~0.000~0.003s~~ 
 - <b>**Instructions**</b>
-    - Input - ~~sentence (1~4 words)~~
-    - Output - ~~top 5 possible words / wordcloud plot~~
+    - Input - ~~Sentence (truncate the last 1~4 words)~~
+    - Output - ~~Top possible words / Wordcloud visualization~~
 - <b>**Experience of Application**</b>
-    - App interface
-    - Documents
+    - User Interface - ~~Shiny server / Amazon EC2~~
+    - Manual / Documents 
 
 Prediction Algorithm
 ========================================================
 type: sub-section
 incremental: false
-- <b>**Computing Possibilities**</b>
-    - Markov Chain
-- <b>**Smoothing**</b> 
-    - Kat back-off
+- <b>**Markov Chain**</b><br>
+    ![Markov Chain](markov.png)
+- <b>**Kat back-off**</b> <br>
+    ![Kat backoff](work_flow_shiny.png)
     
 Instructions
 ========================================================
 type: sub-section
 incremental: false
-- <b>**Text Input**</b>
+- <b>**Text Input**</b><br>
+    ![Input](text_input.png)
 - <b>**Prediction Outcomes**</b>
-    - Word prediction
-    - Wordcloud
+    - Word prediction<br>
+    ![Prediction](prediction.png)
+    - Wordcloud<br>
+    ![Wordcloud](wordcloud.png)
 
 
 Experience of App
