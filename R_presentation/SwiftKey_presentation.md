@@ -5,33 +5,32 @@ date: 25 November 2014
 transition: rotate
 class: illustration
 rtl: false
+css: custom.css
 
-Data Product
+Mobile Typing Prediction
 ========================================================
 type: sub-section
 incremental: false
+A data product designed to predict mobile users' typing behaviour.<br>
+<br>**Key Characters** 
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-<span class="emphasized">Pay attention to this!</span>
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- <b>Prediction Algorithm</b> 
+    - high accuracy - ~~Katz back-off~~
+    - small size - 36 mb
+    - quick predictive response - 0.000~0.003 seconds 
+- Instructions
+- Experience of Application
 
 Prediction Algorithm
 ========================================================
 type: sub-section
 incremental: false
-
 ![alt text](myimage.png)
-
 
 Instructions
 ========================================================
 type: sub-section
 incremental: false
-
 
 Experience of App
 ========================================================
