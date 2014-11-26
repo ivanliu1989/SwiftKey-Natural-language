@@ -243,7 +243,9 @@ shinyUI(
                                                         a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com"),
                                                         br()),
                                            mainPanel(
-                                               includeHTML("SwiftKey_presentation.html")
+                                               column(12,
+                                                      includeHTML("SwiftKey_presentation.html")
+                                               )
                                            )
                                        )
                               )
