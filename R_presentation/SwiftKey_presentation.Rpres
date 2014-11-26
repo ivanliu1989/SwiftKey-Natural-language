@@ -14,10 +14,12 @@ incremental: false
 A data product designed to predict mobile users' typing behaviour.<br>
 
 - <b>**Prediction Algorithm**</b> 
-    - high accuracy - ~~Katz back-off~~
-    - small size - ~~36 mb~~
-    - quick predictive response - ~~0.000~0.003 s~~ 
+    - High accuracy - ~~Katz back-off~~
+    - Small size - ~~36 mb~~
+    - Quick predictive response - ~~0.000~0.003 s~~ 
 - <b>**Instructions**</b>
+    - Input - ~~sentence (1~4 words)~~
+    - Output - ~~top 5 possible words / wordcloud plot~~
 - <b>**Experience of Application**</b>
 
 Prediction Algorithm
