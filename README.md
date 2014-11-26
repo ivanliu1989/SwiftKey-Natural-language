@@ -13,3 +13,6 @@ SwiftKey, our corporate partner in this capstone, builds a smart keyboard that m
 5. hash reduce size
 6. 4grams->3->2->1gram
 7. Shiny
+
+##### Please visit Application:
+http://ec2-54-148-113-44.us-west-2.compute.amazonaws.com:3838/SwiftKey-Language-Modelling/
