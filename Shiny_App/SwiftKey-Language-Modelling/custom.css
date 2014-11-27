@@ -1,0 +1,13 @@
+.reveal section del {
+  color: orange;
+}
+
+.exclaim .reveal .state-background {
+  background: black;
+} 
+
+.exclaim .reveal h1,
+.exclaim .reveal h2,
+.exclaim .reveal p {
+  color: white;
+}

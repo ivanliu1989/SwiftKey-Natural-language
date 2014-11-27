@@ -240,7 +240,7 @@ shinyUI(
                                                         br()),
                                            mainPanel(width=9,
                                                column(8,
-                                                      includeHTML("SwiftKey_presentation-rpubs.html")
+                                                      includeMarkdown("SwiftKey_presentation.md")
                                                ),
                                                column(4,
                                                       h5("Please use the slides", code("navigation bar"), 

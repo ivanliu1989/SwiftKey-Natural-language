@@ -1,0 +1,21 @@
+.section .reveal .state-background {
+    background: white;}
+.section .reveal h1,
+.section .reveal p {
+    color: black;
+    position: relative;
+    top: 4%;}
+
+.reveal .present {
+   background: white;
+   background-image: url(http://jhollist.github.io/files/images/TopBar.jpg);
+   background-repeat: no-repeat;
+   background-position: 0% 9.35%;
+   background-size: 100%;}
+
+.reveal h3{
+   position: relative;
+   top: 0%;
+   left: 0%;}
+.reveal .slideContent h3{
+   left: 0%;}
