@@ -93,7 +93,7 @@ shinyUI(
                                     a(img(src = "GitHub-Mark.png", height = 30, width = 30),href="https://github.com/ivanliu1989/SwiftKey-Natural-language"),
                                     a(img(src = "linkedin.png", height = 26, width = 26),href="https://www.linkedin.com/in/ivanliu1989"),
                                     a(img(src = "gmail.jpeg", height = 30, width = 30),href="mailto: ivan.liuyanfeng@gmail.com"),
-                                    br()
+                                    br(),hr()
                                     ),
                                 mainPanel(
                                     tabsetPanel(type="tabs",
@@ -186,7 +186,7 @@ shinyUI(
                                                           By doing so, the model with the most reliable information about a given history is used to provide the better results."),
                                                         p("The equation for Katz's back-off model is:"),
                                                         img(src = "backoff.png"),
-                                                        br()
+                                                        br(),hr()
                                                         )
                                                 )
                                     )
@@ -240,7 +240,11 @@ shinyUI(
                                                         br()),
                                            mainPanel(width=9,
                                                column(8,
-                                                      includeMarkdown("SwiftKey_presentation.md")
+                                                      a(img(src = "slides_1.png"),href="https://rpubs.com/ivanliu1989/SwiftKey_slides"),hr(),
+                                                      a(img(src = "slides_2.png"),href="https://rpubs.com/ivanliu1989/SwiftKey_slides"),hr(),
+                                                      a(img(src = "slides_3.png"),href="https://rpubs.com/ivanliu1989/SwiftKey_slides"),hr(),
+                                                      a(img(src = "slides_4.png"),href="https://rpubs.com/ivanliu1989/SwiftKey_slides"),hr(),
+                                                      a(img(src = "slides_5.png"),href="https://rpubs.com/ivanliu1989/SwiftKey_slides"),hr()
                                                ),
                                                column(4,
                                                       h5("Please use the slides", code("navigation bar"), 
