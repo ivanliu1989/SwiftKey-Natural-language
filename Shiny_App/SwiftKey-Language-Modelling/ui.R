@@ -43,19 +43,18 @@ shinyUI(
                                 ),
                                 mainPanel(
                                     column(5,
-                                    
                                     h3("Word Prediction"),hr(),
                                     h5('The sentence you just typed:'),                             
-                                    span(h4(textOutput('sent')),style = "color:blue"),
+                                    wellPanel(span(h4(textOutput('sent')),style = "color:blue")),
                                     hr(),
                                     h5('Single Word Prediction:'),
-                                    span(h4(textOutput('top1')),style = "color:red"),
+                                    wellPanel(span(h4(textOutput('top1')),style = "color:red")),
                                     hr(),
                                     h5('Other Possible Single Word Predictions:'),
-                                    span(h5(textOutput('top2')),style = "color:green"),
+                                    wellPanel(span(h5(textOutput('top2')),style = "color:green"),
                                     span(h5(textOutput('top3')),style = "color:green"),
                                     span(h5(textOutput('top4')),style = "color:green"),
-                                    span(h5(textOutput('top5')),style = "color:green"),
+                                    span(h5(textOutput('top5')),style = "color:green")),
                                     hr(),
                                     
                                     p('More details of the prediction algorithm and source codes', 
