@@ -15,4 +15,4 @@ SwiftKey, our corporate partner in this capstone, builds a smart keyboard that m
 7. Shiny
 
 ##### Please visit Application:
-http://ec2-54-148-113-44.us-west-2.compute.amazonaws.com:3838/SwiftKey-Language-Modelling/
+http://www.ivanliuyanfeng.com:3838/SwiftKey-Language-Modelling/
