@@ -14,5 +14,5 @@ SwiftKey, our corporate partner in this capstone, builds a smart keyboard that m
 6. 4grams->3->2->1gram
 7. Shiny
 
-##### Please visit the ppplication at:
+##### Please visit the application at:
 http://54.201.18.67:3838/SwiftKey-Language-Modelling/
